@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IberaDelivery.Models
 {
@@ -24,7 +25,7 @@ namespace IberaDelivery.Models
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Product> Products { get; set; }
 
-        [Display(Name = "Full Name")]
+         [Display(Name = "Full Name")]
         public string FullName
         {
             get
@@ -32,6 +33,5 @@ namespace IberaDelivery.Models
                 return FirstName + " " + LastName;
             }
         }
-
     }
 }

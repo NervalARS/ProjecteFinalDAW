@@ -41,13 +41,13 @@ namespace pt1_mvc.Controllers
 
         }
 
-        private void PopulateCategoriesDropDownList(object selectedCategory = null)
+        private void PopulateCategoriesDropDownList(object? selectedCategory = null)
         {
             var categories = dataContext.Categories;
             ViewBag.CategoryId = new SelectList(categories.ToList(), "Id", "Name", selectedCategory);
         }
 
-        private void PopulateProvidersDropDownList(object selectedProvider = null)
+        private void PopulateProvidersDropDownList(object? selectedProvider = null)
         {
             var providers = dataContext.Users;
             ViewBag.ProviderId = new SelectList(providers.ToList(), "Id", "FullName", selectedProvider);
@@ -70,17 +70,17 @@ namespace pt1_mvc.Controllers
         public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva")] Product product)
         {
 
-            //if (ModelState.IsValid)
-            //{
+            if (ModelState.IsValid)
+            {
                 dataContext.Add(product);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
-            //}
-            //else
-            //{
+            }
+            else
+            {
                 //ViewBag.missatge = product.validarProduct().Missatge;
-                //return View();
-            //}
+                return View();
+            }
 
 
         }
@@ -124,7 +124,8 @@ namespace pt1_mvc.Controllers
 
         public IActionResult Edit(int? id)
         {
-           
+           PopulateCategoriesDropDownList();
+           PopulateProvidersDropDownList();
                 if (id == null)
                 {
                     return NotFound();
