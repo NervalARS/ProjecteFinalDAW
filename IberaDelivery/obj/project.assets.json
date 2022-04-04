@@ -2265,16 +2265,11 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "/home/leite/.nuget/packages/": {}
-=======
-    "/home/pol/.nuget/packages/": {}
->>>>>>> origin/pol
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "/var/www/html/PROJECTE FINAL/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj",
       "projectName": "IberaDelivery",
       "projectPath": "/var/www/html/PROJECTE FINAL/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj",
@@ -2283,16 +2278,6 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/leite/.nuget/NuGet/NuGet.Config"
-=======
-      "projectUniqueName": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj",
-      "projectName": "IberaDelivery",
-      "projectPath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj",
-      "packagesPath": "/home/pol/.nuget/packages/",
-      "outputPath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/obj/",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "/home/pol/.nuget/NuGet/NuGet.Config"
->>>>>>> origin/pol
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -2355,12 +2340,16 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.102/RuntimeIdentifierGraph.json"
->>>>>>> origin/pol
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file /var/www/html/PROJECTE FINAL/ProjecteFinalDAW/IberaDelivery/obj/project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

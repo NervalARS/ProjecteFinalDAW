@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
-=======
 using System.ComponentModel.DataAnnotations;
->>>>>>> origin/pol
 
 namespace IberaDelivery.Models
 {
@@ -26,8 +23,6 @@ namespace IberaDelivery.Models
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Product> Products { get; set; }
-<<<<<<< HEAD
-=======
 
         [Display(Name = "Full Name")]
         public string FullName
@@ -38,6 +33,5 @@ namespace IberaDelivery.Models
             }
         }
 
->>>>>>> origin/pol
     }
 }
