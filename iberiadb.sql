@@ -85,6 +85,7 @@ CREATE TABLE iberiadb.dbo.comments (
 );
 
 
+<<<<<<< HEAD
 -- iberiadb.dbo.image definition
 
 -- Drop table
@@ -95,6 +96,18 @@ CREATE TABLE iberiadb.dbo.image (
 	id int NOT NULL,
 	product_id int NOT NULL,
 	image image NOT NULL,
+=======
+-- iberiadb.dbo.[image] definition
+
+-- Drop table
+
+-- DROP TABLE iberiadb.dbo.[image];
+
+CREATE TABLE iberiadb.dbo.[image] (
+	id int NOT NULL,
+	product_id int NOT NULL,
+	[image] image NOT NULL,
+>>>>>>> origin/pol
 	CONSTRAINT image_PK PRIMARY KEY (id),
 	CONSTRAINT image_Product_FK FOREIGN KEY (product_id) REFERENCES iberiadb.dbo.product(id) ON DELETE CASCADE ON UPDATE CASCADE
 );

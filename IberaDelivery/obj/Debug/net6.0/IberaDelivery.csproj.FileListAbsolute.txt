@@ -68,6 +68,7 @@
 /var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/obj/Debug/net6.0/ref/IberaDelivery.dll
 /var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/obj/Debug/net6.0/IberaDelivery.pdb
 /var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/obj/Debug/net6.0/IberaDelivery.genruntimeconfig.cache
+<<<<<<< HEAD
 /var/www/html/ProjecteFinalDAW/IberaDelivery/bin/Debug/net6.0/appsettings.Development.json
 /var/www/html/ProjecteFinalDAW/IberaDelivery/bin/Debug/net6.0/appsettings.json
 /var/www/html/ProjecteFinalDAW/IberaDelivery/bin/Debug/net6.0/IberaDelivery.staticwebassets.runtime.json
@@ -208,3 +209,5 @@
 /var/www/html/PROJECTE FINAL/ProjecteFinalDAW/IberaDelivery/obj/Debug/net6.0/scopedcss/projectbundle/IberaDelivery.bundle.scp.css
 /var/www/html/PROJECTE FINAL/ProjecteFinalDAW/IberaDelivery/obj/Debug/net6.0/IberaDelivery.csproj.CopyComplete
 /var/www/html/PROJECTE FINAL/ProjecteFinalDAW/IberaDelivery/obj/Debug/net6.0/IberaDelivery.genruntimeconfig.cache
+=======
+>>>>>>> origin/pol

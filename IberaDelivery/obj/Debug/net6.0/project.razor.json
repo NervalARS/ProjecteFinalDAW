@@ -16308,6 +16308,7 @@
       "FileKind": "mvc"
     },
     {
+<<<<<<< HEAD
       "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Product/Delete.cshtml",
       "TargetPath": "Views\\Product\\Delete.cshtml",
       "FileKind": "mvc"
@@ -16318,6 +16319,8 @@
       "FileKind": "mvc"
     },
     {
+=======
+>>>>>>> origin/pol
       "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Shared/_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"

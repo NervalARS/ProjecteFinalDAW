@@ -1,6 +1,7 @@
 @model IEnumerable<IberaDelivery.Models.Product>
 @inject IHttpContextAccessor HttpContextAccessor
 @{
+<<<<<<< HEAD
     ViewData["Title"] = "Products";
     
 }
@@ -10,6 +11,14 @@
 <a asp-action="Create"><button>New Product +</button></a>
 
 
+=======
+    ViewData["Title"] = "Autors";
+    
+}
+
+<h2>Autors</h2>
+ <a asp-action="Create"><button>Create</button></a>
+>>>>>>> origin/pol
 <table class="table">
     <thead>
         <tr>
@@ -45,6 +54,7 @@
         @foreach (var item in Model)
         {
             <tr>
+<<<<<<< HEAD
                 <th>
                 @Html.DisplayFor(modelItem => item.Id)
             </th>
@@ -75,16 +85,48 @@
          @*   @if (@HttpContextAccessor.HttpContext.Session.GetString("userName") != null){  *@
 
             
+=======
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Provider.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Iva)
+                </td>
+
+>>>>>>> origin/pol
                 <td>
                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
                 <td>
                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                 </td>
+<<<<<<< HEAD
        @*     }else{
                 <td></td>
                 <td></td>
             } *@
+=======
+        
+>>>>>>> origin/pol
             </tr>
         }
     </tbody>
