@@ -19,26 +19,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Provider)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Stock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Iva)
-            </th>
-            <th></th>
-             <th></th>
         </tr>
     </thead>
     <tbody>
@@ -50,26 +30,6 @@
             </th>
             <th>
                 @Html.DisplayFor(modelItem => item.Name)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Description)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </th>
-            <th>
-                @* Comentario
-                @Html.DisplayFor(modelItem => item.Provider.FullName)
-                *@
-            </th> 
-            <th>
-                @Html.DisplayFor(modelItem => item.Stock)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Price)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Iva)
             </th>
             
          @*   @if (@HttpContextAccessor.HttpContext.Session.GetString("userName") != null){  *@
