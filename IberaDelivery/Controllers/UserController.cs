@@ -92,7 +92,7 @@ namespace IberaDelivery.Controllers
                 //If user is valid & present in database, we are redirecting it to Welcome page.
                 if (isValidUser != null)
                 {
-                    return RedirectToAction("Index");
+                    return Redirect("/");
                 }
                 else
                 {
@@ -112,13 +112,17 @@ namespace IberaDelivery.Controllers
         public User IsValidUser(ViewLogin model)
         {
             //Retireving the user details from DB based on username and password enetered by user.
-            User user = dataContext.Users.Where(query => query.Email.Equals(model.Email) && query.Password.Equals(model.Password)).SingleOrDefault();
+            User user = dataContext.Users.Where(query => query.Email.Equals(model.Email)).SingleOrDefault();
             //If user is present, then true is returned.
             if (user == null)
                 return null;
             //If user is not present false is returned.
             else
-                return user;
+                if(BCrypt.Net.BCrypt.Verify(model.Password, user.Password)){
+                    return user;
+                }else{
+                    return null;
+                }
         }
 
 
