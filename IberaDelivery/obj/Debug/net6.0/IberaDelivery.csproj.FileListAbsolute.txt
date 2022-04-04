@@ -138,3 +138,4 @@
 /var/www/html/ProjecteFinalDAW/IberaDelivery/obj/Debug/net6.0/IberaDelivery.pdb
 /var/www/html/ProjecteFinalDAW/IberaDelivery/obj/Debug/net6.0/IberaDelivery.genruntimeconfig.cache
 /var/www/html/ProjecteFinalDAW/IberaDelivery/obj/Debug/net6.0/ref/IberaDelivery.dll
+/var/www/html/ProjecteFinalDAW/IberaDelivery/bin/Debug/net6.0/BCrypt.Net-Next.dll

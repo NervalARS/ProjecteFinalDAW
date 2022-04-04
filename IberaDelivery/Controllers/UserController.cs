@@ -40,24 +40,29 @@ namespace IberaDelivery.Controllers
             //If any form value fails the DataAnnotation validation the model state becomes invalid.
             if (ModelState.IsValid)
             {
-                //If the model state is valid i.e. the form values passed the validation then we are storing the User's details in DB.
-                User reglog = new User();
+                if(dataContext.Users.Any(x => x.Email.Equals(registerDetails.Email))){
+                    ViewBag.Message = "Email is already in use";
+                    return View("Register");
+                }else{
+                    //If the model state is valid i.e. the form values passed the validation then we are storing the User's details in DB.
+                    User reglog = new User();
 
-                //Save all details in RegitserUser object
+                    //Save all details in RegitserUser object
 
-                reglog.FirstName = registerDetails.FirstName;
-                reglog.LastName = registerDetails.LastName;
-                reglog.Email = registerDetails.Email;
-                reglog.Password = registerDetails.Password;
-                reglog.Rol = 3;
+                    reglog.FirstName = registerDetails.FirstName;
+                    reglog.LastName = registerDetails.LastName;
+                    reglog.Email = registerDetails.Email;
+                    reglog.Password = BCrypt.Net.BCrypt.HashPassword(registerDetails.Password);
+                    reglog.Rol = 3;
 
 
-                //Calling the SaveDetails method which saves the details.
-                dataContext.Users.Add(reglog);
-                dataContext.SaveChanges();
+                    //Calling the SaveDetails method which saves the details.
+                    dataContext.Users.Add(reglog);
+                    dataContext.SaveChanges();
 
-                ViewBag.Message = "User Details Saved";
-                return View("Register");
+                    ViewBag.Message = "User Details Saved";
+                    return View("Register");
+                }
             }
             else
             {
