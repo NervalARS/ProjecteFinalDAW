@@ -70,17 +70,17 @@ namespace pt1_mvc.Controllers
         public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva")] Product product)
         {
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 dataContext.Add(product);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                //ViewBag.missatge = autor.validarAutor().Missatge;
-                return View();
-            }
+            //}
+            //else
+            //{
+                //ViewBag.missatge = product.validarProduct().Missatge;
+                //return View();
+            //}
 
 
         }
