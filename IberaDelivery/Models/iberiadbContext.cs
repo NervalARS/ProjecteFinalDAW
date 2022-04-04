@@ -38,9 +38,7 @@ namespace IberaDelivery.Models
             {
                 entity.ToTable("category");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(255)
@@ -52,9 +50,7 @@ namespace IberaDelivery.Models
             {
                 entity.ToTable("comments");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Contens)
                     .HasColumnType("text")
@@ -80,9 +76,7 @@ namespace IberaDelivery.Models
             {
                 entity.ToTable("image");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Image1)
                     .HasColumnType("image")
@@ -105,7 +99,9 @@ namespace IberaDelivery.Models
 
                 entity.Property(e => e.NumOrder).HasColumnName("num_order");
 
-                entity.Property(e => e.NumLine).HasColumnName("num_line");
+                entity.Property(e => e.NumLine)
+                    .ValueGeneratedOnAdd()
+                    .HasColumnName("num_line");
 
                 entity.Property(e => e.Quantity).HasColumnName("quantity");
 
@@ -131,9 +127,7 @@ namespace IberaDelivery.Models
             {
                 entity.ToTable("order");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Date)
                     .HasColumnType("datetime")
@@ -155,9 +149,7 @@ namespace IberaDelivery.Models
             {
                 entity.ToTable("product");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.CategoryId).HasColumnName("category_id");
 
@@ -198,9 +190,7 @@ namespace IberaDelivery.Models
             {
                 entity.ToTable("user");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id");
+                entity.Property(e => e.Id).HasColumnName("id");
 
                 entity.Property(e => e.Email)
                     .HasMaxLength(255)
