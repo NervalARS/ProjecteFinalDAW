@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-<<<<<<< HEAD
-=======
 using Microsoft.AspNetCore.Mvc;
->>>>>>> origin/pol
 
 namespace IberaDelivery.Models
 {
