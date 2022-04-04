@@ -12,11 +12,11 @@ namespace IberaDelivery.Models
             LnOrders = new HashSet<LnOrder>();
         }
 
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
-        public long CategoryId { get; set; }
-        public long ProviderId { get; set; }
+        public int CategoryId { get; set; }
+        public int ProviderId { get; set; }
         public int Stock { get; set; }
         public decimal Price { get; set; }
         public decimal Iva { get; set; }

@@ -5,8 +5,8 @@ namespace IberaDelivery.Models
 {
     public partial class Image
     {
-        public long Id { get; set; }
-        public long ProductId { get; set; }
+        public int Id { get; set; }
+        public int ProductId { get; set; }
         public byte[] Image1 { get; set; } = null!;
 
         public virtual Product Product { get; set; } = null!;

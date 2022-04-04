@@ -12,7 +12,7 @@ namespace IberaDelivery.Models
             Products = new HashSet<Product>();
         }
 
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string Email { get; set; } = null!;
@@ -22,14 +22,5 @@ namespace IberaDelivery.Models
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Product> Products { get; set; }
-
-
-        public string FullName
-        {
-            get
-            {
-                return FirstName + " " + LastName;
-            }
-        }
     }
 }
