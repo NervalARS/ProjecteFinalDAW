@@ -8,6 +8,7 @@ namespace IberaDelivery.Models
         public Product()
         {
             Comments = new HashSet<Comment>();
+            Images = new HashSet<Image>();
             LnOrders = new HashSet<LnOrder>();
         }
 
@@ -23,6 +24,7 @@ namespace IberaDelivery.Models
         public virtual Category Category { get; set; } = null!;
         public virtual User Provider { get; set; } = null!;
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<LnOrder> LnOrders { get; set; }
     }
 }

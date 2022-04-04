@@ -18,6 +18,7 @@ namespace IberaDelivery.Models
 
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Comment> Comments { get; set; } = null!;
+        public virtual DbSet<Image> Images { get; set; } = null!;
         public virtual DbSet<LnOrder> LnOrders { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
@@ -74,6 +75,26 @@ namespace IberaDelivery.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("comments_user_FK");
+            });
+
+            modelBuilder.Entity<Image>(entity =>
+            {
+                entity.ToTable("image");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Image1)
+                    .HasColumnType("image")
+                    .HasColumnName("image");
+
+                entity.Property(e => e.ProductId).HasColumnName("product_id");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Images)
+                    .HasForeignKey(d => d.ProductId)
+                    .HasConstraintName("image_FK");
             });
 
             modelBuilder.Entity<LnOrder>(entity =>
