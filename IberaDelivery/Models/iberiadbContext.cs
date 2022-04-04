@@ -18,6 +18,7 @@ namespace IberaDelivery.Models
 
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Comment> Comments { get; set; } = null!;
+        public virtual DbSet<Image> Images { get; set; } = null!;
         public virtual DbSet<LnOrder> LnOrders { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
@@ -66,14 +67,33 @@ namespace IberaDelivery.Models
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.ProductId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("comments_product_FK");
+                    .HasConstraintName("comments_ProductFK");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("comments_user_FK");
+                    .HasConstraintName("comments_User_FK");
+            });
+
+            modelBuilder.Entity<Image>(entity =>
+            {
+                entity.ToTable("image");
+
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Image1)
+                    .HasColumnType("image")
+                    .HasColumnName("image");
+
+                entity.Property(e => e.ProductId).HasColumnName("product_id");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Images)
+                    .HasForeignKey(d => d.ProductId)
+                    .HasConstraintName("image_Product_FK");
             });
 
             modelBuilder.Entity<LnOrder>(entity =>
@@ -98,13 +118,13 @@ namespace IberaDelivery.Models
                 entity.HasOne(d => d.NumOrderNavigation)
                     .WithMany(p => p.LnOrders)
                     .HasForeignKey(d => d.NumOrder)
-                    .HasConstraintName("ln_order_FK");
+                    .HasConstraintName("ln_order_Order_FK");
 
                 entity.HasOne(d => d.RefProductNavigation)
                     .WithMany(p => p.LnOrders)
                     .HasForeignKey(d => d.RefProduct)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("ln_order_FK_1");
+                    .HasConstraintName("ln_order_Product_FK");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -128,8 +148,7 @@ namespace IberaDelivery.Models
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("order_FK");
+                    .HasConstraintName("order_FK_1");
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -167,7 +186,7 @@ namespace IberaDelivery.Models
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.CategoryId)
-                    .HasConstraintName("product_category_FK");
+                    .HasConstraintName("product_Category_FK");
 
                 entity.HasOne(d => d.Provider)
                     .WithMany(p => p.Products)
