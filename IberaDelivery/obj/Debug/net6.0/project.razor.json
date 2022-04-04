@@ -16323,6 +16323,16 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Product/Index.cshtml",
+      "TargetPath": "Views\\Product\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Product/Create.cshtml",
+      "TargetPath": "Views\\Product\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Shared/_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"

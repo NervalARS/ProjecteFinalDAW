@@ -1,6 +1,11 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using IberaDelivery.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace pt1_mvc.Controllers
 {
@@ -14,11 +19,15 @@ namespace pt1_mvc.Controllers
         }
 
         // GET: Autor
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var products = dataContext.Products;
-            return View(products.ToList());
+            var products = dataContext.Products
+            .Include(c => c.Category)
+            .Include(p => p.Provider)
+            .AsNoTracking();
+            return View(await products.ToListAsync());
         }
+
 
         [HttpPost]
         public IActionResult Index(String Cadena)
@@ -32,12 +41,24 @@ namespace pt1_mvc.Controllers
 
         }
 
+        private void PopulateCategoriesDropDownList(object selectedCategory = null)
+        {
+            var categories = dataContext.Categories;
+            ViewBag.CategoryId = new SelectList(categories.ToList(), "Id", "Name", selectedCategory);
+        }
+
+        private void PopulateProvidersDropDownList(object selectedProvider = null)
+        {
+            var providers = dataContext.Users;
+            ViewBag.ProviderId = new SelectList(providers.ToList(), "Id", "FullName", selectedProvider);
+        }
 
 
         // GET: Autor/Create
         public IActionResult Create()
         {
-           
+           PopulateCategoriesDropDownList();
+           PopulateProvidersDropDownList();
                 return View();
             
             
@@ -49,17 +70,11 @@ namespace pt1_mvc.Controllers
         public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva")] Product product)
         {
 
-            if (ModelState.IsValid)
-            {
+           
                 dataContext.Add(product);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                //ViewBag.missatge = autor.validarAutor().Missatge;
-                return View();
-            }
+           
 
 
         }
