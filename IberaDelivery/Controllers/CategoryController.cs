@@ -33,7 +33,7 @@ namespace IberaDelivery.Controllers
         {
 
             var categories = dataContext.Categories
-            .Where(a => a.Name.Contains(Cadena)); 
+            .Where(a => a.Name.Contains(Cadena));
             ViewBag.missatge = "Filtrat per: " + Cadena;
             return View(categories.ToList());
 
@@ -49,7 +49,7 @@ namespace IberaDelivery.Controllers
         public IActionResult Create()
         {
             PopulateProductesDropDownList();
-                return View();
+            return View();
         }
 
         // POST: Category/Create
@@ -69,34 +69,34 @@ namespace IberaDelivery.Controllers
                 //ViewBag.missatge = autor.validarAutor().Missatge;
                 return View();
             }
-
-
         }
 
         // GET: Category/Delete/5
         public IActionResult Delete(int? id)
         {
-            if (HttpContext.Session.GetString("userName") != null)
+            //if (HttpContext.Session.GetString("userName") != null)
+            //{
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var category = dataContext.Categories
-                    .FirstOrDefault(a => a.Id == id);
-                if (category == null)
-                {
-                    return NotFound();
-                }
-
-                return View(category);
+                return NotFound();
             }
-            else
+
+            var category = dataContext.Categories
+                .FirstOrDefault(a => a.Id == id);
+            if (category == null)
             {
-                return Redirect("/");
+                return NotFound();
             }
+
+            return View(category);
         }
+        /*
+        else
+        {
+            return Redirect("/");
+        }
+        */
+
 
         // POST: Category/Delete/5
         [HttpPost]
@@ -112,47 +112,41 @@ namespace IberaDelivery.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
         public IActionResult Edit(int? id)
         {
-            if (HttpContext.Session.GetString("userName") != null)
+            //if (HttpContext.Session.GetString("userName") != null)
+            //{
+            if (id == null)
             {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var category = dataContext.Categories
-                    .FirstOrDefault(a => a.Id == id);
-                if (category == null)
-                {
-                    return NotFound();
-                }
-
-                return View(category);
+                return NotFound();
             }
-            else
+            var category = dataContext.Categories
+                .FirstOrDefault(a => a.Id == id);
+            //.Find(id);
+            if (category == null)
             {
-                return Redirect("/");
+                return NotFound();
             }
+            ViewBag.Id = id;
+            return View(category);
+            //}
         }
 
         // POST: Category/Edit/6
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Name")] Category category)
+        public IActionResult Edit([Bind("Id", "Name")] Category category)
         {
-            //var autor = dataContext.Autors.Find(id);
-            //dataContext.Entry(autor).State = EntityState.Modified;
             if (ModelState.IsValid)
             {
-                dataContext.Update(category);
+                var original = dataContext.Categories.Where(s => s.Id == category.Id).FirstOrDefault();
+                dataContext.Entry(original).CurrentValues.SetValues(category);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             else
             {
-                //ViewBag.missatge = autor.validarAutor().Missatge;
+                //ViewBag.missatge = category.validarCategory().msg;
                 return View();
             }
 
