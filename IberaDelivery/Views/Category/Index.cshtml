@@ -1,0 +1,45 @@
+@model IEnumerable<IberaDelivery.Models.Category>
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Categories";
+
+}
+
+<h2>Categories</h2>
+
+<a asp-action="Create"><button>New Category</button></a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </th>
+                <th>
+            </tr>
+        }
+    </tbody>
+</table>
+<form asp-action="Index">
+    <input type="text" class="form-control" name="Cadena"> <input type="button" value="Cerca"> @ViewBag.missatge
+</form>
+@if (@ViewBag.missatge != null)
+{
+    <a asp-action="Index">Treure filtre</a>
+}

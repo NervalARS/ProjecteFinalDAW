@@ -50,7 +50,8 @@ namespace IberaDelivery.Controllers
         private void PopulateProvidersDropDownList(object? selectedProvider = null)
         {
             var providers = dataContext.Users;
-            ViewBag.ProviderId = new SelectList(providers.ToList(), "Id", "FullName", selectedProvider);
+
+            ViewBag.ProviderId = new SelectList(providers.ToList(), "Id", "FirstName", selectedProvider);
         }
 
         // GET: Product/Create
