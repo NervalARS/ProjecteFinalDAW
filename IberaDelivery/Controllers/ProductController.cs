@@ -78,6 +78,7 @@ namespace IberaDelivery.Controllers
             }
             else
             {
+                //ViewBag.missatge = product.validarProduct().Missatge;
                 return View();
             }
 
@@ -126,8 +127,8 @@ namespace IberaDelivery.Controllers
 
         public IActionResult Edit(int? id)
         {
-            if (HttpContext.Session.GetString("userName") != null)
-            {
+           PopulateCategoriesDropDownList();
+           PopulateProvidersDropDownList();
                 if (id == null)
                 {
                     return NotFound();
@@ -141,11 +142,6 @@ namespace IberaDelivery.Controllers
                 }
 
                 return View(product);
-            }
-            else
-            {
-                return Redirect("/");
-            }
         }
 
         // POST: Product/Edit/6

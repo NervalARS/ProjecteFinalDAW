@@ -16308,8 +16308,18 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/Views/Product/Create.cshtml",
-      "TargetPath": "Views\\Product\\Create.cshtml",
+      "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Product/Delete.cshtml",
+      "TargetPath": "Views\\Product\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Product/Edit.cshtml",
+      "TargetPath": "Views\\Product\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Shared/_Layout.cshtml",
+      "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
     },
     {
