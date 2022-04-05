@@ -21,7 +21,43 @@ namespace IberaDelivery.Controllers
         // Return Home page.
         public ActionResult Index()
         {
-            return View();
+            var users = dataContext.Users;
+            return View(users.ToList());
+        }
+
+        public IActionResult Create()
+        {
+                return View();  
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(ViewUserCreate user)
+        {
+
+            if (ModelState.IsValid)
+            {
+                User reglog = new User();
+
+                //Save all details in RegitserUser object
+
+                reglog.FirstName = user.FirstName;
+                reglog.LastName = user.LastName;
+                reglog.Email = user.Email;
+                reglog.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                reglog.Rol = user.Rol;
+
+                dataContext.Users.Add(reglog);
+                dataContext.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                //ViewBag.missatge = autor.validarAutor().Missatge;
+                return View();
+            }
+
+
         }
 
         //Return Register view
@@ -34,7 +70,7 @@ namespace IberaDelivery.Controllers
         //We have binded the Register View with Register ViewModel, so we can accept object of Register class as parameter.
         //This object contains all the values entered in the form by the user.
         [HttpPost]
-        public ActionResult Register(ViewRegister registerDetails)
+        public ActionResult Register(ViewUserRegister registerDetails)
         {
             //We check if the model state is valid or not. We have used DataAnnotation attributes.
             //If any form value fails the DataAnnotation validation the model state becomes invalid.
@@ -80,7 +116,7 @@ namespace IberaDelivery.Controllers
 
         //The login form is posted to this method.
         [HttpPost]
-        public ActionResult Login(ViewLogin model)
+        public ActionResult Login(ViewUserLogin model)
         {
             //Checking the state of model passed as parameter.
             if (ModelState.IsValid)
@@ -109,7 +145,7 @@ namespace IberaDelivery.Controllers
         }
 
         //function to check if User is valid or not
-        public User IsValidUser(ViewLogin model)
+        public User IsValidUser(ViewUserLogin model)
         {
             //Retireving the user details from DB based on username and password enetered by user.
             User user = dataContext.Users.Where(query => query.Email.Equals(model.Email)).SingleOrDefault();

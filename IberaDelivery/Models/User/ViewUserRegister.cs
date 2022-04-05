@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IberaDelivery.Models
 {
-    public partial class ViewRegister
+    public partial class ViewUserRegister
     {
-        public ViewRegister()
+        public ViewUserRegister()
         {
 
         }

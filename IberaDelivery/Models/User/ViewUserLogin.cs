@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IberaDelivery.Models
 {
-    public partial class ViewLogin
+    public partial class ViewUserLogin
     {
-        public ViewLogin()
+        public ViewUserLogin()
         {
         }
         [Required]
