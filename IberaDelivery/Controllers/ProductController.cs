@@ -9,17 +9,17 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 
-using Microsoft.AspNetCore.Hosting;   
-using System;  
-using System.IO;  
-using System.Threading.Tasks;  
+using Microsoft.AspNetCore.Hosting;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace IberaDelivery.Controllers
 {
     public class ProductController : Controller
     {
         private readonly iberiadbContext dataContext;
-        private readonly IWebHostEnvironment webHostEnvironment;  
+        private readonly IWebHostEnvironment webHostEnvironment;
 
         public ProductController(iberiadbContext context, IWebHostEnvironment hostEnvironment)
         {
@@ -66,30 +66,31 @@ namespace IberaDelivery.Controllers
         // GET: Autor/Create
         public IActionResult Create()
         {
-           PopulateCategoriesDropDownList();
-           PopulateProvidersDropDownList();
-                return View();
-            
-            
+            PopulateCategoriesDropDownList();
+            PopulateProvidersDropDownList();
+            return View();
+
+
         }
+        /*
+                private string UploadedFile(FromProduct model)
+                {
+                    string uniqueFileName = null;
 
-        private string UploadedFile(FromProduct model)  
-        {  
-            string uniqueFileName = null;  
-  
-            if (model.Image != null)  
-            {  
-                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images");  
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;  
-                string filePath = Path.Combine(uploadsFolder, uniqueFileName);  
-                using (var fileStream = new FileStream(filePath, FileMode.Create))  
-                {  
-                    model.Image.CopyTo(fileStream);  
-                }  
-            }  
-            return uniqueFileName;  
-        }  
+                    if (model.Image != null)
+                    {
+                        string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images");
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName[0];
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
 
+                            //model.Image.CopyTo(fileStream);
+                        }
+                    }
+                    return uniqueFileName;
+                }
+        */
         // POST: Autor/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -98,26 +99,74 @@ namespace IberaDelivery.Controllers
 
             //if (ModelState.IsValid)
             //{
-                string uniqueFileName = UploadedFile(model);  
-                Product product = new Product  
-                {  
-                    Name = model.Name,  
-                    Description = model.Description,  
-                    CategoryId = model.CategoryId,  
-                    ProviderId = model.ProviderId,  
-                    Stock = model.Stock,  
-                    Price = model.Price,  
-                    Iva = model.Iva,  
-                };  
+            //string uniqueFileName = UploadedFile(model);
 
-                dataContext.Add(product);
-                dataContext.SaveChanges();
-                return RedirectToAction(nameof(Index));
+            /*foreach (var file in model.Image)
+           {
+               if (file.Length > 0)
+               {
+                   using (var ms = new MemoryStream())
+                   {
+                       file.CopyTo(ms);
+                       var fileBytes = ms.ToArray();
+                       string s = Convert.ToBase64String(fileBytes);
+                       // act on the Base64 data
+                   }
+               }
+           }*/
+            //IFormFile file = model.Image;
+            Product product = new Product
+            {
+                Name = model.Name,
+                Description = model.Description,
+                CategoryId = model.CategoryId,
+                ProviderId = model.ProviderId,
+                Stock = model.Stock,
+                Price = model.Price,
+                Iva = model.Iva,
+            };
+
+            dataContext.Add(product);
+            dataContext.SaveChanges();
+
+
+            foreach (var file in model.Image)
+            {
+                if (file.Length > 0)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+
+                        file.CopyTo(ms);
+                        var fileBytes = ms.ToArray();
+                        Image image = new Image
+                        {
+                            ProductId = product.Id,
+                            Image1 = fileBytes,
+                        };
+                        dataContext.Add(image);
+                        dataContext.SaveChanges();
+                        //string s = Convert.ToBase64String(fileBytes);
+                        // act on the Base64 data
+                    }
+                }
+            }
+
+
+            /* Image image = new Image
+                 {
+                     ProductId = product.Id,
+                     Image1 = uniqueFileName,
+
+                 }
+              dataContext.Add(image);
+             dataContext.SaveChanges();*/
+            return RedirectToAction(nameof(Index));
             //}
             //else
             //{
-                //ViewBag.missatge = product.validarProduct().Missatge;
-                return View();
+            //ViewBag.missatge = product.validarProduct().Missatge;
+            return View();
             //}
 
 
@@ -126,23 +175,23 @@ namespace IberaDelivery.Controllers
         // GET: Autor/Delete/5
         public IActionResult Delete(int? id)
         {
-            
-                if (id == null)
-                {
-                    return NotFound();
-                }
 
-                var product = dataContext.Products
-                    .FirstOrDefault(a => a.Id == id);
-                if (product == null)
-                {
-                    return NotFound();
-                }
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-                return View(product);
-            
-           
-            
+            var product = dataContext.Products
+                .FirstOrDefault(a => a.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
+
+
+
         }
 
         // POST: Autor/Delete/5
@@ -162,24 +211,24 @@ namespace IberaDelivery.Controllers
 
         public IActionResult Edit(int? id)
         {
-           PopulateCategoriesDropDownList();
-           PopulateProvidersDropDownList();
-                if (id == null)
-                {
-                    return NotFound();
-                }
+            PopulateCategoriesDropDownList();
+            PopulateProvidersDropDownList();
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-                var autor = dataContext.Products
-                    .FirstOrDefault(a => a.Id == id);
-                if (autor == null)
-                {
-                    return NotFound();
-                }
+            var autor = dataContext.Products
+                .FirstOrDefault(a => a.Id == id);
+            if (autor == null)
+            {
+                return NotFound();
+            }
 
-                return View(autor);
-            
-              
-            
+            return View(autor);
+
+
+
         }
 
         // POST: Autor/Edit/6

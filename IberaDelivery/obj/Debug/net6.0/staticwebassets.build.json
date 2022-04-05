@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "/WWM3L4nsYe3WUKYoBUeCtLZ5T6s2wh2PFcGHwA0FVQ=",
+  "Hash": "D2YQBDtoBK9/dyLzpql/9mFRpwRURj6pW3zHvwJ+0jg=",
   "Source": "IberaDelivery",
   "BasePath": "_content/IberaDelivery",
   "Mode": "Default",
@@ -1103,6 +1103,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/favicon.ico"
+    },
+    {
+      "Identity": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/images/2ab0fa89-51df-47cb-9261-0e9b082fecb4_triger2.png",
+      "SourceId": "IberaDelivery",
+      "SourceType": "Discovered",
+      "ContentRoot": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "BasePath": "_content/IberaDelivery",
+      "RelativePath": "images/2ab0fa89-51df-47cb-9261-0e9b082fecb4_triger2.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/2ab0fa89-51df-47cb-9261-0e9b082fecb4_triger2.png"
+    },
+    {
+      "Identity": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/images/48454839-66d1-4b82-a25d-3cef9fdf1fc9_Captura de pantalla de 2021-01-22 15-06-32.png",
+      "SourceId": "IberaDelivery",
+      "SourceType": "Discovered",
+      "ContentRoot": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "BasePath": "_content/IberaDelivery",
+      "RelativePath": "images/48454839-66d1-4b82-a25d-3cef9fdf1fc9_Captura de pantalla de 2021-01-22 15-06-32.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/48454839-66d1-4b82-a25d-3cef9fdf1fc9_Captura de pantalla de 2021-01-22 15-06-32.png"
     },
     {
       "Identity": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/js/site.js",
