@@ -7,15 +7,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace pt1_mvc.Controllers
+
+
+using Microsoft.AspNetCore.Hosting;   
+using System;  
+using System.IO;  
+using System.Threading.Tasks;  
+
+namespace IberaDelivery.Controllers
 {
     public class ProductController : Controller
     {
         private readonly iberiadbContext dataContext;
+        private readonly IWebHostEnvironment webHostEnvironment;  
 
-        public ProductController(iberiadbContext context)
+        public ProductController(iberiadbContext context, IWebHostEnvironment hostEnvironment)
         {
             dataContext = context;
+            webHostEnvironment = hostEnvironment;
         }
 
         // GET: Autor
@@ -64,23 +73,52 @@ namespace pt1_mvc.Controllers
             
         }
 
+        private string UploadedFile(FromProduct model)  
+        {  
+            string uniqueFileName = null;  
+  
+            if (model.Image != null)  
+            {  
+                string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images");  
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName;  
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);  
+                using (var fileStream = new FileStream(filePath, FileMode.Create))  
+                {  
+                    model.Image.CopyTo(fileStream);  
+                }  
+            }  
+            return uniqueFileName;  
+        }  
+
         // POST: Autor/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva")] Product product)
+        public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva,Image")] FromProduct model)
         {
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
+                string uniqueFileName = UploadedFile(model);  
+                Product product = new Product  
+                {  
+                    Name = model.Name,  
+                    Description = model.Description,  
+                    CategoryId = model.CategoryId,  
+                    ProviderId = model.ProviderId,  
+                    Stock = model.Stock,  
+                    Price = model.Price,  
+                    Iva = model.Iva,  
+                };  
+
                 dataContext.Add(product);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 //ViewBag.missatge = product.validarProduct().Missatge;
                 return View();
-            }
+            //}
 
 
         }
