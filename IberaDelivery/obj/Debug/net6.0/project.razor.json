@@ -16298,6 +16298,11 @@
   "RootNamespace": "IberaDelivery",
   "Documents": [
     {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Delete.cshtml",
+      "TargetPath": "Views\\User\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Product/Delete.cshtml",
       "TargetPath": "Views\\Product\\Delete.cshtml",
       "FileKind": "mvc"
@@ -16375,6 +16380,11 @@
     {
       "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Product/Index.cshtml",
       "TargetPath": "Views\\Product\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Edit.cshtml",
+      "TargetPath": "Views\\User\\Edit.cshtml",
       "FileKind": "mvc"
     },
     {
