@@ -78,14 +78,13 @@ namespace IberaDelivery.Controllers
             }
             else
             {
-                //ViewBag.missatge = autor.validarAutor().Missatge;
                 return View();
             }
 
 
         }
 
-        // GET: Autor/Delete/5
+        // GET: Product/Delete/5
         public IActionResult Delete(int? id)
         {
             if (HttpContext.Session.GetString("userName") != null)
@@ -110,7 +109,7 @@ namespace IberaDelivery.Controllers
             }
         }
 
-        // POST: Autor/Delete/5
+        // POST: Product/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
@@ -149,7 +148,7 @@ namespace IberaDelivery.Controllers
             }
         }
 
-        // POST: Autor/Edit/6
+        // POST: Product/Edit/6
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva")] Product product)
