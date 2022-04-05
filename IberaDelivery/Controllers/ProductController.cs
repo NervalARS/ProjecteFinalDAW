@@ -33,7 +33,11 @@ namespace IberaDelivery.Controllers
             var products = dataContext.Products
             .Include(c => c.Category)
             .Include(p => p.Provider)
+            .Include(p => p.Images)
             .AsNoTracking();
+
+
+
             return View(await products.ToListAsync());
         }
 
@@ -94,27 +98,12 @@ namespace IberaDelivery.Controllers
         // POST: Autor/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva,Image")] FromProduct model)
+        public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva,Image")] FormProduct model)
         {
 
             //if (ModelState.IsValid)
             //{
-            //string uniqueFileName = UploadedFile(model);
 
-            /*foreach (var file in model.Image)
-           {
-               if (file.Length > 0)
-               {
-                   using (var ms = new MemoryStream())
-                   {
-                       file.CopyTo(ms);
-                       var fileBytes = ms.ToArray();
-                       string s = Convert.ToBase64String(fileBytes);
-                       // act on the Base64 data
-                   }
-               }
-           }*/
-            //IFormFile file = model.Image;
             Product product = new Product
             {
                 Name = model.Name,
@@ -153,20 +142,12 @@ namespace IberaDelivery.Controllers
             }
 
 
-            /* Image image = new Image
-                 {
-                     ProductId = product.Id,
-                     Image1 = uniqueFileName,
-
-                 }
-              dataContext.Add(image);
-             dataContext.SaveChanges();*/
             return RedirectToAction(nameof(Index));
             //}
             //else
             //{
             //ViewBag.missatge = product.validarProduct().Missatge;
-            return View();
+            //return View();
             //}
 
 
