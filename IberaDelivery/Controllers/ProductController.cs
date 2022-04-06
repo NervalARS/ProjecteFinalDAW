@@ -164,6 +164,9 @@ namespace IberaDelivery.Controllers
 
             var product = dataContext.Products
                 .FirstOrDefault(a => a.Id == id);
+
+
+
             if (product == null)
             {
                 return NotFound();
@@ -199,14 +202,52 @@ namespace IberaDelivery.Controllers
                 return NotFound();
             }
 
-            var autor = dataContext.Products
+            var product = dataContext.Products
+                .Include(p => p.Images)
                 .FirstOrDefault(a => a.Id == id);
-            if (autor == null)
+            if (product == null)
             {
                 return NotFound();
             }
 
-            return View(autor);
+            FormProduct model = new FormProduct
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                CategoryId = product.CategoryId,
+                ProviderId = product.ProviderId,
+                Stock = product.Stock,
+                Price = product.Price,
+                Iva = product.Iva,
+                Image = new IFormFile[product.Images.Count],
+            };
+            //ICollection<IFormFile> imageCollection = new List<IFormFile>();
+            var cont = 0;
+            foreach (var file in product.Images)
+            {
+                if (file.Image1.Length > 0)
+                {
+                    var testFilePath = "path/to/test.jpg";
+                    using (var ms = new MemoryStream(file.Image1))
+                    {
+                        IFormFile fromFile = new FormFile(ms, 0, ms.Length,
+                        Path.GetFileNameWithoutExtension(testFilePath),
+                        Path.GetFileName(testFilePath)
+                        );
+
+                        //Image ret = Image.FromStream(ms);
+                        
+                       model.Image[cont] = fromFile;
+                    }
+                }
+                cont = cont + 1;
+            }
+            {
+
+            }
+
+            return View(model);
 
 
 
@@ -215,13 +256,13 @@ namespace IberaDelivery.Controllers
         // POST: Autor/Edit/6
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva")] Product product)
+        public IActionResult Edit([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva,Image")] FormProduct model)
         {
             //var autor = dataContext.Autors.Find(id);
             //dataContext.Entry(autor).State = EntityState.Modified;
             if (ModelState.IsValid)
             {
-                dataContext.Update(product);
+                dataContext.Update(model);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }

@@ -75,7 +75,8 @@
                     {
                         
                    @* @Html.DisplayFor(modelItem => @System.Convert.ToBase64String(item2.Image1)) *@
-                    <div style="height:100px;width:100px; background-image: url(data:image;base64,@System.Convert.ToBase64String(item2.Image1))"></div>
+                  @*  <div style="height:100px;width:100px; background-image: url(data:image;base64,@System.Convert.ToBase64String(item2.Image1))"></div> *@
+                    <img src="data:image;base64,@System.Convert.ToBase64String(item2.Image1)"/>
                    
                           
                     }
