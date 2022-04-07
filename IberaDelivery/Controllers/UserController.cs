@@ -19,9 +19,12 @@ namespace IberaDelivery.Controllers
         }
 
         // Return Home page.
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var users = dataContext.Users
+            .Include(p => p.Products)
+            .AsNoTracking();
+            return View(await users.ToListAsync());
         }
 
         //Return Register view
