@@ -21,9 +21,12 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                Edit
+
             </th>
-             <th>
+            <th>
+                Edit 
+            </th>
+            <th>
                 Delete
             </th>
         </tr>
@@ -39,10 +42,13 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id"><button>Edit Category</button></a>
+                    
                 </td>
                 <td>
-                    <a asp-action="Delete" asp-route-id="@item.Id"><button>Delete Category</button></a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit Category</a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete Category</a>
                 </td>
             </tr>
         }
