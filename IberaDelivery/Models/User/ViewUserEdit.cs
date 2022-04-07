@@ -5,24 +5,21 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IberaDelivery.Models
 {
-    public partial class User
+    public partial class ViewUserEdit
     {
-        public User()
+        public ViewUserEdit()
         {
-            Comments = new HashSet<Comment>();
-            Orders = new HashSet<Order>();
-            Products = new HashSet<Product>();
+  
         }
-
-        public int Id { get; set; }
+        public int? Id { get; set; }
+        [Required]
         public string? FirstName { get; set; }
+        [Required]
         public string? LastName { get; set; }
+
+        [RegularExpression("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$", ErrorMessage = "E-mail id is not valid")]
         public string Email { get; set; } = null!;
         public string Password { get; set; } = null!;
         public int Rol { get; set; }
-
-        public virtual ICollection<Comment> Comments { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
-        public virtual ICollection<Product> Products { get; set; }
     }
 }

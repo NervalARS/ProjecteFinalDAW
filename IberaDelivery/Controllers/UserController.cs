@@ -60,6 +60,65 @@ namespace IberaDelivery.Controllers
 
         }
 
+        public IActionResult Edit(int? id)
+        {
+            var user = dataContext.Users
+            .FirstOrDefault(a => a.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            ViewUserEdit editUser = new ViewUserEdit();
+
+            editUser.Id = id;
+            editUser.FirstName = user.FirstName;
+            editUser.LastName = user.LastName;
+            editUser.Email = user.Email;
+            editUser.Rol = user.Rol;
+            editUser.Password = user.Password;
+            return View(editUser);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(ViewUserEdit user)
+        {
+
+            if (ModelState.IsValid)
+            {
+                User reglog = dataContext.Users.Find(user.Id);
+
+                //Update all details in object
+                if(reglog.FirstName != user.FirstName){
+                    reglog.FirstName = user.FirstName;
+                }
+                if(reglog.LastName != user.LastName){
+                    reglog.LastName = user.LastName;
+                }
+                if(reglog.Email != user.Email){
+                    reglog.Email = user.Email;
+                }
+                if(reglog.Password != user.Password){
+                    reglog.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                }
+                if(reglog.Rol != user.Rol){
+                    reglog.Rol = user.Rol;
+                }
+
+                dataContext.Users.Update(reglog);
+                dataContext.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                //ViewBag.missatge = autor.validarAutor().Missatge;
+                return View(user);
+            }
+
+
+        }
+
         //Return Register view
         public ActionResult Register()
         {
@@ -168,5 +227,33 @@ namespace IberaDelivery.Controllers
             Session.Abandon(); // it will clear the session at the end of request
             return RedirectToAction("Index");
         }*/
+
+        public IActionResult Delete(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = dataContext.Users
+                .FirstOrDefault(a => a.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {                      
+            var user = dataContext.Users.Find(id);
+            dataContext.Users.Remove(user);
+            dataContext.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }    
     }
 }
