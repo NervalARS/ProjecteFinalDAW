@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yAU/Jg9TulI9F2cZLTx6XYAyCZMfWRPdkz/V+Tt2eeE=",
+  "Hash": "skRTDUhUfdqOuzKPCyvqADBn2yN3S1h3AWzZkAbEHWI=",
   "Source": "IberaDelivery",
   "BasePath": "_content/IberaDelivery",
   "Mode": "Default",
@@ -1069,6 +1069,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/obj/Debug/net6.0/scopedcss/projectbundle/IberaDelivery.bundle.scp.css"
+    },
+    {
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/Content/Images/logo.png",
+      "SourceId": "IberaDelivery",
+      "SourceType": "Discovered",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "BasePath": "_content/IberaDelivery",
+      "RelativePath": "Content/Images/logo.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/Content/Images/logo.png"
     },
     {
       "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/css/site.css",
