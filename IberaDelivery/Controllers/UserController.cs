@@ -21,10 +21,102 @@ namespace IberaDelivery.Controllers
         // Return Home page.
         public async Task<IActionResult> Index()
         {
-            var users = dataContext.Users
-            .Include(p => p.Products)
-            .AsNoTracking();
-            return View(await users.ToListAsync());
+            var users = dataContext.Users;
+            return View(users.ToList());
+        }
+
+        public IActionResult Create()
+        {
+                return View();  
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(ViewUserCreate user)
+        {
+
+            if (ModelState.IsValid)
+            {
+                User reglog = new User();
+
+                //Save all details in RegitserUser object
+
+                reglog.FirstName = user.FirstName;
+                reglog.LastName = user.LastName;
+                reglog.Email = user.Email;
+                reglog.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                reglog.Rol = user.Rol;
+
+                dataContext.Users.Add(reglog);
+                dataContext.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                //ViewBag.missatge = autor.validarAutor().Missatge;
+                return View();
+            }
+
+
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            var user = dataContext.Users
+            .FirstOrDefault(a => a.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            ViewUserEdit editUser = new ViewUserEdit();
+
+            editUser.Id = id;
+            editUser.FirstName = user.FirstName;
+            editUser.LastName = user.LastName;
+            editUser.Email = user.Email;
+            editUser.Rol = user.Rol;
+            editUser.Password = user.Password;
+            return View(editUser);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(ViewUserEdit user)
+        {
+
+            if (ModelState.IsValid)
+            {
+                User reglog = dataContext.Users.Find(user.Id);
+
+                //Update all details in object
+                if(reglog.FirstName != user.FirstName){
+                    reglog.FirstName = user.FirstName;
+                }
+                if(reglog.LastName != user.LastName){
+                    reglog.LastName = user.LastName;
+                }
+                if(reglog.Email != user.Email){
+                    reglog.Email = user.Email;
+                }
+                if(reglog.Password != user.Password){
+                    reglog.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
+                }
+                if(reglog.Rol != user.Rol){
+                    reglog.Rol = user.Rol;
+                }
+
+                dataContext.Users.Update(reglog);
+                dataContext.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                //ViewBag.missatge = autor.validarAutor().Missatge;
+                return View(user);
+            }
+
+
         }
 
         //Return Register view
@@ -37,7 +129,7 @@ namespace IberaDelivery.Controllers
         //We have binded the Register View with Register ViewModel, so we can accept object of Register class as parameter.
         //This object contains all the values entered in the form by the user.
         [HttpPost]
-        public ActionResult Register(ViewRegister registerDetails)
+        public ActionResult Register(ViewUserRegister registerDetails)
         {
             //We check if the model state is valid or not. We have used DataAnnotation attributes.
             //If any form value fails the DataAnnotation validation the model state becomes invalid.
@@ -83,7 +175,7 @@ namespace IberaDelivery.Controllers
 
         //The login form is posted to this method.
         [HttpPost]
-        public ActionResult Login(ViewLogin model)
+        public ActionResult Login(ViewUserLogin model)
         {
             //Checking the state of model passed as parameter.
             if (ModelState.IsValid)
@@ -95,7 +187,7 @@ namespace IberaDelivery.Controllers
                 //If user is valid & present in database, we are redirecting it to Welcome page.
                 if (isValidUser != null)
                 {
-                    return RedirectToAction("Index");
+                    return Redirect("/");
                 }
                 else
                 {
@@ -112,16 +204,20 @@ namespace IberaDelivery.Controllers
         }
 
         //function to check if User is valid or not
-        public User IsValidUser(ViewLogin model)
+        public User IsValidUser(ViewUserLogin model)
         {
             //Retireving the user details from DB based on username and password enetered by user.
-            User user = dataContext.Users.Where(query => query.Email.Equals(model.Email) && query.Password.Equals(model.Password)).SingleOrDefault();
+            User user = dataContext.Users.Where(query => query.Email.Equals(model.Email)).SingleOrDefault();
             //If user is present, then true is returned.
             if (user == null)
                 return null;
             //If user is not present false is returned.
             else
-                return user;
+                if(BCrypt.Net.BCrypt.Verify(model.Password, user.Password)){
+                    return user;
+                }else{
+                    return null;
+                }
         }
 
 
@@ -131,5 +227,33 @@ namespace IberaDelivery.Controllers
             Session.Abandon(); // it will clear the session at the end of request
             return RedirectToAction("Index");
         }*/
+
+        public IActionResult Delete(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = dataContext.Users
+                .FirstOrDefault(a => a.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {                      
+            var user = dataContext.Users.Find(id);
+            dataContext.Users.Remove(user);
+            dataContext.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }    
     }
 }
