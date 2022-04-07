@@ -17,7 +17,6 @@ namespace IberaDelivery.Controllers
         {
             dataContext = context;
         }
-
         // GET: Product
         public async Task<IActionResult> Index()
         {
@@ -26,50 +25,37 @@ namespace IberaDelivery.Controllers
             .Include(p => p.Provider)
             .AsNoTracking();
             return View(await products.ToListAsync());
-
         }
-
         [HttpPost]
         public IActionResult Index(String Cadena)
         {
-
             var products = dataContext.Products
             .Where(a => a.Name.Contains(Cadena)); //|| a.Cognoms.Contains(Cadena));
             ViewBag.missatge = "Filtrat per: " + Cadena;
-
             return View(products.ToList());
-
         }
-
         private void PopulateCategoriesDropDownList(object? selectedCategory = null)
         {
             var categories = dataContext.Categories;
             ViewBag.CategoryId = new SelectList(categories.ToList(), "Id", "Name", selectedCategory);
         }
-
         private void PopulateProvidersDropDownList(object? selectedProvider = null)
         {
             var providers = dataContext.Users;
-
             ViewBag.ProviderId = new SelectList(providers.ToList(), "Id", "FirstName", selectedProvider);
         }
-
         // GET: Product/Create
         public IActionResult Create()
         {
             PopulateCategoriesDropDownList();
             PopulateProvidersDropDownList();
                 return View();
-           
-           
         }
-
         // POST: Product/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva")] Product product)
         {
-
             if (ModelState.IsValid)
             {
                 dataContext.Add(product);
@@ -81,10 +67,7 @@ namespace IberaDelivery.Controllers
                 //ViewBag.missatge = product.validarProduct().Missatge;
                 return View();
             }
-
-
         }
-
         // GET: Product/Delete/5
         public IActionResult Delete(int? id)
         {
@@ -94,14 +77,12 @@ namespace IberaDelivery.Controllers
                 {
                     return NotFound();
                 }
-
                 var product = dataContext.Products
                     .FirstOrDefault(a => a.Id == id);
                 if (product == null)
                 {
                     return NotFound();
                 }
-
                 return View(product);
             }
             else
@@ -109,7 +90,6 @@ namespace IberaDelivery.Controllers
                 return Redirect("/");
             }
         }
-
         // POST: Product/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -133,14 +113,12 @@ namespace IberaDelivery.Controllers
                 {
                     return NotFound();
                 }
-
                 var product = dataContext.Products
                     .FirstOrDefault(a => a.Id == id);
                 if (product == null)
                 {
                     return NotFound();
                 }
-
                 return View(product);
         }
 
@@ -162,10 +140,21 @@ namespace IberaDelivery.Controllers
                 //ViewBag.missatge = autor.validarAutor().Missatge;
                 return View();
             }
-
-
         }
-
-
+        
+        public IActionResult Details(int? id)
+        {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                var product = dataContext.Products
+                    .FirstOrDefault(a => a.Id == id);
+                if (product == null)
+                {
+                    return NotFound();
+                }
+                return View(product);
+        }
     }
 }

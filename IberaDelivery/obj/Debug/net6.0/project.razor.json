@@ -16368,6 +16368,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/Views/Product/Details.cshtml",
+      "TargetPath": "Views\\Product\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/Views/User/Register.cshtml",
       "TargetPath": "Views\\User\\Register.cshtml",
       "FileKind": "mvc"
