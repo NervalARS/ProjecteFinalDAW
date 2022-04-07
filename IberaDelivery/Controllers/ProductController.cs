@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
-
-
 using Microsoft.AspNetCore.Hosting;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Drawing;
+
+
+
 
 namespace IberaDelivery.Controllers
 {
@@ -76,8 +77,8 @@ namespace IberaDelivery.Controllers
 
 
         }
-        /*
-                private string UploadedFile(FromProduct model)
+        
+              /*  private string UploadedFile(FormProduct model)
                 {
                     string uniqueFileName = null;
 
@@ -93,8 +94,8 @@ namespace IberaDelivery.Controllers
                         }
                     }
                     return uniqueFileName;
-                }
-        */
+                }*/
+        
         // POST: Autor/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -210,7 +211,7 @@ namespace IberaDelivery.Controllers
                 return NotFound();
             }
 
-            FormProduct model = new FormProduct
+            FormProductEdit model = new FormProductEdit
             {
                 Id = product.Id,
                 Name = product.Name,
@@ -220,32 +221,36 @@ namespace IberaDelivery.Controllers
                 Stock = product.Stock,
                 Price = product.Price,
                 Iva = product.Iva,
-                Image = new IFormFile[product.Images.Count],
+                Image = new List<string>(),
             };
-            //ICollection<IFormFile> imageCollection = new List<IFormFile>();
+
+             /*var img = dataContext.Images
+            .Where(i => i.ProductId == id)
+            .AsNoTracking();*/
+            
+           
+           
+          
             var cont = 0;
             foreach (var file in product.Images)
             {
                 if (file.Image1.Length > 0)
                 {
-                    var testFilePath = "path/to/test.jpg";
-                    using (var ms = new MemoryStream(file.Image1))
-                    {
-                        IFormFile fromFile = new FormFile(ms, 0, ms.Length,
-                        Path.GetFileNameWithoutExtension(testFilePath),
-                        Path.GetFileName(testFilePath)
-                        );
+                    
 
-                        //Image ret = Image.FromStream(ms);
+                
+                       
                         
-                       model.Image[cont] = fromFile;
-                    }
+                        model.Image.Add(System.Convert.ToBase64String(file.Image1));
+                    
+                   
                 }
-                cont = cont + 1;
+               
+                
             }
-            {
 
-            }
+            
+        
 
             return View(model);
 

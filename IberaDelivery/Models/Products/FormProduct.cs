@@ -22,7 +22,7 @@ namespace IberaDelivery.Models
 
         public IFormFile[] Image { get; set; } = null!;
 
-        public Image[] Image2 { get; set; } = null!;
+        //public Image[] Image2 { get; set; } = null!;
 
        
 
