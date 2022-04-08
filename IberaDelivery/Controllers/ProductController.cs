@@ -11,6 +11,8 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 
 
@@ -31,6 +33,9 @@ namespace IberaDelivery.Controllers
         // GET: Autor
         public async Task<IActionResult> Index()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
             var products = dataContext.Products
             .Include(c => c.Category)
             .Include(p => p.Provider)
@@ -47,6 +52,9 @@ namespace IberaDelivery.Controllers
         public IActionResult Index(String Cadena)
         {
 
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
             var products = dataContext.Products
             .Where(p => p.Name.Contains(Cadena)); //|| a.Cognoms.Contains(Cadena));
             ViewBag.missatge = "Filtrat per: " + Cadena;
@@ -71,6 +79,9 @@ namespace IberaDelivery.Controllers
         // GET: Autor/Create
         public IActionResult Create()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
             PopulateCategoriesDropDownList();
             PopulateProvidersDropDownList();
             return View();
@@ -101,7 +112,9 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva,Image")] FormProduct model)
         {
-
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
             //if (ModelState.IsValid)
             //{
 
@@ -154,48 +167,11 @@ namespace IberaDelivery.Controllers
 
         }
 
-        // GET: Autor/Delete/5
-        public IActionResult Delete(int? id)
-        {
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var product = dataContext.Products
-                .FirstOrDefault(a => a.Id == id);
-
-
-
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
-
-
-
-        }
-
-        // POST: Autor/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
-        {
-            var products = dataContext.Products.Find(id);
-            if (products != null)
-            {
-                dataContext.Products.Remove(products);
-                dataContext.SaveChanges();
-            }
-
-            return RedirectToAction(nameof(Index));
-        }
-
         public IActionResult Edit(int? id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
             PopulateCategoriesDropDownList();
             PopulateProvidersDropDownList();
             if (id == null)
@@ -263,6 +239,9 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva,Image")] FormProduct model)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
             //var autor = dataContext.Autors.Find(id);
             //dataContext.Entry(autor).State = EntityState.Modified;
             if (ModelState.IsValid)
@@ -280,6 +259,50 @@ namespace IberaDelivery.Controllers
 
         }
 
+        // GET: Autor/Delete/5
+        public IActionResult Delete(int? id)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
 
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = dataContext.Products
+                .FirstOrDefault(a => a.Id == id);
+
+
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
+
+
+
+        }
+
+        // POST: Autor/Delete/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
+            var products = dataContext.Products.Find(id);
+            if (products != null)
+            {
+                dataContext.Products.Remove(products);
+                dataContext.SaveChanges();
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
