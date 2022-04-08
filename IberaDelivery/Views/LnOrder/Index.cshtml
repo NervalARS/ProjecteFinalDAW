@@ -1,0 +1,82 @@
+@model IEnumerable<IberaDelivery.Models.LnOrder>
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "LnOrders";
+    
+}
+
+<h2>LnOrders</h2>
+
+<a asp-action="Create"><button>New LnOrder +</button></a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NumOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumLine)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalImport)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RefProduct)
+            </th>
+            <th>Delete</th>
+            <th>Edit</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                @Html.DisplayFor(modelItem => item.NumOrder)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.NumLine)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.TotalImport)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.RefProduct)
+            </th>
+            
+         @*   @if (@HttpContextAccessor.HttpContext.Session.GetString("userName") != null){  *@
+
+            
+                <td>
+                   <a asp-action="Delete" asp-route-id="@item.NumOrder, @item.NumLine ">Delete</a>
+                </td>
+                <td>
+                   <a asp-action="Edit" asp-route-id="@item.NumOrder, @item.NumLine">Edit</a>
+                </td>
+                <td>
+                   <a asp-action="Details" asp-route-id="@item.NumOrder, @item.NumLine">Details</a>
+                </td>
+       @*     }else{
+                <td></td>
+                <td></td>
+            } *@
+            </tr>
+        }
+    </tbody>
+</table>
+<form asp-action="Index">
+<input type="text" class="form-control" name="Cadena"> <input type="button" value="Cerca"> @ViewBag.missatge
+</form>
+@if(@ViewBag.missatge != null){
+<a asp-action="Index">Treure filtre</a>
+}
+

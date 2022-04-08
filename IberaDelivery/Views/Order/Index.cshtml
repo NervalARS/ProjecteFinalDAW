@@ -1,7 +1,7 @@
-@model IEnumerable<IberaDelivery.Models.Product>
+@model IEnumerable<IberaDelivery.Models.Order>
 @inject IHttpContextAccessor HttpContextAccessor
 @{
-    ViewData["Title"] = "Products";
+    ViewData["Title"] = "Orders";
     
 }
 
@@ -17,30 +17,18 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Date)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.Import)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
+                @Html.DisplayNameFor(model => model.UserId)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Provider)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Stock)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Iva)
-            </th>
+            <th>LnOrder</th>
             <th>Delete</th>
             <th>Edit</th>
             <th>Details</th>
-            <th>Add to carrito</th>
         </tr>
     </thead>
     <tbody>
@@ -51,25 +39,13 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </th>
             <th>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.Date)
             </th>
             <th>
-                @Html.DisplayFor(modelItem => item.Description)
+                @Html.DisplayFor(modelItem => item.Import)
             </th>
             <th>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Provider.FirstName)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Stock)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Price)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Iva)
+                @Html.DisplayFor(modelItem => item.UserId)
             </th>
             
          @*   @if (@HttpContextAccessor.HttpContext.Session.GetString("userName") != null){  *@
@@ -85,7 +61,7 @@
                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                 </td>
                 <td>
-                    <a asp-action="AddToCart" asp-route-id="@item.Id">+</a>
+                   <a asp-action="LnOrder" asp-route-id="@item.Id">LnOrder</a>
                 </td>
        @*     }else{
                 <td></td>
@@ -95,10 +71,7 @@
         }
     </tbody>
 </table>
- @if (@HttpContextAccessor.HttpContext.Session.GetString("Cart") != null){ 
-    <a asp-action="Checkout">Checkout</a>
-    <a asp-action="ClearCart">Empty Cart</a>
- }
+
 <form asp-action="Index">
 <input type="text" class="form-control" name="Cadena"> <input type="button" value="Cerca"> @ViewBag.missatge
 </form>

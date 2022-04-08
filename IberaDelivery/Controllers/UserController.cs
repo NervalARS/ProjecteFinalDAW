@@ -6,7 +6,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using System.Text.Json;
+using System.Text.Json.Serialization;
 namespace IberaDelivery.Controllers
 {
     public class UserController : Controller
@@ -27,7 +28,7 @@ namespace IberaDelivery.Controllers
 
         public IActionResult Create()
         {
-                return View();  
+            return View();
         }
 
         [HttpPost]
@@ -90,19 +91,24 @@ namespace IberaDelivery.Controllers
                 User reglog = dataContext.Users.Find(user.Id);
 
                 //Update all details in object
-                if(reglog.FirstName != user.FirstName){
+                if (reglog.FirstName != user.FirstName)
+                {
                     reglog.FirstName = user.FirstName;
                 }
-                if(reglog.LastName != user.LastName){
+                if (reglog.LastName != user.LastName)
+                {
                     reglog.LastName = user.LastName;
                 }
-                if(reglog.Email != user.Email){
+                if (reglog.Email != user.Email)
+                {
                     reglog.Email = user.Email;
                 }
-                if(reglog.Password != user.Password){
+                if (reglog.Password != user.Password)
+                {
                     reglog.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
                 }
-                if(reglog.Rol != user.Rol){
+                if (reglog.Rol != user.Rol)
+                {
                     reglog.Rol = user.Rol;
                 }
 
@@ -135,10 +141,13 @@ namespace IberaDelivery.Controllers
             //If any form value fails the DataAnnotation validation the model state becomes invalid.
             if (ModelState.IsValid)
             {
-                if(dataContext.Users.Any(x => x.Email.Equals(registerDetails.Email))){
+                if (dataContext.Users.Any(x => x.Email.Equals(registerDetails.Email)))
+                {
                     ViewBag.Message = "Email is already in use";
                     return View("Register");
-                }else{
+                }
+                else
+                {
                     //If the model state is valid i.e. the form values passed the validation then we are storing the User's details in DB.
                     User reglog = new User();
 
@@ -161,7 +170,7 @@ namespace IberaDelivery.Controllers
             }
             else
             {
-               
+
                 //If the validation fails, we are returning the model object with errors to the view, which will display the error messages.
                 return View("Register", registerDetails);
             }
@@ -180,7 +189,7 @@ namespace IberaDelivery.Controllers
             //Checking the state of model passed as parameter.
             if (ModelState.IsValid)
             {
-                
+
                 //Validating the user, whether the user is valid or not.
                 var isValidUser = IsValidUser(model);
 
@@ -213,11 +222,14 @@ namespace IberaDelivery.Controllers
                 return null;
             //If user is not present false is returned.
             else
-                if(BCrypt.Net.BCrypt.Verify(model.Password, user.Password)){
-                    return user;
-                }else{
-                    return null;
-                }
+                if (BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
+            {
+                return user;
+            }
+            else
+            {
+                return null;
+            }
         }
 
 
@@ -249,11 +261,26 @@ namespace IberaDelivery.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
-        {                      
+        {
             var user = dataContext.Users.Find(id);
             dataContext.Users.Remove(user);
             dataContext.SaveChanges();
             return RedirectToAction(nameof(Index));
-        }    
+        }
+
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var usuaris = dataContext.Users
+                .FirstOrDefault(a => a.Id == id);
+            if (usuaris == null)
+            {
+                return NotFound();
+            }
+            return View(usuaris);
+        }
     }
 }

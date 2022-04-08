@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace IberaDelivery.Controllers
 {
@@ -49,24 +51,24 @@ namespace IberaDelivery.Controllers
         {
             PopulateCategoriesDropDownList();
             PopulateProvidersDropDownList();
-                return View();
+            return View();
         }
         // POST: Product/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva")] Product product)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 dataContext.Add(product);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 //ViewBag.missatge = product.validarProduct().Missatge;
-                return View();
-            }
+                //return View();
+            //}
         }
         // GET: Product/Delete/5
         public IActionResult Delete(int? id)
@@ -107,19 +109,19 @@ namespace IberaDelivery.Controllers
 
         public IActionResult Edit(int? id)
         {
-           PopulateCategoriesDropDownList();
-           PopulateProvidersDropDownList();
-                if (id == null)
-                {
-                    return NotFound();
-                }
-                var product = dataContext.Products
-                    .FirstOrDefault(a => a.Id == id);
-                if (product == null)
-                {
-                    return NotFound();
-                }
-                return View(product);
+            PopulateCategoriesDropDownList();
+            PopulateProvidersDropDownList();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var product = dataContext.Products
+                .FirstOrDefault(a => a.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
         }
 
         // POST: Product/Edit/6
@@ -141,20 +143,90 @@ namespace IberaDelivery.Controllers
                 return View();
             }
         }
-        
+
         public IActionResult Details(int? id)
         {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-                var product = dataContext.Products
-                    .FirstOrDefault(a => a.Id == id);
-                if (product == null)
-                {
-                    return NotFound();
-                }
-                return View(product);
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var product = dataContext.Products
+                .FirstOrDefault(a => a.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
+        }
+        public async Task<IActionResult> AddToCart(int? id)
+        {
+            List<Product> list;
+            if (HttpContext.Session.GetString("Cart") == null)
+            {
+                list = new List<Product>();
+                HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(list));
+            }
+            else
+            {
+                list = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
+            }
+            var product = dataContext.Products
+                .FirstOrDefault(a => a.Id == id);
+            if (product != null)
+            {
+                list.Add(product);
+                HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(list));
+            }
+            var products = dataContext.Products
+            .Include(c => c.Category)
+            .Include(p => p.Provider)
+            .AsNoTracking();
+            return View("Index", await products.ToListAsync());
+        }
+
+                public async Task<IActionResult> ClearCart(int? id)
+        {
+            HttpContext.Session.Remove("Cart");
+            var products = dataContext.Products
+            .Include(c => c.Category)
+            .Include(p => p.Provider)
+            .AsNoTracking();
+            return View("Index", await products.ToListAsync());
+        }
+
+        public async Task<IActionResult> Checkout(){
+            List<Product> list;
+            list = new List<Product>();
+            if (HttpContext.Session.GetString("Cart") != null)
+            {
+                list = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
+            }
+            var orders = dataContext.Orders;
+            DateTime today = DateTime.Today;
+
+            var order = new Order();
+            order.Date = today;
+            order.Import = 0;
+            order.UserId = 1;
+            dataContext.Add(order);
+            dataContext.SaveChanges();
+
+            for (var i = 0; i < list.Count; i++) {
+                var lnOrder = new LnOrder(); 
+                lnOrder.NumOrder = order.Id;
+                //lnOrder.NumLine = i;
+                lnOrder.RefProduct = list[i].Id;
+                lnOrder.Quantity = 1;
+                lnOrder.TotalImport = list[i].Price;
+                dataContext.Add(lnOrder);
+                dataContext.SaveChanges();
+            }
+            
+            var products = dataContext.Products
+            .Include(c => c.Category)
+            .Include(p => p.Provider)
+            .AsNoTracking();
+            return View("Index", await products.ToListAsync());
         }
     }
 }

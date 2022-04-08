@@ -6,7 +6,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-
+using System.Text.Json;
+using System.Text.Json.Serialization;
 namespace IberaDelivery.Controllers
 {
     public class CategoryController : Controller
@@ -149,10 +150,22 @@ namespace IberaDelivery.Controllers
                 //ViewBag.missatge = category.validarCategory().msg;
                 return View();
             }
-
-
         }
 
 
+        public IActionResult Details(int? id)
+        {
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                var categoria = dataContext.Categories
+                    .FirstOrDefault(a => a.Id == id);
+                if (categoria == null)
+                {
+                    return NotFound();
+                }
+                return View(categoria);
+        }
     }
 }

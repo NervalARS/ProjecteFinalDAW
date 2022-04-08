@@ -1,0 +1,21 @@
+@model IberaDelivery.Models.Order
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewBag.Title = "Order Details";
+
+}
+
+<h2>Order Details</h2>
+<p>
+    @Html.DisplayFor(Order => Order.Id)
+</p>
+<p>
+    @Html.DisplayFor(Order => Order.Date)
+</p>
+<p>
+    @Html.DisplayFor(Order => Order.Import)
+</p>
+<p>
+    @Html.DisplayFor(Order => Order.UserId)
+</p>
+<a asp-action="LnOrder" asp-route-id="@Html.DisplayFor(Order => Order.UserId)">LnOrder</a>
