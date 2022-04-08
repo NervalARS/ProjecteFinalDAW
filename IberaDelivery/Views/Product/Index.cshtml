@@ -1,15 +1,12 @@
 @model IEnumerable<IberaDelivery.Models.Product>
 @inject IHttpContextAccessor HttpContextAccessor
 @{
-    ViewData["Title"] = "Products";
+    ViewData["Title"] = "Autors";
     
 }
 
-<h2>Productes</h2>
-
-<a asp-action="Create"><button>New Product +</button></a>
-
-
+<h2>Autors</h2>
+ <a asp-action="Create"><button>Create</button></a>
 <table class="table">
     <thead>
         <tr>
@@ -45,44 +42,39 @@
         @foreach (var item in Model)
         {
             <tr>
-                <th>
-                @Html.DisplayFor(modelItem => item.Id)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Name)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Description)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Provider.FirstName)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Stock)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Price)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Iva)
-            </th>
-            
-         @*   @if (@HttpContextAccessor.HttpContext.Session.GetString("userName") != null){  *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
 
-            
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Provider.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Iva)
+                </td>
+
                 <td>
                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
                 <td>
                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                 </td>
-       @*     }else{
-                <td></td>
-                <td></td>
-            } *@
+        
             </tr>
         }
     </tbody>

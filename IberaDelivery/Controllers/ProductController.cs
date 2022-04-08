@@ -1,13 +1,13 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using IberaDelivery.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace IberaDelivery.Controllers
+namespace pt1_mvc.Controllers
 {
     public class ProductController : Controller
     {
@@ -18,7 +18,7 @@ namespace IberaDelivery.Controllers
             dataContext = context;
         }
 
-        // GET: Product
+        // GET: Autor
         public async Task<IActionResult> Index()
         {
             var products = dataContext.Products
@@ -26,60 +26,61 @@ namespace IberaDelivery.Controllers
             .Include(p => p.Provider)
             .AsNoTracking();
             return View(await products.ToListAsync());
-
         }
+
 
         [HttpPost]
         public IActionResult Index(String Cadena)
         {
 
             var products = dataContext.Products
-            .Where(a => a.Name.Contains(Cadena)); //|| a.Cognoms.Contains(Cadena));
+            .Where(p => p.Name.Contains(Cadena)); //|| a.Cognoms.Contains(Cadena));
             ViewBag.missatge = "Filtrat per: " + Cadena;
 
             return View(products.ToList());
 
         }
 
-        private void PopulateCategoriesDropDownList(object? selectedCategory = null)
+        private void PopulateCategoriesDropDownList(object selectedCategory = null)
         {
             var categories = dataContext.Categories;
             ViewBag.CategoryId = new SelectList(categories.ToList(), "Id", "Name", selectedCategory);
         }
 
-        private void PopulateProvidersDropDownList(object? selectedProvider = null)
+        private void PopulateProvidersDropDownList(object selectedProvider = null)
         {
             var providers = dataContext.Users;
             ViewBag.ProviderId = new SelectList(providers.ToList(), "Id", "FullName", selectedProvider);
         }
 
-        // GET: Product/Create
+
+        // GET: Autor/Create
         public IActionResult Create()
         {
-            PopulateCategoriesDropDownList();
-            PopulateProvidersDropDownList();
+           PopulateCategoriesDropDownList();
+           PopulateProvidersDropDownList();
                 return View();
-           
-           
+            
+            
         }
 
-        // POST: Product/Create
+        // POST: Autor/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva")] Product product)
         {
 
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 dataContext.Add(product);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                //ViewBag.missatge = autor.validarAutor().Missatge;
-                return View();
-            }
+            //}
+            //else
+            //{
+                //ViewBag.missatge = product.validarProduct().Missatge;
+                //return View();
+            //}
 
 
         }
@@ -87,8 +88,7 @@ namespace IberaDelivery.Controllers
         // GET: Autor/Delete/5
         public IActionResult Delete(int? id)
         {
-            if (HttpContext.Session.GetString("userName") != null)
-            {
+            
                 if (id == null)
                 {
                     return NotFound();
@@ -102,11 +102,9 @@ namespace IberaDelivery.Controllers
                 }
 
                 return View(product);
-            }
-            else
-            {
-                return Redirect("/");
-            }
+            
+           
+            
         }
 
         // POST: Autor/Delete/5
@@ -114,10 +112,10 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            var product = dataContext.Products.Find(id);
-            if (product != null)
+            var products = dataContext.Products.Find(id);
+            if (products != null)
             {
-                dataContext.Products.Remove(product);
+                dataContext.Products.Remove(products);
                 dataContext.SaveChanges();
             }
 
@@ -126,26 +124,23 @@ namespace IberaDelivery.Controllers
 
         public IActionResult Edit(int? id)
         {
-            if (HttpContext.Session.GetString("userName") != null)
-            {
+           
                 if (id == null)
                 {
                     return NotFound();
                 }
 
-                var product = dataContext.Products
+                var autor = dataContext.Products
                     .FirstOrDefault(a => a.Id == id);
-                if (product == null)
+                if (autor == null)
                 {
                     return NotFound();
                 }
 
-                return View(product);
-            }
-            else
-            {
-                return Redirect("/");
-            }
+                return View(autor);
+            
+              
+            
         }
 
         // POST: Autor/Edit/6
