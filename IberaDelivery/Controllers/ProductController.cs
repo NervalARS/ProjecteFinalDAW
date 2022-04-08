@@ -6,16 +6,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Hosting;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using System.Drawing;
 
-namespace pt1_mvc.Controllers
+
+
+
+namespace IberaDelivery.Controllers
 {
     public class ProductController : Controller
     {
         private readonly iberiadbContext dataContext;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
-        public ProductController(iberiadbContext context)
+        public ProductController(iberiadbContext context, IWebHostEnvironment hostEnvironment)
         {
             dataContext = context;
+            webHostEnvironment = hostEnvironment;
         }
 
         // GET: Autor
@@ -24,7 +34,11 @@ namespace pt1_mvc.Controllers
             var products = dataContext.Products
             .Include(c => c.Category)
             .Include(p => p.Provider)
+            .Include(p => p.Images)
             .AsNoTracking();
+
+
+
             return View(await products.ToListAsync());
         }
 
@@ -41,13 +55,13 @@ namespace pt1_mvc.Controllers
 
         }
 
-        private void PopulateCategoriesDropDownList(object selectedCategory = null)
+        private void PopulateCategoriesDropDownList(object? selectedCategory = null)
         {
             var categories = dataContext.Categories;
             ViewBag.CategoryId = new SelectList(categories.ToList(), "Id", "Name", selectedCategory);
         }
 
-        private void PopulateProvidersDropDownList(object selectedProvider = null)
+        private void PopulateProvidersDropDownList(object? selectedProvider = null)
         {
             var providers = dataContext.Users;
             ViewBag.ProviderId = new SelectList(providers.ToList(), "Id", "FullName", selectedProvider);
@@ -57,29 +71,84 @@ namespace pt1_mvc.Controllers
         // GET: Autor/Create
         public IActionResult Create()
         {
-           PopulateCategoriesDropDownList();
-           PopulateProvidersDropDownList();
-                return View();
-            
-            
-        }
+            PopulateCategoriesDropDownList();
+            PopulateProvidersDropDownList();
+            return View();
 
+
+        }
+        
+              /*  private string UploadedFile(FormProduct model)
+                {
+                    string uniqueFileName = null;
+
+                    if (model.Image != null)
+                    {
+                        string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images");
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName[0];
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+
+                            //model.Image.CopyTo(fileStream);
+                        }
+                    }
+                    return uniqueFileName;
+                }*/
+        
         // POST: Autor/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva")] Product product)
+        public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva,Image")] FormProduct model)
         {
 
             //if (ModelState.IsValid)
             //{
-                dataContext.Add(product);
-                dataContext.SaveChanges();
-                return RedirectToAction(nameof(Index));
+
+            Product product = new Product
+            {
+                Name = model.Name,
+                Description = model.Description,
+                CategoryId = model.CategoryId,
+                ProviderId = model.ProviderId,
+                Stock = model.Stock,
+                Price = model.Price,
+                Iva = model.Iva,
+            };
+
+            dataContext.Add(product);
+            dataContext.SaveChanges();
+
+
+            foreach (var file in model.Image)
+            {
+                if (file.Length > 0)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+
+                        file.CopyTo(ms);
+                        var fileBytes = ms.ToArray();
+                        Image image = new Image
+                        {
+                            ProductId = product.Id,
+                            Image1 = fileBytes,
+                        };
+                        dataContext.Add(image);
+                        dataContext.SaveChanges();
+                        //string s = Convert.ToBase64String(fileBytes);
+                        // act on the Base64 data
+                    }
+                }
+            }
+
+
+            return RedirectToAction(nameof(Index));
             //}
             //else
             //{
-                //ViewBag.missatge = product.validarProduct().Missatge;
-                //return View();
+            //ViewBag.missatge = product.validarProduct().Missatge;
+            //return View();
             //}
 
 
@@ -88,23 +157,26 @@ namespace pt1_mvc.Controllers
         // GET: Autor/Delete/5
         public IActionResult Delete(int? id)
         {
-            
-                if (id == null)
-                {
-                    return NotFound();
-                }
 
-                var product = dataContext.Products
-                    .FirstOrDefault(a => a.Id == id);
-                if (product == null)
-                {
-                    return NotFound();
-                }
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-                return View(product);
-            
-           
-            
+            var product = dataContext.Products
+                .FirstOrDefault(a => a.Id == id);
+
+
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
+
+
+
         }
 
         // POST: Autor/Delete/5
@@ -124,35 +196,78 @@ namespace pt1_mvc.Controllers
 
         public IActionResult Edit(int? id)
         {
+            PopulateCategoriesDropDownList();
+            PopulateProvidersDropDownList();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = dataContext.Products
+                .Include(p => p.Images)
+                .FirstOrDefault(a => a.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            FormProductEdit model = new FormProductEdit
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                CategoryId = product.CategoryId,
+                ProviderId = product.ProviderId,
+                Stock = product.Stock,
+                Price = product.Price,
+                Iva = product.Iva,
+                Image = new List<string>(),
+            };
+
+             /*var img = dataContext.Images
+            .Where(i => i.ProductId == id)
+            .AsNoTracking();*/
+            
            
-                if (id == null)
+           
+          
+            var cont = 0;
+            foreach (var file in product.Images)
+            {
+                if (file.Image1.Length > 0)
                 {
-                    return NotFound();
-                }
+                    
 
-                var autor = dataContext.Products
-                    .FirstOrDefault(a => a.Id == id);
-                if (autor == null)
-                {
-                    return NotFound();
+                
+                       
+                        
+                        model.Image.Add(System.Convert.ToBase64String(file.Image1));
+                    
+                   
                 }
+               
+                
+            }
 
-                return View(autor);
             
-              
-            
+        
+
+            return View(model);
+
+
+
         }
 
         // POST: Autor/Edit/6
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva")] Product product)
+        public IActionResult Edit([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva,Image")] FormProduct model)
         {
             //var autor = dataContext.Autors.Find(id);
             //dataContext.Entry(autor).State = EntityState.Modified;
             if (ModelState.IsValid)
             {
-                dataContext.Update(product);
+                dataContext.Update(model);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }

@@ -1,7 +1,8 @@
-@model IberaDelivery.Models.Product
+@model IberaDelivery.Models.FormProduct
 
 @{
     ViewData["Title"] = "Create";
+
 }
 
 <h1>Create</h1>
@@ -10,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <!-- <input type="hidden" asp-for="Id"/> -->
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -22,19 +23,19 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-              <div class="form-group">
+            <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
                     <option value="">-- Select Category --</option>
                 </select>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label asp-for="ProviderId" class="control-label"></label>
                 <select asp-for="ProviderId" class="form-control" asp-items="ViewBag.ProviderId">
                     <option value="">-- Select Provider --</option>
                 </select>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label asp-for="Stock" class="control-label"></label>
                 <input asp-for="Stock" class="form-control" />
                 <span asp-validation-for="Stock" class="text-danger"></span>
@@ -49,21 +50,37 @@
                 <input asp-for="Iva" class="form-control" />
                 <span asp-validation-for="Iva" class="text-danger"></span>
             </div>
-            
+            <div class="form-group">
+                <label asp-for="Image" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="Image" class="custom-file-input" id="customFile" multiple>
+
+                </div>
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+
+        
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
- <span style="color: red;">@ViewBag.missatge</span>
+<span style="color: red;">@ViewBag.missatge</span>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 <div>
-  
+
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script type="text/javascript">
+    // Add the following code if you want the name of the file appear on select  
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });  
+</script>
 }

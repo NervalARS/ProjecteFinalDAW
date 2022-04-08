@@ -2,11 +2,19 @@
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Autors";
-    
+
 }
 
-<h2>Autors</h2>
- <a asp-action="Create"><button>Create</button></a>
+<h2>Productes</h2>
+<a asp-action="Create"><button>Create</button></a>
+<br><br>
+<form asp-action="Index">
+    <input type="text" class="form-control" name="Cadena"> <input type="button" value="Cerca"> @ViewBag.missatge
+</form>
+@if (@ViewBag.missatge != null)
+{
+    <a asp-action="Index">Treure filtre</a>
+}
 <table class="table">
     <thead>
         <tr>
@@ -34,8 +42,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.Iva)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Images)
+            </th>
             <th></th>
-             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -67,22 +78,29 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Iva)
                 </td>
+                <td>
+
+
+                    @foreach (var item2 in item.Images)
+                    {
+
+
+                        <img src="data:image;base64,@System.Convert.ToBase64String(item2.Image1)" class="img-thumbnail" />
+
+                    }
+
+
+                </td>
 
                 <td>
-                   <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
                 <td>
-                   <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                 </td>
-        
+
             </tr>
         }
     </tbody>
 </table>
-<form asp-action="Index">
-<input type="text" class="form-control" name="Cadena"> <input type="button" value="Cerca"> @ViewBag.missatge
-</form>
-@if(@ViewBag.missatge != null){
-<a asp-action="Index">Treure filtre</a>
-}
 
