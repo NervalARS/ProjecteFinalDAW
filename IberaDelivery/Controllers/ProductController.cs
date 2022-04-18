@@ -1,16 +1,7 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using IberaDelivery.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Hosting;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using System.Drawing;
 
 
 
@@ -28,7 +19,7 @@ namespace IberaDelivery.Controllers
             webHostEnvironment = hostEnvironment;
         }
 
-        // GET: Autor
+        // GET: Producte
         public async Task<IActionResult> Index()
         {
             var products = dataContext.Products
@@ -48,6 +39,9 @@ namespace IberaDelivery.Controllers
         {
 
             var products = dataContext.Products
+            .Include(c => c.Category)
+            .Include(p => p.Provider)
+            .Include(p => p.Images)
             .Where(p => p.Name.Contains(Cadena)); //|| a.Cognoms.Contains(Cadena));
             ViewBag.missatge = "Filtrat per: " + Cadena;
 
@@ -68,7 +62,7 @@ namespace IberaDelivery.Controllers
         }
 
 
-        // GET: Autor/Create
+        // GET: Producte/Create
         public IActionResult Create()
         {
             PopulateCategoriesDropDownList();
@@ -77,26 +71,26 @@ namespace IberaDelivery.Controllers
 
 
         }
-        
-              /*  private string UploadedFile(FormProduct model)
-                {
-                    string uniqueFileName = null;
 
-                    if (model.Image != null)
-                    {
-                        string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images");
-                        uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName[0];
-                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                        using (var fileStream = new FileStream(filePath, FileMode.Create))
-                        {
+        /*  private string UploadedFile(FormProduct model)
+          {
+              string uniqueFileName = null;
 
-                            //model.Image.CopyTo(fileStream);
-                        }
-                    }
-                    return uniqueFileName;
-                }*/
-        
-        // POST: Autor/Create
+              if (model.Image != null)
+              {
+                  string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images");
+                  uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName[0];
+                  string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                  using (var fileStream = new FileStream(filePath, FileMode.Create))
+                  {
+
+                      //model.Image.CopyTo(fileStream);
+                  }
+              }
+              return uniqueFileName;
+          }*/
+
+        // POST: Producte/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva,Image")] FormProduct model)
@@ -119,30 +113,31 @@ namespace IberaDelivery.Controllers
             dataContext.Add(product);
             dataContext.SaveChanges();
 
-
-            foreach (var file in model.Image)
+            if (model.Image != null)
             {
-                if (file.Length > 0)
+                foreach (var file in model.Image)
                 {
-                    using (var ms = new MemoryStream())
+                    if (file.Length > 0)
                     {
-
-                        file.CopyTo(ms);
-                        var fileBytes = ms.ToArray();
-                        Image image = new Image
+                        using (var ms = new MemoryStream())
                         {
-                            ProductId = product.Id,
-                            Image1 = fileBytes,
-                        };
-                        dataContext.Add(image);
-                        dataContext.SaveChanges();
-                        //string s = Convert.ToBase64String(fileBytes);
-                        // act on the Base64 data
+
+                            file.CopyTo(ms);
+                            var fileBytes = ms.ToArray();
+                            Image image = new Image
+                            {
+                                ProductId = product.Id,
+                                Image1 = fileBytes,
+                            };
+                            dataContext.Add(image);
+                            dataContext.SaveChanges();
+                            //string s = Convert.ToBase64String(fileBytes);
+                            // act on the Base64 data
+                        }
                     }
                 }
+
             }
-
-
             return RedirectToAction(nameof(Index));
             //}
             //else
@@ -154,7 +149,7 @@ namespace IberaDelivery.Controllers
 
         }
 
-        // GET: Autor/Delete/5
+        // GET: Producte/Delete/5
         public IActionResult Delete(int? id)
         {
 
@@ -179,7 +174,7 @@ namespace IberaDelivery.Controllers
 
         }
 
-        // POST: Autor/Delete/5
+        // POST: Producte/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
@@ -192,6 +187,47 @@ namespace IberaDelivery.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult DeleteImage(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var image = dataContext.Images
+                .FirstOrDefault(a => a.Id == id);
+
+
+
+            if (image == null)
+            {
+                return NotFound();
+            }
+
+            return View(image);
+
+
+
+        }
+
+        // POST: Producte/DeleteImage/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteImage(int id, string url)
+        {
+            var image = dataContext.Images.Find(id);
+            /* var image = dataContext.Images
+             .Where(p => p.ProductId == id);*/
+            if (image != null)
+            {
+                dataContext.Images.Remove(image);
+                dataContext.SaveChanges();
+            }
+
+            return Redirect("/" + url);
         }
 
         public IActionResult Edit(int? id)
@@ -221,36 +257,41 @@ namespace IberaDelivery.Controllers
                 Stock = product.Stock,
                 Price = product.Price,
                 Iva = product.Iva,
-                Image = new List<string>(),
+                Image = new List<Image>(),
             };
 
-             /*var img = dataContext.Images
-            .Where(i => i.ProductId == id)
-            .AsNoTracking();*/
-            
-           
-           
-          
+            /*var img = dataContext.Images
+           .Where(i => i.ProductId == id)
+           .AsNoTracking();*/
+
+
+
+
             var cont = 0;
             foreach (var file in product.Images)
             {
                 if (file.Image1.Length > 0)
                 {
-                    
 
-                
-                       
-                        
-                        model.Image.Add(System.Convert.ToBase64String(file.Image1));
-                    
-                   
+
+                    Image img = new Image
+                    {
+                        Id = file.Id,
+                        ProductId = file.ProductId,
+                        Image1 = file.Image1
+                    };
+
+                    //model.Image.Add(System.Convert.ToBase64String(file.Image1));
+                    model.Image.Add(img);
+
+
                 }
-               
-                
+
+
             }
 
-            
-        
+
+
 
             return View(model);
 
@@ -258,24 +299,64 @@ namespace IberaDelivery.Controllers
 
         }
 
-        // POST: Autor/Edit/6
+        // POST: Producte/Edit/6
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva,Image")] FormProduct model)
+        public IActionResult Edit([Bind("Id,Name,Description,CategoryId,ProviderId,Stock,Price,Iva,ImageIn")] FormProductEdit model)
         {
             //var autor = dataContext.Autors.Find(id);
             //dataContext.Entry(autor).State = EntityState.Modified;
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            //{
+            Product product = new Product
             {
-                dataContext.Update(model);
-                dataContext.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
-            else
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                CategoryId = model.CategoryId,
+                ProviderId = model.ProviderId,
+                Stock = model.Stock,
+                Price = model.Price,
+                Iva = model.Iva,
+            };
+
+            dataContext.Update(product);
+            dataContext.SaveChanges();
+
+            if (model.ImageIn != null)
             {
-                //ViewBag.missatge = autor.validarAutor().Missatge;
-                return View();
+
+
+
+                foreach (var file in model.ImageIn)
+                {
+                    if (file.Length > 0)
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+
+                            file.CopyTo(ms);
+                            var fileBytes = ms.ToArray();
+                            Image image = new Image
+                            {
+                                ProductId = product.Id,
+                                Image1 = fileBytes,
+                            };
+                            dataContext.Add(image);
+                            dataContext.SaveChanges();
+                            //string s = Convert.ToBase64String(fileBytes);
+                            // act on the Base64 data
+                        }
+                    }
+                }
             }
+            return RedirectToAction(nameof(Index));
+            //}
+            //else
+            //{
+            //ViewBag.missatge = autor.validarAutor().Missatge;
+            //    return View(model);
+            //}
 
 
         }

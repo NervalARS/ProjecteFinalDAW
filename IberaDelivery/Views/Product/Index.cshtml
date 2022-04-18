@@ -1,7 +1,7 @@
 @model IEnumerable<IberaDelivery.Models.Product>
 @inject IHttpContextAccessor HttpContextAccessor
 @{
-    ViewData["Title"] = "Autors";
+    ViewData["Title"] = "Productes";
 
 }
 
@@ -9,7 +9,7 @@
 <a asp-action="Create"><button>Create</button></a>
 <br><br>
 <form asp-action="Index">
-    <input type="text" class="form-control" name="Cadena"> <input type="button" value="Cerca"> @ViewBag.missatge
+    <input type="text" class="form-control" name="Cadena"> <input type="submit" value="Cerca"> @ViewBag.missatge
 </form>
 @if (@ViewBag.missatge != null)
 {
