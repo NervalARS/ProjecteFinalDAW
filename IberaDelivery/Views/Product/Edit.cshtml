@@ -1,4 +1,4 @@
-@model IberaDelivery.Models.Product
+@model IberaDelivery.Models.FormProductEdit
 
 @{
     ViewData["Title"] = "Edit";
@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+       <form asp-action="Create" enctype="multipart/form-data">
             <!-- <input type="hidden" asp-for="Id"/> -->
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -22,19 +22,19 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-              <div class="form-group">
+            <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
                     <option value="">-- Select Category --</option>
                 </select>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label asp-for="ProviderId" class="control-label"></label>
                 <select asp-for="ProviderId" class="form-control" asp-items="ViewBag.ProviderId">
                     <option value="">-- Select Provider --</option>
                 </select>
             </div>
-             <div class="form-group">
+            <div class="form-group">
                 <label asp-for="Stock" class="control-label"></label>
                 <input asp-for="Stock" class="form-control" />
                 <span asp-validation-for="Stock" class="text-danger"></span>
@@ -49,7 +49,41 @@
                 <input asp-for="Iva" class="form-control" />
                 <span asp-validation-for="Iva" class="text-danger"></span>
             </div>
-            
+
+
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+       @{int i = 0;}
+        @foreach (var item in Model.Image)
+                    {
+                       
+                            <div class="carousel-item @(i == 0 ? "active" : "") ">
+                                  <img src="data:image;base64,@item" class="img-thumbnail" />
+                            </div>
+                           {i++;}
+                    }
+    
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+           
+            <div class="form-group">
+                <label asp-for="ImageIn" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="ImageIn" class="custom-file-input" id="customFile" multiple>
+
+                </div>
+                <span asp-validation-for="ImageIn" class="text-danger"></span>
+            </div>
+
+        
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -66,4 +100,11 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+    // Add the following code if you want the name of the file appear on select  
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });  
+</script>
 }

@@ -1,13 +1,7 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using IberaDelivery.Models;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text.Json;
-using System.Text.Json.Serialization;
+
 namespace IberaDelivery.Controllers
 {
     public class UserController : Controller
@@ -19,22 +13,38 @@ namespace IberaDelivery.Controllers
             dataContext = context;
         }
 
+        private void showUsers()
+        {
+            if (!(string.IsNullOrEmpty(HttpContext.Session.GetString("user")))) {
+                var user = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user"));
+                ViewBag.userName = user.FirstName + " " + user.LastName;
+            }
+        }
         // Return Home page.
         public async Task<IActionResult> Index()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
             var users = dataContext.Users;
             return View(users.ToList());
         }
 
         public IActionResult Create()
         {
-            return View();
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();  
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(ViewUserCreate user)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
 
             if (ModelState.IsValid)
             {
@@ -63,6 +73,10 @@ namespace IberaDelivery.Controllers
 
         public IActionResult Edit(int? id)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
+
             var user = dataContext.Users
             .FirstOrDefault(a => a.Id == id);
             if (user == null)
@@ -85,6 +99,9 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(ViewUserEdit user)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
 
             if (ModelState.IsValid)
             {
@@ -125,6 +142,41 @@ namespace IberaDelivery.Controllers
 
         }
 
+        public IActionResult Delete(int? id)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var user = dataContext.Users
+                .FirstOrDefault(a => a.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {       
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
+                           
+            var user = dataContext.Users.Find(id);
+            dataContext.Users.Remove(user);
+            dataContext.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }    
+
         //Return Register view
         public ActionResult Register()
         {
@@ -164,8 +216,7 @@ namespace IberaDelivery.Controllers
                     dataContext.Users.Add(reglog);
                     dataContext.SaveChanges();
 
-                    ViewBag.Message = "User Details Saved";
-                    return View("Register");
+                    return Redirect("/");
                 }
             }
             else
@@ -222,16 +273,19 @@ namespace IberaDelivery.Controllers
                 return null;
             //If user is not present false is returned.
             else
-                if (BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
-            {
-                return user;
-            }
-            else
-            {
-                return null;
-            }
+                if(BCrypt.Net.BCrypt.Verify(model.Password, user.Password)){
+                    HttpContext.Session.SetString("user", JsonSerializer.Serialize(user));
+                    return user;
+                }else{
+                    return null;
+                }
         }
 
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
 
         /*public ActionResult Logout()
         {
@@ -239,48 +293,5 @@ namespace IberaDelivery.Controllers
             Session.Abandon(); // it will clear the session at the end of request
             return RedirectToAction("Index");
         }*/
-
-        public IActionResult Delete(int? id)
-        {
-
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var user = dataContext.Users
-                .FirstOrDefault(a => a.Id == id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            return View(user);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
-        {
-            var user = dataContext.Users.Find(id);
-            dataContext.Users.Remove(user);
-            dataContext.SaveChanges();
-            return RedirectToAction(nameof(Index));
-        }
-
-        public IActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-            var usuaris = dataContext.Users
-                .FirstOrDefault(a => a.Id == id);
-            if (usuaris == null)
-            {
-                return NotFound();
-            }
-            return View(usuaris);
-        }
     }
 }
