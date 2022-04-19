@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using IberaDelivery.Models;
 using System.Text.Json;
+using IberaDelivery.Models;
+using IberaDelivery.Services;
 
 namespace IberaDelivery.Controllers
 {
@@ -182,7 +183,7 @@ namespace IberaDelivery.Controllers
         //We have binded the Register View with Register ViewModel, so we can accept object of Register class as parameter.
         //This object contains all the values entered in the form by the user.
         [HttpPost]
-        public ActionResult Register(ViewUserRegister registerDetails)
+        public async Task<IActionResult> Register(ViewUserRegister registerDetails)
         {
             //We check if the model state is valid or not. We have used DataAnnotation attributes.
             //If any form value fails the DataAnnotation validation the model state becomes invalid.
@@ -192,6 +193,7 @@ namespace IberaDelivery.Controllers
                     ViewBag.Message = "Email is already in use";
                     return View("Register");
                 }else{
+
                     //If the model state is valid i.e. the form values passed the validation then we are storing the User's details in DB.
                     User reglog = new User();
 
@@ -203,6 +205,9 @@ namespace IberaDelivery.Controllers
                     reglog.Password = BCrypt.Net.BCrypt.HashPassword(registerDetails.Password);
                     reglog.Rol = 3;
 
+                    var options = new AuthMessageSenderOptions();
+                    options.SendGridKey = "qnqnkwxfkxenpkvh";
+                    var sender = new EmailSender(options);
 
                     //Calling the SaveDetails method which saves the details.
                     dataContext.Users.Add(reglog);
