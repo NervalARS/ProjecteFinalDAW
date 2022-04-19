@@ -13,10 +13,7 @@
 }
 
 <h2>Productes</h2>
-@if (@userSession.Rol != 3)
-{
 <a asp-action="Create"><button>New Product +</button></a>
-}
 
 <table class="table">
     <thead>
@@ -45,11 +42,8 @@
             <th>
                 @Html.DisplayNameFor(model => model.Iva)
             </th>
-            @if (@userSession.Rol != 3)
-            {
             <th>Delete</th>
             <th>Edit</th>
-            }
             <th>Details</th>
             <th>Add to carrito</th>
         </tr>
@@ -85,25 +79,19 @@
             
          @*   @if (@HttpContextAccessor.HttpContext.Session.GetString("userName") != null){  *@
 
-            @if (@userSession.Rol != 3)
-{
+
                 <td>
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                 </td>
-}
                 <td>
                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                 </td>
                 <td>
                     <a asp-action="AddToCart" asp-route-id="@item.Id">+</a>
                 </td>
-       @*     }else{
-                <td></td>
-                <td></td>
-            } *@
             </tr>
         }
     </tbody>
