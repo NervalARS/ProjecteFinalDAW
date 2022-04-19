@@ -32,7 +32,7 @@ namespace IberaDelivery.Controllers
         // GET: Product
         public async Task<IActionResult> Index()
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")) == null) {
                 return RedirectToAction("Index", "Home");
             }
             var products = dataContext.Products

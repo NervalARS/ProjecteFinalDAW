@@ -1,14 +1,22 @@
 @model IEnumerable<IberaDelivery.Models.Product>
+@using System.Text.Json
+@using Microsoft.AspNetCore.Mvc;
+@using IberaDelivery.Models;
+@using Microsoft.EntityFrameworkCore;
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Products";
-    
+    User userSession = new User();
+    if(HttpContextAccessor.HttpContext.Session.GetString("user") != null){
+         userSession = JsonSerializer.Deserialize<User>(HttpContextAccessor.HttpContext.Session.GetString("user"));
+    }
 }
 
 <h2>Productes</h2>
-
+@if (@userSession.Rol != 3)
+{
 <a asp-action="Create"><button>New Product +</button></a>
-
+}
 
 <table class="table">
     <thead>
@@ -37,8 +45,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.Iva)
             </th>
+            @if (@userSession.Rol != 3)
+            {
             <th>Delete</th>
             <th>Edit</th>
+            }
             <th>Details</th>
             <th>Add to carrito</th>
         </tr>
@@ -74,13 +85,15 @@
             
          @*   @if (@HttpContextAccessor.HttpContext.Session.GetString("userName") != null){  *@
 
-            
+            @if (@userSession.Rol != 3)
+{
                 <td>
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                 </td>
+}
                 <td>
                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                 </td>
@@ -96,6 +109,23 @@
     </tbody>
 </table>
  @if (@HttpContextAccessor.HttpContext.Session.GetString("Cart") != null){ 
+        List<Product> list;
+        list = new List<Product>();
+        list = JsonSerializer.Deserialize<List<Product>>(@HttpContextAccessor.HttpContext.Session.GetString("Cart"));
+        var totalPrice = new Decimal();                
+        <div>
+        <h3>Carrito</h3>
+        <ul style="max-height: 100px; max-width:100px; overflow:hidden; overflow-y:scroll;">
+            @for (var i = 0; i < list.Count; i++) {
+                <li>@list[i].Name</li>
+                <li>@list[i].Price</li>
+                totalPrice = totalPrice + list[i].Price;
+            }
+        </ul>
+        <p>
+            Total price = <b>@totalPrice</b>
+        </p>
+    </div>
     <a asp-action="Checkout">Checkout</a>
     <a asp-action="ClearCart">Empty Cart</a>
  }
@@ -105,4 +135,3 @@
 @if(@ViewBag.missatge != null){
 <a asp-action="Index">Treure filtre</a>
 }
-
