@@ -95,6 +95,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9SZXNlbmRFbWFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9SZXNldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/ResetPasswordEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9SZXNldFBhc3N3b3JkRW1haWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

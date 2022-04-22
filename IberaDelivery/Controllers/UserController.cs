@@ -486,5 +486,72 @@ namespace IberaDelivery.Controllers
 
             return RedirectToAction("Login", "User");
         }
+
+        public IActionResult ResetPasswordEmail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ResetPasswordEmail(User model)
+        {
+            User user = dataContext.Users.Where(a => a.Email.Equals(model.Email)).FirstOrDefault();
+
+            string token = GenerateToken();
+            user.Token = token;
+            dataContext.Users.Update(user);
+            dataContext.SaveChanges();
+
+            EmailSender sender = new EmailSender();
+            sender.ResetPasswordEmail(user.Email, token);
+
+            return RedirectToAction("Login", "User");
+        }
+
+        public IActionResult ResetPassword()
+        {
+            string token = HttpContext.Request.Query["token"].ToString();;
+            
+            if(token != null){
+                User user = dataContext.Users.Where(a => a.Token.Equals(token)).FirstOrDefault();
+                if(user != null){
+                    if(user.Token == token){
+                        byte[] data = Base64UrlTextEncoder.Decode(token);
+                        DateTime when = DateTime.FromBinary(BitConverter.ToInt64(data, 0));
+                        if (when > DateTime.UtcNow.AddHours(-24)) {
+                            user.Token = null;
+
+                            dataContext.Users.Update(user);
+                            dataContext.SaveChanges();
+
+                            ViewUserResetPassword model = new ViewUserResetPassword();
+                            model.Id = user.Id;
+                            return View(model);
+                        }
+                    }    
+                }       
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        public IActionResult ResetPassword(ViewUserResetPassword model)
+        {
+
+            if (ModelState.IsValid)
+            {
+                User user = dataContext.Users.Find(model.Id);
+
+                user.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
+                dataContext.Users.Update(user);
+                dataContext.SaveChanges();
+                return RedirectToAction("Login", "User");
+                
+            }
+            else
+            {
+                return View(model);
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@
 <div>
     @using (Html.BeginForm("Login", "User"))
     {
-        <div class="card container">
+        <div class="card container p-3">
             <div style="color:red;">@Html.ValidationSummary()</div>
             <div class="row">
                 <div class="col-lg-2">@Html.LabelFor(a => a.Email)</div>
@@ -21,8 +21,11 @@
                 <div class="col-lg-10">@Html.TextBoxFor(a => a.Password, new { @class = "form-control", type="Password" })</div>
             </div><br />
             <div class="row">
+                <diV class="col-lg-10"><a asp-controller="User" asp-action="ResetPasswordEmail">Lost your password? Click here to reset it.</a></diV>
+            </div><br />
+            <div class="row">
                 <!--Show details are saved successfully message-->
-                <a asp-controller="User" asp-action="ResendEmail">@ViewBag.Message</a>
+                <div class="col-lg-10"><a asp-controller="User" asp-action="ResendEmail">@ViewBag.Message</a></div>
             </div><br />
             <input type="submit" value="Login" class="btn btn-primary" />
         </div>

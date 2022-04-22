@@ -44,4 +44,43 @@ public class EmailSender
         Console.WriteLine(ex.ToString());
         }
     }
+
+    public void ResetPasswordEmail(string userEmail, string token){
+        MailAddress to = new MailAddress(userEmail);
+        MailAddress from = new MailAddress("iberiadelivery@gmail.com");
+
+        MailMessage message = new MailMessage(from, to);
+        message.Subject = "Reset Password";
+        message.IsBodyHtml = true;
+
+        string htmlString = @"<html>
+                      <body>
+                      <p>Link to reset your Iberia Delivery password. If you did not request a reset ignore this message.</p>
+                      <p><a href='https://localhost:7274/User/ResetPassword?token="+ token +@"'>Link</p>
+                      </body>
+                      </html>
+                     "; 
+        
+        message.Body = htmlString;
+
+        SmtpClient client = new SmtpClient("smtp.server.address", 2525)
+        {
+            Host = "smtp.gmail.com",
+            Port = 587,
+            EnableSsl = true,
+            DeliveryMethod = SmtpDeliveryMethod.Network,
+            Credentials = new NetworkCredential(from.Address, "IberiaDeliveryP@ssw0rd"),
+            Timeout = 20000
+        };
+        // code in brackets above needed if authentication required
+
+        try
+        {
+        client.Send(message);
+        }
+        catch (SmtpException ex)
+        {
+        Console.WriteLine(ex.ToString());
+        }
+    }
 }
