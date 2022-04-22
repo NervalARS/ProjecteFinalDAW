@@ -192,6 +192,8 @@ namespace IberaDelivery.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.Activate).HasColumnName("activate");
+
                 entity.Property(e => e.Email)
                     .HasMaxLength(255)
                     .IsUnicode(false)
@@ -213,6 +215,11 @@ namespace IberaDelivery.Models
                     .HasColumnName("password");
 
                 entity.Property(e => e.Rol).HasColumnName("rol");
+
+                entity.Property(e => e.Token)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("token");
             });
 
             OnModelCreatingPartial(modelBuilder);

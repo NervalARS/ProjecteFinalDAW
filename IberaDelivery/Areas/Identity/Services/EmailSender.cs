@@ -1,50 +1,47 @@
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.Extensions.Options;
-using SendGrid;
-using SendGrid.Helpers.Mail;
+using System.Net;
+using System.Net.Mail;
+using System.Net.Mime;
 
 namespace IberaDelivery.Services;
 
-public class EmailSender : IEmailSender
+public class EmailSender
 {
-    private readonly ILogger _logger;
+    public void SendActivationEmail(string userEmail, string token){
+        MailAddress to = new MailAddress(userEmail);
+        MailAddress from = new MailAddress("iberiadelivery@gmail.com");
 
-    public EmailSender(IOptions<AuthMessageSenderOptions> optionsAccessor,
-                       ILogger<EmailSender> logger)
-    {
-        Options = optionsAccessor.Value;
-        _logger = logger;
-    }
+        MailMessage message = new MailMessage(from, to);
+        message.Subject = "Activation Account";
+        message.IsBodyHtml = true;
 
-    public AuthMessageSenderOptions Options { get; } //Set with Secret Manager.
+        string htmlString = @"<html>
+                      <body>
+                      <p>An account has been created with the email "+ userEmail +@", associated please click the link to activate the account.</p>
+                      <p><a href='https://localhost:7274/User/ActivateAccount?token="+ token +@"'>Link</p>
+                      </body>
+                      </html>
+                     "; 
+        
+        message.Body = htmlString;
 
-    public async Task SendEmailAsync(string toEmail, string subject, string message)
-    {
-        if (string.IsNullOrEmpty(Options.SendGridKey))
+        SmtpClient client = new SmtpClient("smtp.server.address", 2525)
         {
-            throw new Exception("Null SendGridKey");
-        }
-        await Execute(Options.SendGridKey, subject, message, toEmail);
-    }
-
-    public async Task Execute(string apiKey, string subject, string message, string toEmail)
-    {
-        var client = new SendGridClient(apiKey);
-        var msg = new SendGridMessage()
-        {
-            From = new EmailAddress("iberiadelivery@gmail.com", "Password Recovery"),
-            Subject = subject,
-            PlainTextContent = message,
-            HtmlContent = message
+            Host = "smtp.gmail.com",
+            Port = 587,
+            EnableSsl = true,
+            DeliveryMethod = SmtpDeliveryMethod.Network,
+            Credentials = new NetworkCredential(from.Address, "IberiaDeliveryP@ssw0rd"),
+            Timeout = 20000
         };
-        msg.AddTo(new EmailAddress(toEmail));
+        // code in brackets above needed if authentication required
 
-        // Disable click tracking.
-        // See https://sendgrid.com/docs/User_Guide/Settings/tracking.html
-        msg.SetClickTracking(false, false);
-        var response = await client.SendEmailAsync(msg);
-        _logger.LogInformation(response.IsSuccessStatusCode 
-                               ? $"Email to {toEmail} queued successfully!"
-                               : $"Failure Email to {toEmail}");
+        try
+        {
+        client.Send(message);
+        }
+        catch (SmtpException ex)
+        {
+        Console.WriteLine(ex.ToString());
+        }
     }
 }

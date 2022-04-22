@@ -139,3 +139,6 @@
 /var/www/html/ProjecteFinalDAW/IberaDelivery/obj/Debug/net6.0/IberaDelivery.genruntimeconfig.cache
 /var/www/html/ProjecteFinalDAW/IberaDelivery/obj/Debug/net6.0/ref/IberaDelivery.dll
 /var/www/html/ProjecteFinalDAW/IberaDelivery/bin/Debug/net6.0/BCrypt.Net-Next.dll
+/var/www/html/ProjecteFinalDAW/IberaDelivery/bin/Debug/net6.0/Newtonsoft.Json.dll
+/var/www/html/ProjecteFinalDAW/IberaDelivery/bin/Debug/net6.0/SendGrid.dll
+/var/www/html/ProjecteFinalDAW/IberaDelivery/bin/Debug/net6.0/StarkbankEcdsa.dll

@@ -75,8 +75,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Managment.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9NYW5hZ21lbnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/NewEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9OZXdFbWFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/NewPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9OZXdQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9SZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/ResendEmail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9SZXNlbmRFbWFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/_ViewImports.cshtml]

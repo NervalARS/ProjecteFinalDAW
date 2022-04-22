@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using System.Text.Json;
 using IberaDelivery.Models;
 using IberaDelivery.Services;
@@ -14,6 +15,12 @@ namespace IberaDelivery.Controllers
             dataContext = context;
         }
 
+        private string GenerateToken(){
+            byte[] time = BitConverter.GetBytes(DateTime.UtcNow.ToBinary());
+            byte[] key = Guid.NewGuid().ToByteArray();
+            string token = Base64UrlTextEncoder.Encode(time.Concat(key).ToArray());
+            return token;
+        }
         private void showUsers()
         {
             if (!(string.IsNullOrEmpty(HttpContext.Session.GetString("user")))) {
@@ -58,6 +65,7 @@ namespace IberaDelivery.Controllers
                 reglog.Email = user.Email;
                 reglog.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
                 reglog.Rol = user.Rol;
+                reglog.Activate = true;
 
                 dataContext.Users.Add(reglog);
                 dataContext.SaveChanges();
@@ -204,16 +212,21 @@ namespace IberaDelivery.Controllers
                     reglog.Email = registerDetails.Email;
                     reglog.Password = BCrypt.Net.BCrypt.HashPassword(registerDetails.Password);
                     reglog.Rol = 3;
+                    //var sender = new EmailSender(options);
 
-                    var options = new AuthMessageSenderOptions();
-                    options.SendGridKey = "qnqnkwxfkxenpkvh";
-                    var sender = new EmailSender(options);
+                    string token = GenerateToken();
+
+                    reglog.Token = token;
 
                     //Calling the SaveDetails method which saves the details.
                     dataContext.Users.Add(reglog);
                     dataContext.SaveChanges();
 
-                    return Redirect("/");
+                    EmailSender sender = new EmailSender();
+
+                    sender.SendActivationEmail(reglog.Email, token);
+
+                    return RedirectToAction("Index", "Home");
                 }
             }
             else
@@ -244,7 +257,13 @@ namespace IberaDelivery.Controllers
                 //If user is valid & present in database, we are redirecting it to Welcome page.
                 if (isValidUser != null)
                 {
-                    return Redirect("/");
+                    if(isValidUser.Activate){
+                        return RedirectToAction("Index", "Home");
+                    }else{
+                        ModelState.AddModelError("Failure", "Account no activated");
+                        ViewBag.Message = "You lost confirmation email? Resend.";
+                        return View();
+                    }  
                 }
                 else
                 {
@@ -266,16 +285,18 @@ namespace IberaDelivery.Controllers
             //Retireving the user details from DB based on username and password enetered by user.
             User user = dataContext.Users.Where(query => query.Email.Equals(model.Email)).SingleOrDefault();
             //If user is present, then true is returned.
-            if (user == null)
+            if (user == null){
                 return null;
             //If user is not present false is returned.
-            else
+            }
+            else{
                 if(BCrypt.Net.BCrypt.Verify(model.Password, user.Password)){
                     HttpContext.Session.SetString("user", JsonSerializer.Serialize(user));
                     return user;
                 }else{
                     return null;
                 }
+            }                
         }
 
         public IActionResult Logout()
@@ -284,11 +305,186 @@ namespace IberaDelivery.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        /*public ActionResult Logout()
+        public IActionResult Managment(int? id)
         {
-            FormsAuthentication.SignOut();
-            Session.Abandon(); // it will clear the session at the end of request
-            return RedirectToAction("Index");
-        }*/
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user"))) {
+                return RedirectToAction("Index", "Home");
+            }
+
+            var user = dataContext.Users
+            .FirstOrDefault(a => a.Id == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Managment(User user)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user"))) {
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (ModelState.IsValid)
+            {
+                User reglog = dataContext.Users.Find(user.Id);
+
+                //Update all details in object
+                if(reglog.FirstName != user.FirstName){
+                    reglog.FirstName = user.FirstName;
+                }
+                if(reglog.LastName != user.LastName){
+                    reglog.LastName = user.LastName;
+                }
+
+                dataContext.Users.Update(reglog);
+                dataContext.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                //ViewBag.missatge = autor.validarAutor().Missatge;
+                return View(user);
+            }
+
+
+        }
+
+        public IActionResult NewPassword(int id)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user"))) {
+                return RedirectToAction("Index", "Home");
+            }
+
+            ViewUserNewPassword model = new ViewUserNewPassword();
+            model.Id = id;
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult NewPassword(ViewUserNewPassword model)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user"))) {
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (ModelState.IsValid)
+            {
+                User user = dataContext.Users.Find(model.Id);
+
+                if(BCrypt.Net.BCrypt.Verify(model.OrgPassword, user.Password)){
+                    user.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
+                    dataContext.Users.Update(user);
+                    dataContext.SaveChanges();
+                    return RedirectToAction("Index", "Home");
+                }else{
+                    ViewBag.Message = "The old password is incorrect";
+                    return View();
+                }
+
+                //Update all details in object
+                
+            }
+            else
+            {
+                //ViewBag.missatge = autor.validarAutor().Missatge;
+                return View();
+            }
+
+
+        }
+
+        public IActionResult NewEmail(int id)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user"))) {
+                return RedirectToAction("Index", "Home");
+            }
+
+            User model = new User();
+            model.Id = id;
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult NewEmail(User model)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user"))) {
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (ModelState.IsValid)
+            {
+                User user = dataContext.Users.Find(model.Id);
+
+                if(BCrypt.Net.BCrypt.Verify(model.Password, user.Password)){
+                    user.Email = model.Email;
+                    dataContext.Users.Update(user);
+                    dataContext.SaveChanges();
+                    return RedirectToAction("Index", "Home");
+                }else{
+                    ViewBag.Message = "The old password is incorrect";
+                    return View();
+                }
+
+                //Update all details in object
+                
+            }
+            else
+            {
+                //ViewBag.missatge = autor.validarAutor().Missatge;
+                return View();
+            }
+
+
+        }
+
+        public IActionResult ActivateAccount()
+        {
+            string token = HttpContext.Request.Query["token"].ToString();;
+            
+            if(token != null){
+                User user = dataContext.Users.Where(a => a.Token.Equals(token)).FirstOrDefault();
+                if(user != null){
+                    if(user.Token == token){
+                        byte[] data = Base64UrlTextEncoder.Decode(token);
+                        DateTime when = DateTime.FromBinary(BitConverter.ToInt64(data, 0));
+                        if (when > DateTime.UtcNow.AddHours(-24)) {
+                            user.Activate = true;
+                            user.Token = null;
+
+                            dataContext.Users.Update(user);
+                            dataContext.SaveChanges();
+                        }
+                    }    
+                }       
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult ResendEmail()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult ResendEmail(User model)
+        {
+            User user = dataContext.Users.Where(a => a.Email.Equals(model.Email)).FirstOrDefault();
+
+            string token = GenerateToken();
+            user.Token = token;
+            dataContext.Users.Update(user);
+            dataContext.SaveChanges();
+
+            EmailSender sender = new EmailSender();
+            sender.SendActivationEmail(user.Email, token);
+
+            return RedirectToAction("Login", "User");
+        }
     }
 }

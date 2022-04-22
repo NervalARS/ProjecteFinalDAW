@@ -12,7 +12,7 @@
 @if (HttpContextAccessor.HttpContext.Session.GetString("user") != null)
 {
     <li class="nav-item">
-        <a  class="nav-link text-dark" asp-controller="User" asp-action="Managment" title="Manage">Hello @userSession.FullName</a>
+        <a  class="nav-link text-dark" asp-controller="User" asp-route-id="@userSession.Id" asp-action="Managment" title="Manage">Hello @userSession.FullName</a>
     </li>
     <li class="nav-item">
         <form  class="form-inline" asp-controller="User" asp-action="Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
