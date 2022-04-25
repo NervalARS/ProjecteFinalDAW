@@ -1,0 +1,29 @@
+@model IberaDelivery.Models.Product
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewBag.Title = "Product Details";
+
+}
+
+<h2>Product Details</h2>
+<p>
+    @Html.DisplayFor(Product => Product.Name)
+</p>
+<p>
+    @Html.DisplayFor(Product => Product.Description)
+</p>
+<p>
+    @Html.DisplayFor(Product => Product.Category)
+</p>
+<p>
+    @Html.DisplayFor(Product => Product.Provider)
+</p>
+<p>
+    @Html.DisplayFor(Product => Product.Stock)
+</p>
+<p>
+    @Html.DisplayFor(Product => Product.Price)
+</p>
+<p>
+    @Html.DisplayFor(Product => Product.Iva)
+</p>

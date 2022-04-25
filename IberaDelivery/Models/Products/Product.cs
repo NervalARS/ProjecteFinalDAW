@@ -21,8 +21,8 @@ namespace IberaDelivery.Models
         public decimal Price { get; set; }
         public decimal Iva { get; set; }
 
-        public virtual Category? Category { get; set; }
-        public virtual User? Provider { get; set; }
+        public virtual Category Category { get; set; } = null!;
+        public virtual User Provider { get; set; } = null!;
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<LnOrder> LnOrders { get; set; }

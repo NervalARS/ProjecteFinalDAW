@@ -1,0 +1,14 @@
+@model IberaDelivery.Models.Category
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewBag.Title = "Category Details";
+
+}
+
+<h2>Category Details</h2>
+<p>
+    @Html.DisplayFor(Category => Category.Id)
+</p>
+<p>
+    @Html.DisplayFor(Category => Category.Name)
+</p>

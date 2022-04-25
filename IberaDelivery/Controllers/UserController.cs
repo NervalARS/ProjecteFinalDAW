@@ -31,7 +31,7 @@ namespace IberaDelivery.Controllers
             }
         }
         // Return Home page.
-        public ActionResult Index()
+        public async Task<IActionResult> Index()
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1)
             {
@@ -218,7 +218,6 @@ namespace IberaDelivery.Controllers
                 }
                 else
                 {
-
                     //If the model state is valid i.e. the form values passed the validation then we are storing the User's details in DB.
                     User reglog = new User();
 
