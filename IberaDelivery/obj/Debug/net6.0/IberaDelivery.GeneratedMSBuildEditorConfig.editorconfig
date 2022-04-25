@@ -71,7 +71,11 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdC9EZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Product/Edit.cshtml]
+[/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/Views/Product/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdC9EZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/Views/Product/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHVjdC9FZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
@@ -115,35 +119,35 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Managment.cshtml]
+[/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/Views/User/Managment.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9NYW5hZ21lbnQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/NewEmail.cshtml]
+[/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/Views/User/NewEmail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9OZXdFbWFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/NewPassword.cshtml]
+[/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/Views/User/NewPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9OZXdQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Register.cshtml]
+[/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/Views/User/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9SZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/ResendEmail.cshtml]
+[/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/Views/User/ResendEmail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9SZXNlbmRFbWFpbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/ResetPassword.cshtml]
+[/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/Views/User/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9SZXNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/ResetPasswordEmail.cshtml]
+[/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/Views/User/ResetPasswordEmail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvVXNlci9SZXNldFBhc3N3b3JkRW1haWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/_ViewImports.cshtml]
+[/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 

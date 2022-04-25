@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6YSd5qjsGi7wKzpeZey8OCgflSovVD8jaWcJlPcMgK8=",
+  "Hash": "DAnxAmiz+u+zgiZp5v7XEC964eYPcfLouoKjkk1UdlM=",
   "Source": "IberaDelivery",
   "BasePath": "_content/IberaDelivery",
   "Mode": "Default",
@@ -1139,10 +1139,10 @@
       "OriginalItemSpec": "wwwroot/js/site.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/.DS_Store",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/.DS_Store",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/.DS_Store",
       "AssetKind": "All",
@@ -1156,10 +1156,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/.DS_Store"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/animate.min.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/animate.min.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/animate.min.css",
       "AssetKind": "All",
@@ -1173,7 +1173,7 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/animate.min.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
       "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
@@ -1717,10 +1717,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/default-skin.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/default-skin.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/default-skin.css",
       "AssetKind": "All",
@@ -1734,10 +1734,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/default-skin.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/font-awesome.min.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/font-awesome.min.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/font-awesome.min.css",
       "AssetKind": "All",
@@ -1751,10 +1751,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/font-awesome.min.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/icomoon.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/icomoon.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/icomoon.css",
       "AssetKind": "All",
@@ -1768,10 +1768,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/icomoon.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/jquery-ui.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/jquery-ui.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/jquery-ui.css",
       "AssetKind": "All",
@@ -1785,10 +1785,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/jquery-ui.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/jquery.fancybox.min.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/jquery.fancybox.min.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/jquery.fancybox.min.css",
       "AssetKind": "All",
@@ -1802,10 +1802,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/jquery.fancybox.min.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/jquery.mCustomScrollbar.min.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/jquery.mCustomScrollbar.min.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/jquery.mCustomScrollbar.min.css",
       "AssetKind": "All",
@@ -1819,10 +1819,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/jquery.mCustomScrollbar.min.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/meanmenu.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/meanmenu.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/meanmenu.css",
       "AssetKind": "All",
@@ -1836,10 +1836,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/meanmenu.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/nice-select.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/nice-select.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/nice-select.css",
       "AssetKind": "All",
@@ -1853,10 +1853,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/nice-select.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/normalize.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/normalize.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/normalize.css",
       "AssetKind": "All",
@@ -1870,10 +1870,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/normalize.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/owl.carousel.min.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/owl.carousel.min.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/owl.carousel.min.css",
       "AssetKind": "All",
@@ -1887,10 +1887,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/owl.carousel.min.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/responsive.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/responsive.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/responsive.css",
       "AssetKind": "All",
@@ -1904,10 +1904,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/responsive.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/slick.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/slick.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/slick.css",
       "AssetKind": "All",
@@ -1921,10 +1921,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/slick.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/style.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/css/style.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/css/style.css",
       "AssetKind": "All",
@@ -1938,10 +1938,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/css/style.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/.DS_Store",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/.DS_Store",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/.DS_Store",
       "AssetKind": "All",
@@ -1955,7 +1955,7 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/.DS_Store"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
       "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
@@ -2159,10 +2159,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/custom.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/custom.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/custom.js",
       "AssetKind": "All",
@@ -2176,10 +2176,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/custom.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/jquery-3.0.0.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/jquery-3.0.0.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/jquery-3.0.0.min.js",
       "AssetKind": "All",
@@ -2193,10 +2193,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/jquery-3.0.0.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/jquery.mCustomScrollbar.concat.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/jquery.mCustomScrollbar.concat.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/jquery.mCustomScrollbar.concat.min.js",
       "AssetKind": "All",
@@ -2210,10 +2210,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/jquery.mCustomScrollbar.concat.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/jquery.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/jquery.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/jquery.min.js",
       "AssetKind": "All",
@@ -2227,10 +2227,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/jquery.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/jquery.validate.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/jquery.validate.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/jquery.validate.js",
       "AssetKind": "All",
@@ -2244,10 +2244,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/jquery.validate.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/modernizer.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/modernizer.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/modernizer.js",
       "AssetKind": "All",
@@ -2261,10 +2261,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/modernizer.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/plugin.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/plugin.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/plugin.js",
       "AssetKind": "All",
@@ -2278,10 +2278,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/plugin.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/popper.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/popper.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/popper.min.js",
       "AssetKind": "All",
@@ -2295,10 +2295,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/popper.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/.DS_Store",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/.DS_Store",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/.DS_Store",
       "AssetKind": "All",
@@ -2312,10 +2312,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/.DS_Store"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/assets/coloredbg.png",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/assets/coloredbg.png",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/assets/coloredbg.png",
       "AssetKind": "All",
@@ -2329,10 +2329,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/assets/coloredbg.png"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/assets/gridtile_3x3_white.png",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/assets/gridtile_3x3_white.png",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/assets/gridtile_3x3_white.png",
       "AssetKind": "All",
@@ -2346,10 +2346,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/assets/gridtile_3x3_white.png"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/assets/gridtile_3x3.png",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/assets/gridtile_3x3.png",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/assets/gridtile_3x3.png",
       "AssetKind": "All",
@@ -2363,10 +2363,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/assets/gridtile_3x3.png"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/assets/gridtile_white.png",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/assets/gridtile_white.png",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/assets/gridtile_white.png",
       "AssetKind": "All",
@@ -2380,10 +2380,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/assets/gridtile_white.png"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/assets/gridtile.png",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/assets/gridtile.png",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/assets/gridtile.png",
       "AssetKind": "All",
@@ -2397,10 +2397,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/assets/gridtile.png"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/assets/loader.gif",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/assets/loader.gif",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/assets/loader.gif",
       "AssetKind": "All",
@@ -2414,10 +2414,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/assets/loader.gif"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/css/closedhand.html",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/css/closedhand.html",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/css/closedhand.html",
       "AssetKind": "All",
@@ -2431,10 +2431,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/css/closedhand.html"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/css/layers.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/css/layers.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/css/layers.css",
       "AssetKind": "All",
@@ -2448,10 +2448,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/css/layers.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/css/navigation.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/css/navigation.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/css/navigation.css",
       "AssetKind": "All",
@@ -2465,10 +2465,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/css/navigation.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/css/openhand.html",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/css/openhand.html",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/css/openhand.html",
       "AssetKind": "All",
@@ -2482,10 +2482,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/css/openhand.html"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/css/settings.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/css/settings.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/css/settings.css",
       "AssetKind": "All",
@@ -2499,10 +2499,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/css/settings.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css",
       "AssetKind": "All",
@@ -2516,10 +2516,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/css/pe-icon-7-stroke.css"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.eot",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.eot",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.eot",
       "AssetKind": "All",
@@ -2533,10 +2533,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.eot"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.svg",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.svg",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.svg",
       "AssetKind": "All",
@@ -2550,10 +2550,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.svg"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.ttf",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.ttf",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.ttf",
       "AssetKind": "All",
@@ -2567,10 +2567,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.ttf"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.woff",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.woff",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.woff",
       "AssetKind": "All",
@@ -2584,10 +2584,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-strokebb1d.woff"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroked41d.eot",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroked41d.eot",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroked41d.eot",
       "AssetKind": "All",
@@ -2601,10 +2601,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/fonts/pe-icon-7-stroke/fonts/Pe-icon-7-stroked41d.eot"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.eot",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.eot",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.eot",
       "AssetKind": "All",
@@ -2618,10 +2618,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.eot"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.svg",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.svg",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.svg",
       "AssetKind": "All",
@@ -2635,10 +2635,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.svg"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.ttf",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.ttf",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.ttf",
       "AssetKind": "All",
@@ -2652,10 +2652,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.ttf"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.woff",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.woff",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.woff",
       "AssetKind": "All",
@@ -2669,10 +2669,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/fonts/revicons/revicons90c6.woff"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/.DS_Store",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/.DS_Store",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/js/.DS_Store",
       "AssetKind": "All",
@@ -2686,10 +2686,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/js/.DS_Store"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.actions.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.actions.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.actions.min.js",
       "AssetKind": "All",
@@ -2703,10 +2703,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.actions.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.carousel.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.carousel.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.carousel.min.js",
       "AssetKind": "All",
@@ -2720,10 +2720,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.carousel.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.kenburn.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.kenburn.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.kenburn.min.js",
       "AssetKind": "All",
@@ -2737,10 +2737,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.kenburn.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.layeranimation.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.layeranimation.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.layeranimation.min.js",
       "AssetKind": "All",
@@ -2754,10 +2754,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.layeranimation.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.migration.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.migration.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.migration.min.js",
       "AssetKind": "All",
@@ -2771,10 +2771,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.migration.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.navigation.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.navigation.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.navigation.min.js",
       "AssetKind": "All",
@@ -2788,10 +2788,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.navigation.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.parallax.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.parallax.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.parallax.min.js",
       "AssetKind": "All",
@@ -2805,10 +2805,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.parallax.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.slideanims.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.slideanims.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.slideanims.min.js",
       "AssetKind": "All",
@@ -2822,10 +2822,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.slideanims.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.video.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.video.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.video.min.js",
       "AssetKind": "All",
@@ -2839,10 +2839,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/js/extensions/revolution.extension.video.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/jquery.themepunch.revolution.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/jquery.themepunch.revolution.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/js/jquery.themepunch.revolution.min.js",
       "AssetKind": "All",
@@ -2856,10 +2856,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/js/jquery.themepunch.revolution.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/jquery.themepunch.tools.min.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/revolution/js/jquery.themepunch.tools.min.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/revolution/js/jquery.themepunch.tools.min.js",
       "AssetKind": "All",
@@ -2873,10 +2873,10 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/revolution/js/jquery.themepunch.tools.min.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/slider-setting.js",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/dist/js/slider-setting.js",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
+      "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
       "BasePath": "_content/IberaDelivery",
       "RelativePath": "lib/bootstrap/dist/js/slider-setting.js",
       "AssetKind": "All",
@@ -2890,7 +2890,7 @@
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/slider-setting.js"
     },
     {
-      "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/LICENSE",
+      "Identity": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/lib/bootstrap/LICENSE",
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
       "ContentRoot": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/wwwroot/",
