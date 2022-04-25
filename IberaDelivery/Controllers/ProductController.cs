@@ -69,25 +69,72 @@ namespace IberaDelivery.Controllers
                 return RedirectToAction("Index", "Home");
             }
             var products = dataContext.Products
+            .OrderBy(a => a.Id)
             .Include(c => c.Category)
-            .Include(p => p.Provider)
-            .Include(p => p.Images)
-            .AsNoTracking();
-            return View(await products.ToListAsync());
+            .Include(p => p.Provider);
+
+
+            PopulateCategoriesDropDownList();
+
+            return View(products.ToList());
         }
         [HttpPost]
-        public IActionResult Index(String Cadena)
+        public IActionResult Index(String Cadena, int cat, int criteri)
         {
-            if (!checkUserExists())
-            {
-                return RedirectToAction("Index", "Home");
-            }
             var products = dataContext.Products
-            .Include(c => c.Category)
-            .Include(p => p.Provider)
-            .Include(p => p.Images)
-            .Where(p => p.Name.Contains(Cadena)); //|| a.Cognoms.Contains(Cadena));
-            ViewBag.missatge = "Filtrat per: " + Cadena;
+             .Include(c => c.Category)
+             .Include(p => p.Provider).ToList();
+
+
+
+            if (Cadena != null || cat != 0)
+            {
+
+
+                if (Cadena == null)
+                {
+                    products = dataContext.Products
+                    .Where(a => a.CategoryId == cat)
+                   .Include(c => c.Category)
+                   .Include(p => p.Provider).ToList();
+
+                }
+                else
+                {
+                    if (cat != 0)
+                    {
+                        products = dataContext.Products
+                         .Where(a => a.Name.Contains(Cadena) && a.CategoryId == cat)
+                        .Include(c => c.Category)
+                        .Include(p => p.Provider).ToList();
+
+                    }
+                    else
+                    {
+                        products = dataContext.Products
+                        .Where(a => a.Name.Contains(Cadena))
+                        .Include(c => c.Category)
+                        .Include(p => p.Provider).ToList();
+                    }
+                }
+            }
+            switch (criteri)
+            {
+                case 1:
+                    products = products.OrderBy(a => a.Price).ToList();
+                    break;
+                case 2:
+                    products = products.OrderByDescending(a => a.Price).ToList();
+                    break;
+            }
+
+
+            ViewBag.missatge = criteri;
+            ViewBag.Cadena = Cadena;
+
+            PopulateCategoriesDropDownList();
+
+
             return View(products.ToList());
         }
         private void PopulateCategoriesDropDownList(object? selectedCategory = null)
@@ -120,7 +167,7 @@ namespace IberaDelivery.Controllers
         // POST: Product/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva,Image")] FormProduct model)
+        public IActionResult Create(FormProduct model)
         {
             if (!checkUserExists() || checkUserIsClient())
             {
@@ -137,32 +184,38 @@ namespace IberaDelivery.Controllers
                 Price = model.Price,
                 Iva = model.Iva,
             };
+                dataContext.Add(product);
+                dataContext.SaveChanges();
 
-            dataContext.Add(product);
-            dataContext.SaveChanges();
-
-            if (model.Image != null)
-            {
-                foreach (var file in model.Image)
-                {
-                    if (file.Length > 0)
+                if (model.Image != null){
+                    foreach (var file in model.Image)
                     {
-                        using (var ms = new MemoryStream())
+                        if (file.Length > 0)
                         {
-                            file.CopyTo(ms);
-                            var fileBytes = ms.ToArray();
-                            Image image = new Image
+                            using (var ms = new MemoryStream())
                             {
-                                ProductId = product.Id,
-                                Image1 = fileBytes,
-                            };
-                            dataContext.Add(image);
-                            dataContext.SaveChanges();
+
+                                file.CopyTo(ms);
+                                var fileBytes = ms.ToArray();
+                                Image image = new Image
+                                {
+                                    ProductId = product.Id,
+                                    Image1 = fileBytes,
+                                };
+                                dataContext.Add(image);
+                                dataContext.SaveChanges();
+                                //string s = Convert.ToBase64String(fileBytes);
+                                // act on the Base64 data
+                            }
                         }
                     }
+                return RedirectToAction(nameof(Index));
                 }
+            else
+            {
+                //ViewBag.missatge = product.validarProduct().Missatge;
+                return View();
             }
-            return RedirectToAction(nameof(Index));
         }
 
         // GET: Product/Delete/5
@@ -290,46 +343,59 @@ namespace IberaDelivery.Controllers
         // POST: Producte/Edit/6
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id,Name,Description,CategoryId,ProviderId,Stock,Price,Iva,ImageIn")] FormProductEdit model)
+        public IActionResult Edit(FormProductEdit model)
         {
-            if (!checkUserExists() || checkUserIsClient())
+            if (ModelState.IsValid)
             {
-                return RedirectToAction("Index", "Home");
-            }
-            Product product = new Product
-            {
-                Id = model.Id,
-                Name = model.Name,
-                Description = model.Description,
-                CategoryId = model.CategoryId,
-                ProviderId = model.ProviderId,
-                Stock = model.Stock,
-                Price = model.Price,
-                Iva = model.Iva,
-            };
-            dataContext.Update(product);
-            dataContext.SaveChanges();
-
-            if (model.ImageIn != null)
-            {
-                foreach (var file in model.ImageIn)
+                Product product = new Product
                 {
-                    if (file.Length > 0)
+                    Id = model.Id,
+                    Name = model.Name,
+                    Description = model.Description,
+                    CategoryId = model.CategoryId,
+                    ProviderId = model.ProviderId,
+                    Stock = model.Stock,
+                    Price = model.Price,
+                    Iva = model.Iva,
+                };
+
+                dataContext.Update(product);
+                dataContext.SaveChanges();
+
+                if (model.ImageIn != null)
+                {
+
+
+
+                    foreach (var file in model.ImageIn)
                     {
-                        using (var ms = new MemoryStream())
+                        if (file.Length > 0)
                         {
-                            file.CopyTo(ms);
-                            var fileBytes = ms.ToArray();
-                            Image image = new Image
+                            using (var ms = new MemoryStream())
                             {
-                                ProductId = product.Id,
-                                Image1 = fileBytes,
-                            };
-                            dataContext.Add(image);
-                            dataContext.SaveChanges();
+
+                                file.CopyTo(ms);
+                                var fileBytes = ms.ToArray();
+                                Image image = new Image
+                                {
+                                    ProductId = product.Id,
+                                    Image1 = fileBytes,
+                                };
+                                dataContext.Add(image);
+                                dataContext.SaveChanges();
+                                //string s = Convert.ToBase64String(fileBytes);
+                                // act on the Base64 data
+                            }
                         }
                     }
                 }
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                //ViewBag.missatge = autor.validarAutor().Missatge;
+                //return View(model);
+                return View();
             }
             return RedirectToAction(nameof(Index));
         }

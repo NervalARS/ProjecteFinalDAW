@@ -13,8 +13,57 @@
 }
 
 <h2>Productes</h2>
-<a asp-action="Create"><button>New Product +</button></a>
+<a asp-action="Create"><button>Create</button></a>
+<br><br>
+<form asp-action="Index">
 
+    <input type="text" class="form-control" name="Cadena">  @ViewBag.cadena
+    @if (@ViewBag.cadena != null)
+{
+    <a asp-action="Index">Treure filtre</a>
+}
+
+<select  name="cat" id="cat" class="form-control" asp-items="ViewBag.CategoryId">
+                    <option value="">-- Select Category --</option>
+                </select>
+<select name="criteri" id="criteri">
+    
+    @if (@ViewBag.missatge == 1)
+    {
+        <option value="1" selected >Preu ASC</option>
+    }else{
+        <option value="1">Preu ASC</option>
+    }
+
+    @if (@ViewBag.missatge == 2)
+    {
+        <option value="2" selected>Preu Desc</option>
+    }else{
+       <option value="2">Preu Desc</option>
+    }
+
+    @if (@ViewBag.missatge == 3)
+    {
+       <option value="3" selected>Data-ASC</option>
+    }else{
+        <option value="3">Data-ASC</option>
+    }
+
+    @if (@ViewBag.missatge == 4)
+    {
+         <option value="4" selected>Data-Desc</option>
+    }else{
+        <option value="4">Data-Desc</option>
+    }
+    
+    
+   
+   
+</select>
+
+<input type="submit" value="Search" class="btn btn-primary">
+
+</form>
 <table class="table">
     <thead>
         <tr>
