@@ -20,7 +20,7 @@ namespace IberaDelivery.Models
         public decimal Price { get; set; }
         public decimal Iva { get; set; }
 
-        public List<string> Image { get; set; } = null!;
+        public List<Image>? Image { get; set; }
 
         public IFormFile[] ImageIn { get; set; } = null!;
 
