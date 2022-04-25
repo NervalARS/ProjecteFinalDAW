@@ -82,6 +82,12 @@ namespace IberaDelivery.Controllers
                 case 2:
                     products = products.OrderByDescending(a => a.Price).ToList();
                     break;
+                case 3:
+                    products = products.OrderBy(a => a.Id).ToList();
+                    break;
+                case 4:
+                    products = products.OrderByDescending(a => a.Id).ToList();
+                    break;
             }
 
 
