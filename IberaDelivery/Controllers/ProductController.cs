@@ -359,7 +359,7 @@ namespace IberaDelivery.Controllers
                 lnOrder.NumOrder = order.Id;
                 lnOrder.RefProduct = list[i].Id;
                 lnOrder.Quantity = list[i].Stock;
-                lnOrder.TotalImport = list[i].Price;
+                lnOrder.TotalImport = list[i].Price + list[i].Iva;
 
                 var product = dataContext.Products
                 .FirstOrDefault(p => p.Id == list[i].Id);
