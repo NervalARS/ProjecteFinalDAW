@@ -1,0 +1,42 @@
+@model IberaDelivery.Models.ViewUserRegister
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+
+
+<div>
+    @using (Html.BeginForm("Register", "User"))
+    {
+        <div class="card container">
+            <div style="color:red;">@Html.ValidationSummary()</div>
+            <div style="color:red;">@ViewBag.Message</div>
+            <div class="row">
+                <!--Show details are saved successfully message-->
+            </div><br/>
+            <div class="row">
+                <div class="col-lg-2">@Html.LabelFor(a => a.FirstName)</div>
+                <div class="col-lg-10">@Html.TextBoxFor(a => a.FirstName, new { @class = "form-control" })</div>
+            </div><br />
+            <div class="row">
+                <div class="col-lg-2">@Html.LabelFor(a => a.LastName)</div>
+                <div class="col-lg-10">@Html.TextBoxFor(a => a.LastName, new { @class = "form-control" })</div>
+            </div><br />
+            <div class="row">
+                <div class="col-lg-2">@Html.LabelFor(a => a.Email)</div>
+                <div class="col-lg-10">@Html.TextBoxFor(a => a.Email, new { @class = "form-control" })</div>
+            </div><br />
+            <div class="row">
+                <div class="col-lg-2">@Html.LabelFor(a => a.Password)</div>
+                <div class="col-lg-10">@Html.TextBoxFor(a => a.Password, new { @class = "form-control", type = "Password" })</div>
+            </div><br />
+            <div class="row">
+                <div class="col-lg-2">@Html.LabelFor(a => a.ConfirmPassword)</div>
+                <div class="col-lg-10">@Html.TextBoxFor(a => a.ConfirmPassword, new { @class = "form-control", type = "Password" })</div>
+            </div><br />
+            <input type="submit" value="Register" class="btn btn-primary" />
+        </div>
+    }
+
+</div>

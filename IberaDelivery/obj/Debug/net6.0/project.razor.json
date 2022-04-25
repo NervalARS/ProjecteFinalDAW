@@ -16298,8 +16298,18 @@
   "RootNamespace": "IberaDelivery",
   "Documents": [
     {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Delete.cshtml",
+      "TargetPath": "Views\\User\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Product/Delete.cshtml",
       "TargetPath": "Views\\Product\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Create.cshtml",
+      "TargetPath": "Views\\User\\Create.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -16308,8 +16318,23 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Register.cshtml",
+      "TargetPath": "Views\\User\\Register.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Areas/Identity/Pages/_ViewStart.cshtml",
       "TargetPath": "Areas\\Identity\\Pages\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/ResetPasswordEmail.cshtml",
+      "TargetPath": "Views\\User\\ResetPasswordEmail.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/NewPassword.cshtml",
+      "TargetPath": "Views\\User\\NewPassword.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -16318,8 +16343,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Managment.cshtml",
+      "TargetPath": "Views\\User\\Managment.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Product/Edit.cshtml",
       "TargetPath": "Views\\Product\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/NewEmail.cshtml",
+      "TargetPath": "Views\\User\\NewEmail.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -16338,6 +16373,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/ResendEmail.cshtml",
+      "TargetPath": "Views\\User\\ResendEmail.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Home/Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"
@@ -16353,13 +16393,33 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/ResetPassword.cshtml",
+      "TargetPath": "Views\\User\\ResetPassword.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Shared/_LoginPartial.cshtml",
       "TargetPath": "Views\\Shared\\_LoginPartial.cshtml",
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Index.cshtml",
+      "TargetPath": "Views\\User\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Product/Index.cshtml",
       "TargetPath": "Views\\Product\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Edit.cshtml",
+      "TargetPath": "Views\\User\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Login.cshtml",
+      "TargetPath": "Views\\User\\Login.cshtml",
       "FileKind": "mvc"
     }
   ],

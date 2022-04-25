@@ -1,40 +1,62 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using IberaDelivery.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Hosting;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using System.Drawing;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
+
+
 
 namespace IberaDelivery.Controllers
 {
     public class ProductController : Controller
     {
         private readonly iberiadbContext dataContext;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
-        public ProductController(iberiadbContext context)
+        public ProductController(iberiadbContext context, IWebHostEnvironment hostEnvironment)
         {
             dataContext = context;
+            webHostEnvironment = hostEnvironment;
         }
 
-        // GET: Product
+        // GET: Autor
         public async Task<IActionResult> Index()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
             var products = dataContext.Products
             .Include(c => c.Category)
             .Include(p => p.Provider)
+            .Include(p => p.Images)
             .AsNoTracking();
-            return View(await products.ToListAsync());
 
+
+
+            return View(await products.ToListAsync());
         }
+
 
         [HttpPost]
         public IActionResult Index(String Cadena)
         {
 
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
             var products = dataContext.Products
-            .Where(a => a.Name.Contains(Cadena)); //|| a.Cognoms.Contains(Cadena));
+            .Where(p => p.Name.Contains(Cadena)); //|| a.Cognoms.Contains(Cadena));
             ViewBag.missatge = "Filtrat per: " + Cadena;
 
             return View(products.ToList());
@@ -53,25 +75,178 @@ namespace IberaDelivery.Controllers
             ViewBag.ProviderId = new SelectList(providers.ToList(), "Id", "FullName", selectedProvider);
         }
 
-        // GET: Product/Create
+
+        // GET: Autor/Create
         public IActionResult Create()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
             PopulateCategoriesDropDownList();
             PopulateProvidersDropDownList();
-                return View();
-           
-           
-        }
+            return View();
 
-        // POST: Product/Create
+
+        }
+        
+              /*  private string UploadedFile(FormProduct model)
+                {
+                    string uniqueFileName = null;
+
+                    if (model.Image != null)
+                    {
+                        string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images");
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Image.FileName[0];
+                        string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        using (var fileStream = new FileStream(filePath, FileMode.Create))
+                        {
+
+                            //model.Image.CopyTo(fileStream);
+                        }
+                    }
+                    return uniqueFileName;
+                }*/
+        
+        // POST: Autor/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva")] Product product)
+        public IActionResult Create([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva,Image")] FormProduct model)
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
+            //if (ModelState.IsValid)
+            //{
 
+            Product product = new Product
+            {
+                Name = model.Name,
+                Description = model.Description,
+                CategoryId = model.CategoryId,
+                ProviderId = model.ProviderId,
+                Stock = model.Stock,
+                Price = model.Price,
+                Iva = model.Iva,
+            };
+
+            dataContext.Add(product);
+            dataContext.SaveChanges();
+
+
+            foreach (var file in model.Image)
+            {
+                if (file.Length > 0)
+                {
+                    using (var ms = new MemoryStream())
+                    {
+
+                        file.CopyTo(ms);
+                        var fileBytes = ms.ToArray();
+                        Image image = new Image
+                        {
+                            ProductId = product.Id,
+                            Image1 = fileBytes,
+                        };
+                        dataContext.Add(image);
+                        dataContext.SaveChanges();
+                        //string s = Convert.ToBase64String(fileBytes);
+                        // act on the Base64 data
+                    }
+                }
+            }
+
+
+            return RedirectToAction(nameof(Index));
+            //}
+            //else
+            //{
+            //ViewBag.missatge = product.validarProduct().Missatge;
+            //return View();
+            //}
+
+
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
+            PopulateCategoriesDropDownList();
+            PopulateProvidersDropDownList();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var product = dataContext.Products
+                .Include(p => p.Images)
+                .FirstOrDefault(a => a.Id == id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            FormProductEdit model = new FormProductEdit
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                CategoryId = product.CategoryId,
+                ProviderId = product.ProviderId,
+                Stock = product.Stock,
+                Price = product.Price,
+                Iva = product.Iva,
+                Image = new List<string>(),
+            };
+
+             /*var img = dataContext.Images
+            .Where(i => i.ProductId == id)
+            .AsNoTracking();*/
+            
+           
+           
+          
+            var cont = 0;
+            foreach (var file in product.Images)
+            {
+                if (file.Image1.Length > 0)
+                {
+                    
+
+                
+                       
+                        
+                        model.Image.Add(System.Convert.ToBase64String(file.Image1));
+                    
+                   
+                }
+               
+                
+            }
+
+            
+        
+
+            return View(model);
+
+
+
+        }
+
+        // POST: Autor/Edit/6
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva,Image")] FormProduct model)
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
+            //var autor = dataContext.Autors.Find(id);
+            //dataContext.Entry(autor).State = EntityState.Modified;
             if (ModelState.IsValid)
             {
-                dataContext.Add(product);
+                dataContext.Update(model);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
@@ -87,26 +262,29 @@ namespace IberaDelivery.Controllers
         // GET: Autor/Delete/5
         public IActionResult Delete(int? id)
         {
-            if (HttpContext.Session.GetString("userName") != null)
-            {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var product = dataContext.Products
-                    .FirstOrDefault(a => a.Id == id);
-                if (product == null)
-                {
-                    return NotFound();
-                }
-
-                return View(product);
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
             }
-            else
+
+            if (id == null)
             {
-                return Redirect("/");
+                return NotFound();
             }
+
+            var product = dataContext.Products
+                .FirstOrDefault(a => a.Id == id);
+
+
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
+
+
+
         }
 
         // POST: Autor/Delete/5
@@ -114,62 +292,17 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            var product = dataContext.Products.Find(id);
-            if (product != null)
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+                return RedirectToAction("Index", "Home");
+            }
+            var products = dataContext.Products.Find(id);
+            if (products != null)
             {
-                dataContext.Products.Remove(product);
+                dataContext.Products.Remove(products);
                 dataContext.SaveChanges();
             }
 
             return RedirectToAction(nameof(Index));
         }
-
-        public IActionResult Edit(int? id)
-        {
-            if (HttpContext.Session.GetString("userName") != null)
-            {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
-                var product = dataContext.Products
-                    .FirstOrDefault(a => a.Id == id);
-                if (product == null)
-                {
-                    return NotFound();
-                }
-
-                return View(product);
-            }
-            else
-            {
-                return Redirect("/");
-            }
-        }
-
-        // POST: Autor/Edit/6
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Name,Description,CategoryId,ProviderId,Stock,Price,Iva")] Product product)
-        {
-            //var autor = dataContext.Autors.Find(id);
-            //dataContext.Entry(autor).State = EntityState.Modified;
-            if (ModelState.IsValid)
-            {
-                dataContext.Update(product);
-                dataContext.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                //ViewBag.missatge = autor.validarAutor().Missatge;
-                return View();
-            }
-
-
-        }
-
-
     }
 }

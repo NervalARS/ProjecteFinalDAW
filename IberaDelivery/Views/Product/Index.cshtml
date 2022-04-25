@@ -1,15 +1,20 @@
 @model IEnumerable<IberaDelivery.Models.Product>
 @inject IHttpContextAccessor HttpContextAccessor
 @{
-    ViewData["Title"] = "Products";
-    
+    ViewData["Title"] = "Autors";
+
 }
 
 <h2>Productes</h2>
-
-<a asp-action="Create"><button>New Product +</button></a>
-
-
+<a asp-action="Create"><button>Create</button></a>
+<br><br>
+<form asp-action="Index">
+    <input type="text" class="form-control" name="Cadena"> <input type="button" value="Cerca"> @ViewBag.missatge
+</form>
+@if (@ViewBag.missatge != null)
+{
+    <a asp-action="Index">Treure filtre</a>
+}
 <table class="table">
     <thead>
         <tr>
@@ -37,60 +42,65 @@
             <th>
                 @Html.DisplayNameFor(model => model.Iva)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Images)
+            </th>
             <th></th>
-             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <th>
-                @Html.DisplayFor(modelItem => item.Id)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Name)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Description)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Category.Name)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Provider.FullName)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Stock)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Price)
-            </th>
-            <th>
-                @Html.DisplayFor(modelItem => item.Iva)
-            </th>
-            
-         @*   @if (@HttpContextAccessor.HttpContext.Session.GetString("userName") != null){  *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
 
-            
                 <td>
-                   <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
                 </td>
                 <td>
-                   <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                    @Html.DisplayFor(modelItem => item.Provider.FirstName)
                 </td>
-       @*     }else{
-                <td></td>
-                <td></td>
-            } *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Stock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Iva)
+                </td>
+                <td>
+
+
+                    @foreach (var item2 in item.Images)
+                    {
+
+
+                        <img src="data:image;base64,@System.Convert.ToBase64String(item2.Image1)" class="img-thumbnail" />
+
+                    }
+
+
+                </td>
+
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </td>
+
             </tr>
         }
     </tbody>
 </table>
-<form asp-action="Index">
-<input type="text" class="form-control" name="Cadena"> <input type="button" value="Cerca"> @ViewBag.missatge
-</form>
-@if(@ViewBag.missatge != null){
-<a asp-action="Index">Treure filtre</a>
-}
 

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace IberaDelivery.Models
 {
@@ -18,9 +21,21 @@ namespace IberaDelivery.Models
         public string Email { get; set; } = null!;
         public string Password { get; set; } = null!;
         public int Rol { get; set; }
+        public bool Activate { get; set; }
+        public string? Token { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Product> Products { get; set; }
+
+        [Display(Name = "Full Name")]
+        public string FullName
+        {
+            get
+            {
+                return FirstName + " " + LastName;
+            }
+        }
     }
+    
 }

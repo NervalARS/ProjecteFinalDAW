@@ -1,0 +1,71 @@
+@model IberaDelivery.Models.ViewUserCreate
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>User</h4>
+<div class="row">
+    @using (Html.BeginForm("Create", "User"))
+    {
+    <div style="color:red;">@Html.ValidationSummary()</div>
+    <div class="col-lg-12">@ViewBag.Message</div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-lg-2">@Html.LabelFor(a => a.FirstName)</div>
+            <div class="col-lg-10">@Html.TextBoxFor(a => a.FirstName, new { @class = "form-control" })</div>
+        </div><br />
+        <div class="row">
+            <div class="col-lg-2">@Html.LabelFor(a => a.LastName)</div>
+            <div class="col-lg-10">@Html.TextBoxFor(a => a.LastName, new { @class = "form-control" })</div>
+        </div><br />
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-lg-2">@Html.LabelFor(a => a.Email)</div>
+            <div class="col-lg-10">@Html.TextBoxFor(a => a.Email, new { @class = "form-control" })</div>
+        </div><br />
+        <div class="row">
+            <div class="col-lg-2">@Html.LabelFor(a => a.Password)</div>
+            <div class="col-lg-10">@Html.TextBoxFor(a => a.Password, new { @class = "form-control", type = "Password" })</div>
+        </div><br />
+        <div class="row">
+            <div class="col-lg-2">@Html.LabelFor(a => a.Rol)</div>
+            @{
+                List<SelectListItem> listItems = new List<SelectListItem>();
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Administrator",
+                    Value = "1"
+                });
+                listItems.Add(new SelectListItem
+                {
+                    Text = "Provider",
+                    Value = "2"
+                });
+                listItems.Add(new SelectListItem
+                {
+                    Text = "User",
+                    Value = "3",
+                    Selected = true
+                });
+            }
+            <div class="col-lg-10">@Html.DropDownList("rol", listItems, new { @class = "form-control" })</div>
+        </div><br />
+        <input type="submit" value="Register" class="btn btn-primary" />
+    </div>
+    }
+</div>
+ <span style="color: red;">@ViewBag.missatge</span>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+<div>
+  
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
