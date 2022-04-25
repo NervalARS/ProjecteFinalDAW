@@ -15,7 +15,8 @@ namespace IberaDelivery.Controllers
             dataContext = context;
         }
 
-        private string GenerateToken(){
+        private string GenerateToken()
+        {
             byte[] time = BitConverter.GetBytes(DateTime.UtcNow.ToBinary());
             byte[] key = Guid.NewGuid().ToByteArray();
             string token = Base64UrlTextEncoder.Encode(time.Concat(key).ToArray());
@@ -23,7 +24,8 @@ namespace IberaDelivery.Controllers
         }
         private void showUsers()
         {
-            if (!(string.IsNullOrEmpty(HttpContext.Session.GetString("user")))) {
+            if (!(string.IsNullOrEmpty(HttpContext.Session.GetString("user"))))
+            {
                 var user = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user"));
                 ViewBag.userName = user.FirstName + " " + user.LastName;
             }
@@ -31,7 +33,8 @@ namespace IberaDelivery.Controllers
         // Return Home page.
         public ActionResult Index()
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1)
+            {
                 return RedirectToAction("Index", "Home");
             }
             var users = dataContext.Users;
@@ -40,17 +43,19 @@ namespace IberaDelivery.Controllers
 
         public IActionResult Create()
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1)
+            {
                 return RedirectToAction("Index", "Home");
             }
-            return View();  
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(ViewUserCreate user)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1)
+            {
                 return RedirectToAction("Index", "Home");
             }
 
@@ -82,7 +87,8 @@ namespace IberaDelivery.Controllers
 
         public IActionResult Edit(int? id)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1)
+            {
                 return RedirectToAction("Index", "Home");
             }
 
@@ -108,7 +114,8 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(ViewUserEdit user)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1)
+            {
                 return RedirectToAction("Index", "Home");
             }
 
@@ -117,19 +124,24 @@ namespace IberaDelivery.Controllers
                 User reglog = dataContext.Users.Find(user.Id);
 
                 //Update all details in object
-                if(reglog.FirstName != user.FirstName){
+                if (reglog.FirstName != user.FirstName)
+                {
                     reglog.FirstName = user.FirstName;
                 }
-                if(reglog.LastName != user.LastName){
+                if (reglog.LastName != user.LastName)
+                {
                     reglog.LastName = user.LastName;
                 }
-                if(reglog.Email != user.Email){
+                if (reglog.Email != user.Email)
+                {
                     reglog.Email = user.Email;
                 }
-                if(reglog.Password != user.Password){
+                if (reglog.Password != user.Password)
+                {
                     reglog.Password = BCrypt.Net.BCrypt.HashPassword(user.Password);
                 }
-                if(reglog.Rol != user.Rol){
+                if (reglog.Rol != user.Rol)
+                {
                     reglog.Rol = user.Rol;
                 }
 
@@ -148,7 +160,8 @@ namespace IberaDelivery.Controllers
 
         public IActionResult Delete(int? id)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1)
+            {
                 return RedirectToAction("Index", "Home");
             }
 
@@ -170,16 +183,17 @@ namespace IberaDelivery.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
-        {       
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1) {
+        {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1)
+            {
                 return RedirectToAction("Index", "Home");
             }
-                           
+
             var user = dataContext.Users.Find(id);
             dataContext.Users.Remove(user);
             dataContext.SaveChanges();
             return RedirectToAction(nameof(Index));
-        }    
+        }
 
         //Return Register view
         public ActionResult Register()
@@ -197,10 +211,13 @@ namespace IberaDelivery.Controllers
             //If any form value fails the DataAnnotation validation the model state becomes invalid.
             if (ModelState.IsValid)
             {
-                if(dataContext.Users.Any(x => x.Email.Equals(registerDetails.Email))){
+                if (dataContext.Users.Any(x => x.Email.Equals(registerDetails.Email)))
+                {
                     ViewBag.Message = "Email is already in use";
                     return View("Register");
-                }else{
+                }
+                else
+                {
 
                     //If the model state is valid i.e. the form values passed the validation then we are storing the User's details in DB.
                     User reglog = new User();
@@ -231,7 +248,7 @@ namespace IberaDelivery.Controllers
             }
             else
             {
-               
+
                 //If the validation fails, we are returning the model object with errors to the view, which will display the error messages.
                 return View("Register", registerDetails);
             }
@@ -250,20 +267,23 @@ namespace IberaDelivery.Controllers
             //Checking the state of model passed as parameter.
             if (ModelState.IsValid)
             {
-                
+
                 //Validating the user, whether the user is valid or not.
                 var isValidUser = IsValidUser(model);
 
                 //If user is valid & present in database, we are redirecting it to Welcome page.
                 if (isValidUser != null)
                 {
-                    if(isValidUser.Activate){
+                    if (isValidUser.Activate)
+                    {
                         return RedirectToAction("Index", "Home");
-                    }else{
+                    }
+                    else
+                    {
                         ModelState.AddModelError("Failure", "Account no activated");
                         ViewBag.Message = "You lost confirmation email? Resend.";
                         return View();
-                    }  
+                    }
                 }
                 else
                 {
@@ -285,18 +305,27 @@ namespace IberaDelivery.Controllers
             //Retireving the user details from DB based on username and password enetered by user.
             User user = dataContext.Users.Where(query => query.Email.Equals(model.Email)).SingleOrDefault();
             //If user is present, then true is returned.
-            if (user == null){
+            if (user == null)
+            {
                 return null;
-            //If user is not present false is returned.
+                //If user is not present false is returned.
             }
-            else{
-                if(BCrypt.Net.BCrypt.Verify(model.Password, user.Password)){
-                    HttpContext.Session.SetString("user", JsonSerializer.Serialize(user));
+            else
+            {
+                if (BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
+                {
+                    createSession(user);
                     return user;
-                }else{
+                }
+                else
+                {
                     return null;
                 }
-            }                
+            }
+        }
+
+        public void createSession (User user){
+            HttpContext.Session.SetString("user", JsonSerializer.Serialize(user));
         }
 
         public IActionResult Logout()
@@ -307,7 +336,8 @@ namespace IberaDelivery.Controllers
 
         public IActionResult Managment(int? id)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user"))) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+            {
                 return RedirectToAction("Index", "Home");
             }
 
@@ -324,38 +354,35 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Managment(User user)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user"))) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+            {
                 return RedirectToAction("Index", "Home");
             }
 
-            if (ModelState.IsValid)
-            {
-                User reglog = dataContext.Users.Find(user.Id);
+            User reglog = dataContext.Users.Find(user.Id);
 
-                //Update all details in object
-                if(reglog.FirstName != user.FirstName){
-                    reglog.FirstName = user.FirstName;
-                }
-                if(reglog.LastName != user.LastName){
-                    reglog.LastName = user.LastName;
-                }
-
-                dataContext.Users.Update(reglog);
-                dataContext.SaveChanges();
-                return RedirectToAction(nameof(Index));
-            }
-            else
+            //Update all details in object
+            if (reglog.FirstName != user.FirstName)
             {
-                //ViewBag.missatge = autor.validarAutor().Missatge;
-                return View(user);
+                reglog.FirstName = user.FirstName;
             }
+            if (reglog.LastName != user.LastName)
+            {
+                reglog.LastName = user.LastName;
+            }
+
+            dataContext.Users.Update(reglog);
+            dataContext.SaveChanges();
+            createSession(reglog);
+            return RedirectToAction(nameof(Index));
 
 
         }
 
         public IActionResult NewPassword(int id)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user"))) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+            {
                 return RedirectToAction("Index", "Home");
             }
 
@@ -368,7 +395,8 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult NewPassword(ViewUserNewPassword model)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user"))) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+            {
                 return RedirectToAction("Index", "Home");
             }
 
@@ -376,18 +404,21 @@ namespace IberaDelivery.Controllers
             {
                 User user = dataContext.Users.Find(model.Id);
 
-                if(BCrypt.Net.BCrypt.Verify(model.OrgPassword, user.Password)){
+                if (BCrypt.Net.BCrypt.Verify(model.OrgPassword, user.Password))
+                {
                     user.Password = BCrypt.Net.BCrypt.HashPassword(model.Password);
                     dataContext.Users.Update(user);
                     dataContext.SaveChanges();
                     return RedirectToAction("Index", "Home");
-                }else{
+                }
+                else
+                {
                     ViewBag.Message = "The old password is incorrect";
                     return View();
                 }
 
                 //Update all details in object
-                
+
             }
             else
             {
@@ -400,7 +431,8 @@ namespace IberaDelivery.Controllers
 
         public IActionResult NewEmail(int id)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user"))) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+            {
                 return RedirectToAction("Index", "Home");
             }
 
@@ -413,7 +445,8 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult NewEmail(User model)
         {
-            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user"))) {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+            {
                 return RedirectToAction("Index", "Home");
             }
 
@@ -421,18 +454,21 @@ namespace IberaDelivery.Controllers
             {
                 User user = dataContext.Users.Find(model.Id);
 
-                if(BCrypt.Net.BCrypt.Verify(model.Password, user.Password)){
+                if (BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
+                {
                     user.Email = model.Email;
                     dataContext.Users.Update(user);
                     dataContext.SaveChanges();
                     return RedirectToAction("Index", "Home");
-                }else{
+                }
+                else
+                {
                     ViewBag.Message = "The old password is incorrect";
                     return View();
                 }
 
                 //Update all details in object
-                
+
             }
             else
             {
@@ -445,23 +481,27 @@ namespace IberaDelivery.Controllers
 
         public IActionResult ActivateAccount()
         {
-            string token = HttpContext.Request.Query["token"].ToString();;
-            
-            if(token != null){
+            string token = HttpContext.Request.Query["token"].ToString(); ;
+
+            if (token != null)
+            {
                 User user = dataContext.Users.Where(a => a.Token.Equals(token)).FirstOrDefault();
-                if(user != null){
-                    if(user.Token == token){
+                if (user != null)
+                {
+                    if (user.Token == token)
+                    {
                         byte[] data = Base64UrlTextEncoder.Decode(token);
                         DateTime when = DateTime.FromBinary(BitConverter.ToInt64(data, 0));
-                        if (when > DateTime.UtcNow.AddHours(-24)) {
+                        if (when > DateTime.UtcNow.AddHours(-24))
+                        {
                             user.Activate = true;
                             user.Token = null;
 
                             dataContext.Users.Update(user);
                             dataContext.SaveChanges();
                         }
-                    }    
-                }       
+                    }
+                }
             }
             return RedirectToAction("Index", "Home");
         }
@@ -510,15 +550,19 @@ namespace IberaDelivery.Controllers
 
         public IActionResult ResetPassword()
         {
-            string token = HttpContext.Request.Query["token"].ToString();;
-            
-            if(token != null){
+            string token = HttpContext.Request.Query["token"].ToString(); ;
+
+            if (token != null)
+            {
                 User user = dataContext.Users.Where(a => a.Token.Equals(token)).FirstOrDefault();
-                if(user != null){
-                    if(user.Token == token){
+                if (user != null)
+                {
+                    if (user.Token == token)
+                    {
                         byte[] data = Base64UrlTextEncoder.Decode(token);
                         DateTime when = DateTime.FromBinary(BitConverter.ToInt64(data, 0));
-                        if (when > DateTime.UtcNow.AddHours(-24)) {
+                        if (when > DateTime.UtcNow.AddHours(-24))
+                        {
                             user.Token = null;
 
                             dataContext.Users.Update(user);
@@ -528,8 +572,8 @@ namespace IberaDelivery.Controllers
                             model.Id = user.Id;
                             return View(model);
                         }
-                    }    
-                }       
+                    }
+                }
             }
             return RedirectToAction("Index", "Home");
         }
@@ -546,7 +590,7 @@ namespace IberaDelivery.Controllers
                 dataContext.Users.Update(user);
                 dataContext.SaveChanges();
                 return RedirectToAction("Login", "User");
-                
+
             }
             else
             {
