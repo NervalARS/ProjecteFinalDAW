@@ -86,6 +86,7 @@ namespace IberaDelivery.Controllers
 
 
             ViewBag.missatge = criteri;
+            ViewBag.Cadena = Cadena;
 
             PopulateCategoriesDropDownList();
 
