@@ -1,0 +1,63 @@
+@model IberaDelivery.Models.User
+
+@{
+    ViewData["Title"] = "Managment";
+}
+
+<div class="container">
+    <div class="row gutters">
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    @using (Html.BeginForm("Managment", "User"))
+                    {
+                    <div class="row gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <h6 class="mb-3">Personal Details</h6>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                @Html.LabelFor(a => a.FirstName)
+                                @Html.TextBoxFor(a => a.FirstName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="form-group">
+                                @Html.LabelFor(a => a.LastName)
+                                @Html.TextBoxFor(a => a.LastName, new { @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <div class="text-right">
+                                <button type="submit" value="Managment" name="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                    <div class="row gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <h6 class="mb-3">Account Settings</h6>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                            <div class="card">
+                                @Html.DisplayFor(model => model.Email)
+                            </div>
+                            <div class="form-group">
+                                <a asp-action="NewEmail" asp-route-id="@Model.Id">Change Email Address</a>
+                            </div>
+                            <div class="form-group">
+                                <a asp-action="NewPassword" asp-route-id="@Model.Id">New Password</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

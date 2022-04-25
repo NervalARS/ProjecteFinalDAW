@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj": {}
+    "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj": {}
   },
   "projects": {
-    "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj": {
+    "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj",
+        "projectUniqueName": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj",
         "projectName": "IberaDelivery",
-        "projectPath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj",
-        "packagesPath": "/home/pol/.nuget/packages/",
-        "outputPath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/obj/",
+        "projectPath": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj",
+        "packagesPath": "/home/leite/.nuget/packages/",
+        "outputPath": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/pol/.nuget/NuGet/NuGet.Config"
+          "/home/leite/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -38,6 +38,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.0.3, )"
+            },
             "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.2, )"
@@ -50,6 +54,10 @@
               "target": "Package",
               "version": "[6.0.2, )"
             },
+            "Microsoft.AspNetCore.WebUtilities": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[6.0.2, )"
@@ -57,6 +65,10 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "target": "Package",
               "version": "[6.0.2, )"
+            },
+            "SendGrid": {
+              "target": "Package",
+              "version": "[9.27.0, )"
             }
           },
           "imports": [
@@ -77,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.102/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.101/RuntimeIdentifierGraph.json"
         }
       }
     }

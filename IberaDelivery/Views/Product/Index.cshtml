@@ -1,20 +1,28 @@
 @model IEnumerable<IberaDelivery.Models.Product>
+@using System.Text.Json
+@using Microsoft.AspNetCore.Mvc;
+@using IberaDelivery.Models;
+@using Microsoft.EntityFrameworkCore;
 @inject IHttpContextAccessor HttpContextAccessor
 @{
-    ViewData["Title"] = "Productes";
-
+    ViewData["Title"] = "Products";
+    User userSession = new User();
+    if(HttpContextAccessor.HttpContext.Session.GetString("user") != null){
+         userSession = JsonSerializer.Deserialize<User>(HttpContextAccessor.HttpContext.Session.GetString("user"));
+    }
 }
 
 <h2>Productes</h2>
 <a asp-action="Create"><button>Create</button></a>
 <br><br>
 <form asp-action="Index">
-
-    <input type="text" class="form-control" name="Cadena">  @ViewBag.cadena
-    @if (@ViewBag.cadena != null)
+    <input type="text" class="form-control" name="Cadena"> <input type="button" value="Cerca"> @ViewBag.missatge
+</form>
+@if (@ViewBag.missatge != null)
 {
     <a asp-action="Index">Treure filtre</a>
 }
+<<<<<<< HEAD
 
 <select  name="cat" id="cat" class="form-control" asp-items="ViewBag.CategoryId">
                     <option value="">-- Select Category --</option>
@@ -57,6 +65,8 @@
 <input type="submit" value="Search" class="btn btn-primary">
 
 </form>
+=======
+>>>>>>> main
 <table class="table">
     <thead>
         <tr>
@@ -84,55 +94,43 @@
             <th>
                 @Html.DisplayNameFor(model => model.Iva)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Images)
-            </th>
-            <th></th>
-            <th></th>
+            <th>Delete</th>
+            <th>Edit</th>
+            <th>Details</th>
+            <th>Add to carrito</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
+                <th>
+                @Html.DisplayFor(modelItem => item.Id)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Name)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Description)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Category.Name)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Provider.FirstName)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Stock)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Price)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Iva)
+            </th>
+            
+         @*   @if (@HttpContextAccessor.HttpContext.Session.GetString("userName") != null){  *@
 
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Provider.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Stock)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Iva)
-                </td>
-                <td>
-
-
-                    @foreach (var item2 in item.Images)
-                    {
-
-
-                        <img src="data:image;base64,@System.Convert.ToBase64String(item2.Image1)" class="img-thumbnail" />
-
-                    }
-
-
-                </td>
 
                 <td>
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
@@ -140,9 +138,40 @@
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                 </td>
-
+                <td>
+                   <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                </td>
+                <td>
+                    <a asp-action="AddToCart" asp-route-id="@item.Id">+</a>
+                </td>
             </tr>
         }
     </tbody>
 </table>
-
+ @if (@HttpContextAccessor.HttpContext.Session.GetString("Cart") != null){ 
+        List<Product> list;
+        list = new List<Product>();
+        list = JsonSerializer.Deserialize<List<Product>>(@HttpContextAccessor.HttpContext.Session.GetString("Cart"));
+        var totalPrice = new Decimal();                
+        <div>
+        <h3>Carrito</h3>
+        <ul style="max-height: 100px; max-width:100px; overflow:hidden; overflow-y:scroll;">
+            @for (var i = 0; i < list.Count; i++) {
+                <li>@list[i].Name</li>
+                <li>@list[i].Price</li>
+                totalPrice = totalPrice + list[i].Price;
+            }
+        </ul>
+        <p>
+            Total price = <b>@totalPrice</b>
+        </p>
+    </div>
+    <a asp-action="Checkout">Checkout</a>
+    <a asp-action="ClearCart">Empty Cart</a>
+ }
+<form asp-action="Index">
+<input type="text" class="form-control" name="Cadena"> <input type="button" value="Cerca"> @ViewBag.missatge
+</form>
+@if(@ViewBag.missatge != null){
+<a asp-action="Index">Treure filtre</a>
+}

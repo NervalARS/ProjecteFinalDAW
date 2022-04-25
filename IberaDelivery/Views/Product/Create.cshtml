@@ -1,8 +1,12 @@
 @model IberaDelivery.Models.FormProduct
-
+@inject IHttpContextAccessor HttpContextAccessor
+@using System.Text.Json
 @{
     ViewData["Title"] = "Create";
-
+     User userSession = new User();
+    if(HttpContextAccessor.HttpContext.Session.GetString("user") != null){
+         userSession = JsonSerializer.Deserialize<User>(HttpContextAccessor.HttpContext.Session.GetString("user"));
+    }
 }
 
 <h1>Create</h1>
@@ -26,14 +30,21 @@
             <div class="form-group">
                 <label asp-for="CategoryId" class="control-label"></label>
                 <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryId">
-                    <option value="">-- Select Category --</option>
+                    <option value="" disabled selected hidden>-- Select Category --</option>
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="ProviderId" class="control-label"></label>
-                <select asp-for="ProviderId" class="form-control" asp-items="ViewBag.ProviderId">
-                    <option value="">-- Select Provider --</option>
-                </select>
+                @if (ViewBag.ThisProviderId == null){
+                    <label asp-for="ProviderId" class="control-label"></label>
+                    <select asp-for="ProviderId" class="form-control" asp-items="ViewBag.ProviderId">
+                        <option value="" disabled selected hidden>-- Select Provider --</option>
+                    </select>
+                } else {
+                    <label asp-for="ProviderId" class="control-label"></label>
+                    <select asp-for="ProviderId" class="form-control">
+                        <option value="ViewBag.thisProviderId" disabled selected>@ViewBag.ThisProviderName</option>
+                    </select>
+                }
             </div>
             <div class="form-group">
                 <label asp-for="Stock" class="control-label"></label>

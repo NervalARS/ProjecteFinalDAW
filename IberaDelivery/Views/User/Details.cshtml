@@ -1,0 +1,23 @@
+@model IberaDelivery.Models.User
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewBag.Title = "User Details";
+
+}
+
+<h2>User Details</h2>
+<p>
+    @Html.DisplayFor(User => User.FirstName)
+</p>
+<p>
+    @Html.DisplayFor(User => User.LastName)
+</p>
+<p>
+    @Html.DisplayFor(User => User.Email)
+</p>
+<p>
+    @Html.DisplayFor(User => User.Password)
+</p>
+<p>
+    @Html.DisplayFor(User => User.Rol)
+</p>
