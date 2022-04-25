@@ -387,7 +387,6 @@ namespace IberaDelivery.Controllers
             {
                 list = new List<Product>();
                 HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(list));
-                var tempStock = 0;
             }
             else
             {
