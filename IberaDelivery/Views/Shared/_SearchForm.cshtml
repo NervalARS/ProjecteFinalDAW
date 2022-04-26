@@ -1,0 +1,24 @@
+@model IberaDelivery.Models.SearchModel
+@inject iberiadbContext context
+@using (Html.BeginForm("Search", "Navbar"))
+{
+    List<SelectListItem> listItems = new List<SelectListItem>();
+    
+    List<Category> categories = context.Categories.ToList();
+    listItems.Add(new SelectListItem{
+            Text = "All departments",
+            Value = "0",
+            Selected = true
+        });
+    foreach(Category cat in categories){
+        listItems.Add(new SelectListItem{
+            Text = cat.Name,
+            Value = cat.Id + ""
+        });
+    }
+    <ul class="navbar-nav" style="width: 100%">
+        <li class="nav-item pr-2 pl-4">@Html.DropDownList("cat", listItems, new { @class = "form-control" })</li>
+        <li class="nav-item px-1" style="width: 700px">@Html.TextBoxFor(a => a.SearchField, new { @class = "form-control w-80", @placeholder = "Search product..."})</li>
+        <li class="nav-item px-1"><input type="submit" value="Search" class="btn btn-primary" /></li>
+    </ul>
+}

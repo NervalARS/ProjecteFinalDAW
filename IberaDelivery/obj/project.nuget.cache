@@ -2,7 +2,7 @@
   "version": 2,
   "dgSpecHash": "qAEETnlaHJl2zdT1Ydvo3D5v26fv7t0CBLHXFyHZshvxTfXAvtSk3MLwssst/nNWH4BvO0A/HQR90ztiuBOFkg==",
   "success": true,
-  "projectFilePath": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj",
+  "projectFilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj",
   "expectedPackageFiles": [
     "/home/antonio/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/home/antonio/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
