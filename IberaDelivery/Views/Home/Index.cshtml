@@ -1,8 +1,39 @@
-﻿@{
+﻿@model IEnumerable<IberaDelivery.Models.Product>
+@using System.Text.Json
+@using Microsoft.AspNetCore.Mvc;
+@using IberaDelivery.Models;
+@using Microsoft.EntityFrameworkCore;
+@{
     ViewData["Title"] = "Home Page";
 }
 
+
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <br/><br/>
+    <div class="row flex-wrap">
+        
+        @foreach (var item in Model)
+        {
+        
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                @{
+                    int i = 0;
+                }
+                
+                    @foreach (var item2 in item.Images)
+                    {
+                            @if (i == 0)
+                            {
+                                <img src="data:image;base64,@System.Convert.ToBase64String(item2.Image1)" class="img-thumbnail" style="max-height: 50%;" />
+                                i++;
+                            }
+                    }
+                <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
+                </div>
+        
+        }
+    </div>
 </div>
+
+
