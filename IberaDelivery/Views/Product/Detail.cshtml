@@ -1,0 +1,83 @@
+@model IberaDelivery.Models.Product
+@using System.Text.Json
+@using IberaDelivery.Models;
+@using System;
+@using System.Collections;
+@using System.Collections.Generic;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewBag.Title = Model.Name;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            @{int i = 0;}
+        @foreach (var item in Model.Images)
+                    {
+                            <div class="carousel-item @(i == 0 ? "active" : "") ">
+                                  <img src="data:image;base64,@System.Convert.ToBase64String(item.Image1)" class="img-thumbnail" />
+                            </div>
+                           {i++;}
+                    }
+        </div>
+        <div class="col-sm">
+            <h2>
+                @Html.DisplayFor(Product => Product.Name)
+            </h2>
+            <p>
+                @Html.DisplayFor(Product => Product.Description)
+            </p>
+            <p>
+                @Html.DisplayFor(Product => Product.Category.Name)
+            </p>
+            <p>
+                @Html.DisplayFor(Product => Product.Provider.FirstName)
+            </p>
+            <p>
+                @Html.DisplayFor(Product => Product.Stock)
+            </p>
+            <p>
+                @Html.DisplayFor(Product => Product.Price)<br>
+                @Html.DisplayFor(Product => Product.Iva)
+
+            </p>
+            <a asp-action="AddToCart" asp-route-id="@this.Model.Id">+</a>
+        </div>
+        <div class="col-sm">
+            @if (@HttpContextAccessor.HttpContext.Session.GetString("Cart") != null)
+            {
+                List<Product> list;
+                list = new List<Product>();
+                list =
+                JsonSerializer.Deserialize<List<Product>>(@HttpContextAccessor.HttpContext.Session.GetString("Cart"));
+                var totalPrice = new Decimal();
+                <div>
+                    <h3>Carrito</h3>
+                    <ul style="list-style-type: none;">
+                        @for (int j = 0; j < list.Count; j++)
+                        {
+                            <li><b>@list[j].Name</b></li>
+                            <li>Price: @(list[j].Price + @list[j].Iva)</li>
+                            <li>Quantity: @list[j].Stock</li>
+                            totalPrice = totalPrice + (list[j].Price + @list[j].Iva);
+                        }
+                    </ul>
+                    <p>
+                        Total price = <b>@totalPrice</b>
+                    </p>
+                </div>
+                <a asp-action="Checkout">Checkout</a>
+                <a asp-action="ClearCart" asp-route-id="@this.Model.Id">Empty Cart</a>
+            }
+            else
+            {
+                <div>
+                    Your shopping cart is empty!
+                </div>
+            }
+        </div>
+    </div>
+
+
+</div>
+</div>
