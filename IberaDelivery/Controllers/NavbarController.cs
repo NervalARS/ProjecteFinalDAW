@@ -1,8 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
-using System.Text.Json;
 using IberaDelivery.Models;
-using IberaDelivery.Services;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Hosting;
+using System;
+using System.IO;
+using System.Threading.Tasks;
+using System.Drawing;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+
 
 namespace IberaDelivery.Controllers
 {
@@ -22,9 +32,9 @@ namespace IberaDelivery.Controllers
             ViewBag.Search = model.SearchField;
             if(model.SearchField != null){
                 if(model.Category != 0){
-                    products = dataContext.Products.Where(a => a.Name.Contains(model.SearchField) && a.CategoryId.Equals(model.Category)).ToList();
+                    products = dataContext.Products.Where(a => a.Name.Contains(model.SearchField) && a.CategoryId.Equals(model.Category)).Include(i => i.Images).Include(c => c.Category).Include(p => p.Provider).ToList();
                 }else{
-                    products = dataContext.Products.Where(a => a.Name.Contains(model.SearchField)).ToList();
+                    products = dataContext.Products.Where(a => a.Name.Contains(model.SearchField)).Include(i => i.Images).Include(c => c.Category).Include(p => p.Provider).ToList();
                 }
                 return View(products);
             }
