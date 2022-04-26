@@ -26,15 +26,17 @@ namespace IberaDelivery.Controllers
         }
 
         [HttpPost]
-        public IActionResult Search(SearchModel model)
+        public IActionResult Search(IFormCollection form)
         {
-            List<Product> products = new List<Product>();
-            ViewBag.Search = model.SearchField;
-            if(model.SearchField != null){
-                if(model.Category != 0){
-                    products = dataContext.Products.Where(a => a.Name.Contains(model.SearchField) && a.CategoryId.Equals(model.Category)).Include(i => i.Images).Include(c => c.Category).Include(p => p.Provider).ToList();
+            var products = dataContext.Products.ToList();
+            ViewBag.Search = form["SearchField"];
+            string searchField = form["SearchField"];
+            int category = int.Parse(form["Category"]);
+            if(searchField != null){
+                if(category != 0){
+                    products = dataContext.Products.Where(a => a.Name.Contains(searchField) && a.CategoryId.Equals(category)).Include(i => i.Images).Include(c => c.Category).Include(p => p.Provider).ToList();
                 }else{
-                    products = dataContext.Products.Where(a => a.Name.Contains(model.SearchField)).Include(i => i.Images).Include(c => c.Category).Include(p => p.Provider).ToList();
+                    products = dataContext.Products.Where(a => a.Name.Contains(searchField)).Include(i => i.Images).Include(c => c.Category).Include(p => p.Provider).ToList();
                 }
                 return View(products);
             }
