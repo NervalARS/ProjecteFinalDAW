@@ -2,7 +2,6 @@
 @using System.Text.Json
 @using IberaDelivery.Models;
 @using System;
-@using System.Collections;
 @using System.Collections.Generic;
 @inject IHttpContextAccessor HttpContextAccessor
 @{
@@ -11,37 +10,31 @@
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            @{int i = 0;}
-        @foreach (var item in Model.Images)
-                    {
-                            <div class="carousel-item @(i == 0 ? "active" : "") ">
-                                  <img src="data:image;base64,@System.Convert.ToBase64String(item.Image1)" class="img-thumbnail" />
-                            </div>
-                           {i++;}
-                    }
+            @{
+                int i = 0;
+            }
+            @foreach (var item in Model.Images)
+            {
+                <div class="carousel-item @(i == 0 ? "active" : "") ">
+                    <img src="data:image;base64,@System.Convert.ToBase64String(item.Image1)" class="img-thumbnail" style="width: 500px; height: 500px;"/>
+                </div>
+                { i++; }
+            }
         </div>
         <div class="col-sm">
-            <h2>
+            <h2 class="mb-4 display-4">
                 @Html.DisplayFor(Product => Product.Name)
             </h2>
+            <div class="mt-1 mb-0 text-muted small">
+                @Html.DisplayFor(Product => Product.Category.Name)
+            </div>
             <p>
                 @Html.DisplayFor(Product => Product.Description)
             </p>
-            <p>
-                @Html.DisplayFor(Product => Product.Category.Name)
-            </p>
-            <p>
-                @Html.DisplayFor(Product => Product.Provider.FirstName)
-            </p>
-            <p>
-                @Html.DisplayFor(Product => Product.Stock)
-            </p>
-            <p>
-                @Html.DisplayFor(Product => Product.Price)<br>
-                @Html.DisplayFor(Product => Product.Iva)
-
-            </p>
-            <a asp-action="AddToCart" asp-route-id="@this.Model.Id">+</a>
+            <div class="col-sm">
+			    <h4 class="mb-1 me-1">@(Model.Price + @Model.Iva)€</h4>
+                <a asp-action="AddToCart" asp-route-id="@this.Model.Id" class="btn btn-success btn-lg">Add to cart </a>
+            </div>
         </div>
         <div class="col-sm">
             @if (@HttpContextAccessor.HttpContext.Session.GetString("Cart") != null)
