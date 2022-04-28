@@ -17,7 +17,7 @@ body {
   margin-bottom: 60px;
 }
 
-.carousel-item {
+#item {
   height: 65vh;
   min-height: 300px;
   background: no-repeat center center scroll;
@@ -26,4 +26,5 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
+
 

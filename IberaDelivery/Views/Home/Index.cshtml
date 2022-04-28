@@ -9,17 +9,17 @@
 
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    <h1 class="display-4">Welcome to IberiaDelivery</h1>
     <br /><br />
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active">
+            <div id="item" class="carousel-item active">
                 <img src="@Url.Content("~/Content/Images/comida.jpg")"" class="d-block w-100" alt="Comida">
             </div>
-            <div class="carousel-item">
+            <div id="item" class="carousel-item">
                 <img src="@Url.Content("~/Content/Images/deporte.jpg")"" class="d-block w-100" alt="Deporte">
             </div>
-            <div class="carousel-item">
+            <div id="item" class="carousel-item">
                 <img src="@Url.Content("~/Content/Images/hogar.jpeg")"" class="d-block w-100" alt="Hogar">
             </div>
         </div>
@@ -50,7 +50,7 @@
                     @if (i == 0)
                     {
                         <img src="data:image;base64,@System.Convert.ToBase64String(item2.Image1)" class="img-thumbnail"
-                style="max-height: 50%;" />
+                style="max-height: 17vh;" />
                         i++;
                     }
                 }
