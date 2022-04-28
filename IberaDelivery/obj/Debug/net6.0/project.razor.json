@@ -16363,6 +16363,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Product/DeleteImage.cshtml",
+      "TargetPath": "Views\\Product\\DeleteImage.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Category/Details.cshtml",
       "TargetPath": "Views\\Category\\Details.cshtml",
       "FileKind": "mvc"

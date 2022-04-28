@@ -10,8 +10,8 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-       <form asp-action="Create" enctype="multipart/form-data">
-            <!-- <input type="hidden" asp-for="Id"/> -->
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Id"/>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -49,6 +49,7 @@
                 <input asp-for="Iva" class="form-control" />
                 <span asp-validation-for="Iva" class="text-danger"></span>
             </div>
+<<<<<<< HEAD
 
 
                     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -74,6 +75,8 @@
   </button>
 </div>
            
+=======
+>>>>>>> pol2
             <div class="form-group">
                 <label asp-for="ImageIn" class="control-label"></label>
                 <div class="custom-file">
@@ -83,24 +86,76 @@
                 <span asp-validation-for="ImageIn" class="text-danger"></span>
             </div>
 
-        
+
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Edit" class="btn btn-primary" />
             </div>
         </form>
+
+@if (Model.Image != null)
+{
+    
+
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @{
+                    int i = 0;
+                }
+                @foreach (var item in Model.Image)
+                {
+
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <img src="data:image;base64,@System.Convert.ToBase64String(item.Image1)" class="img-thumbnail" />
+                    </div>
+                    { i++; }
+
+
+
+                }
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <table>
+            <tbody>
+                @foreach (var item2 in Model.Image)
+                {
+
+                    <th>
+
+                        <img src="data:image;base64,@System.Convert.ToBase64String(item2.Image1)" class="img-thumbnail" style="max-height: 17vh;"/>
+                        <a asp-action="DeleteImage" asp-route-id="@item2.Id">Delete</a>
+
+                    </th>
+                }
+
+            </tbody>
+        </table>
+}
+
     </div>
 </div>
- <span style="color: red;">@ViewBag.missatge</span>
+<span style="color: red;">@ViewBag.missatge</span>
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 <div>
-  
+
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script type="text/javascript">
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script type="text/javascript">
     // Add the following code if you want the name of the file appear on select  
     $(".custom-file-input").on("change", function () {
         var fileName = $(this).val().split("\\").pop();

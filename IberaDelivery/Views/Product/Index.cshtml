@@ -16,12 +16,54 @@
 <a asp-action="Create"><button>Create</button></a>
 <br><br>
 <form asp-action="Index">
-    <input type="text" class="form-control" name="Cadena"> <input type="button" value="Cerca"> @ViewBag.missatge
-</form>
-@if (@ViewBag.missatge != null)
+
+    <input type="text" class="form-control" name="Cadena">  @ViewBag.cadena
+    @if (@ViewBag.cadena != null)
 {
     <a asp-action="Index">Treure filtre</a>
-}
+} 
+
+<select  name="cat" id="cat" class="form-control" asp-items="ViewBag.CategoryId">
+                    <option value="">-- Select Category --</option>
+                </select>
+<select name="criteri" id="criteri">
+    
+    @if (@ViewBag.missatge == 1)
+    {
+        <option value="1" selected >Id ASC</option>
+    }else{
+        <option value="1">Id ASC</option>
+    }
+
+    @if (@ViewBag.missatge == 2)
+    {
+        <option value="2" selected>Id Desc</option>
+    }else{
+       <option value="2">Id DESC</option>
+    }
+
+    @if (@ViewBag.missatge == 3)
+    {
+       <option value="3" selected>Preu ASC</option>
+    }else{
+        <option value="3">Preu DESC</option>
+    }
+
+    @if (@ViewBag.missatge == 4)
+    {
+         <option value="4" selected>Preu Desc</option>
+    }else{
+        <option value="4">Preu DESC</option>
+    }
+    
+    
+   
+   
+</select>
+
+<input type="submit" value="Search" class="btn btn-primary">
+
+</form>
 <table class="table">
     <thead>
         <tr>
@@ -125,9 +167,4 @@
     <a asp-action="Checkout">Checkout</a>
     <a asp-action="ClearCart">Empty Cart</a>
  }
-<form asp-action="Index">
-<input type="text" class="form-control" name="Cadena"> <input type="button" value="Cerca"> @ViewBag.missatge
-</form>
-@if(@ViewBag.missatge != null){
-<a asp-action="Index">Treure filtre</a>
-}
+
