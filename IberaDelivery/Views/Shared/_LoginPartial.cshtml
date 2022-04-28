@@ -17,6 +17,14 @@
             aria-expanded="false">Hello @userSession.FullName</a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" asp-controller="User" asp-route-id="@userSession.Id" asp-action="Managment">Managment Account</a></li>
+                <li><a class="nav-link text-dark" asp-controller="Cart" asp-route-id="@userSession.Id" asp-action="Managment" title="Manage">Shopping Cart</a></li>
+                @if(userSession.Rol == 1){
+                    <li><a class="dropdown-item" asp-controller="Product" asp-action="Index">Products List</a></li>
+                    <li><a class="dropdown-item" asp-controller="User" asp-action="Index">Users List</a></li>
+                }
+                @if(userSession.Rol == 2){
+                    <li><a class="dropdown-item" asp-controller="Product" asp-route-id="@userSession.Id" asp-action="Index">Products List</a></li>
+                }
             </ul>
         </li>
         <li class="nav-item">
@@ -24,10 +32,6 @@
             asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
             </form>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Cart" asp-route-id="@userSession.Id" asp-action="Managment"
-            title="Manage">Shopping Cart</a>
         </li>
     }
     else

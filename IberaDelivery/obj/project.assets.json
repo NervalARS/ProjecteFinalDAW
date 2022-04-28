@@ -5134,5 +5134,13 @@
         "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problema al leer el archivo de caché /var/www/html/ProjecteFinalDAW/IberaDelivery/obj/project.nuget.cache : Invalid property identifier character: <. Path 'success', line 5, position 0."
+    }
+  ]
 }

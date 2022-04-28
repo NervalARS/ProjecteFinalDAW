@@ -27,4 +27,6 @@ body {
   background-size: cover;
 }
 
-
+#contSearch{
+  padding-left: 12%;
+}
