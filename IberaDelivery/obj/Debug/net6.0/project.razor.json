@@ -16486,6 +16486,11 @@
       "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/var/www/html/PROJECTE FINAL/CARPETA A GITEAR/ProjecteFinalDAW/IberaDelivery/Views/User/Managment.cshtml",
+      "TargetPath": "Views\\User\\Managment.cshtml",
+      "FileKind": "mvc"
     }
   ],
   "SerializationFormat": "0.2"
