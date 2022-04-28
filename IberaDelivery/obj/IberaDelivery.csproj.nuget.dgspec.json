@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "/var/www/html/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj": {}
   },
   "projects": {
@@ -16,22 +15,6 @@
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/antonio/.nuget/NuGet/NuGet.Config"
-=======
-    "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj": {}
-  },
-  "projects": {
-    "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj",
-        "projectName": "IberaDelivery",
-        "projectPath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj",
-        "packagesPath": "/home/pol/.nuget/packages/",
-        "outputPath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/home/pol/.nuget/NuGet/NuGet.Config"
->>>>>>> pol2
         ],
         "originalTargetFrameworks": [
           "net6.0"
@@ -106,11 +89,7 @@
               "privateAssets": "all"
             }
           },
-<<<<<<< HEAD
           "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.200/RuntimeIdentifierGraph.json"
-=======
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.102/RuntimeIdentifierGraph.json"
->>>>>>> pol2
         }
       }
     }

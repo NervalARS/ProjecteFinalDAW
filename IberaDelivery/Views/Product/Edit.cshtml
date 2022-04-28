@@ -49,34 +49,6 @@
                 <input asp-for="Iva" class="form-control" />
                 <span asp-validation-for="Iva" class="text-danger"></span>
             </div>
-<<<<<<< HEAD
-
-
-                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-       @{int i = 0;}
-        @foreach (var item in Model.Image)
-                    {
-                       
-                            <div class="carousel-item @(i == 0 ? "active" : "") ">
-                                  <img src="data:image;base64,@System.Convert.ToBase64String(item.Image1)" class="img-thumbnail" />
-                            </div>
-                           {i++;}
-                    }
-    
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-           
-=======
->>>>>>> pol2
             <div class="form-group">
                 <label asp-for="ImageIn" class="control-label"></label>
                 <div class="custom-file">
