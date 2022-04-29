@@ -20,6 +20,7 @@
                 <li><a class="dropdown-item" asp-controller="Cart" asp-route-id="@userSession.Id" asp-action="Managment" title="Manage">Shopping Cart</a></li>
                 @if(userSession.Rol == 1){
                     <li><a class="dropdown-item" asp-controller="Product" asp-action="Index">Products List</a></li>
+                    <li><a class="dropdown-item" asp-controller="Category" asp-action="Index">Category List</a></li>
                     <li><a class="dropdown-item" asp-controller="User" asp-action="Index">Users List</a></li>
                 }
                 @if(userSession.Rol == 2){
