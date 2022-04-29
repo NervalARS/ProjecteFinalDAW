@@ -452,7 +452,7 @@ namespace IberaDelivery.Controllers
                 HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(list));
             }
             product.Stock = oldStock;
-            return View("Detail", product);
+            return RedirectToAction("Detail", new {id});
         }
 
         public async Task<IActionResult> ClearCart(int? id)
@@ -483,10 +483,16 @@ namespace IberaDelivery.Controllers
                 .Include(p => p.Images)
                 .Include(p => p.Category)
                 .Include(p => p.Provider)
+                .Include(p => p.Comments)
                 .FirstOrDefault(a => a.Id == id);
             foreach (var image in product.Images)
             {
                 image.Product = null;
+            }
+            foreach (var comment in product.Comments)
+            {
+                comment.Product = null;
+                comment.User = null;
             }
             product.Category.Products = null;
             product.Provider.Products = null;

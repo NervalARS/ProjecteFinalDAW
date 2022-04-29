@@ -1,6 +1,6 @@
-@model IberaDelivery.Models.Product
-@using System.Text.Json
+@model IberaDelivery.Models.Product;
 @using IberaDelivery.Models;
+@using System.Text.Json
 @using System;
 @using System.Collections.Generic;
 @inject IHttpContextAccessor HttpContextAccessor
@@ -16,7 +16,8 @@
             @foreach (var item in Model.Images)
             {
                 <div class="carousel-item @(i == 0 ? "active" : "") ">
-                    <img src="data:image;base64,@System.Convert.ToBase64String(item.Image1)" class="img-thumbnail" style="width: 500px; height: 500px;"/>
+                    <img src="data:image;base64,@System.Convert.ToBase64String(item.Image1)" class="img-thumbnail"
+                    style="width: 500px; height: 500px;" />
                 </div>
                 { i++; }
             }
@@ -32,8 +33,15 @@
                 @Html.DisplayFor(Product => Product.Description)
             </p>
             <div class="col-sm">
-			    <h4 class="mb-1 me-1">@(Model.Price + @Model.Iva)€</h4>
-                <a asp-action="AddToCart" asp-route-id="@this.Model.Id" class="btn btn-success btn-lg">Add to cart </a>
+                <h4 class="mb-1 me-1">@(Model.Price + @Model.Iva)€</h4>
+                @if (Model.Stock > 0)
+                {
+                    <a asp-action="AddToCart" asp-route-id="@this.Model.Id" class="btn btn-success btn-lg">Add to cart </a>
+                }
+                else
+                {
+                    <button class="btn btn-failure btn-lg" type="button">Product unavailable</button>
+                }
             </div>
         </div>
         <div class="col-sm">
@@ -69,8 +77,19 @@
                 </div>
             }
         </div>
+        @using (Html.BeginForm("Create", "Comment"))
+        {
+        <div class="form-group">
+                @Html.Label("Comment here bitch!")
+                @Html.Hidden("id", Model.Id)
+                @Html.TextBox("com",null, new{@class = "form-control"})
+            </div>
+        }
+        <div>
+            @foreach (var item in Model.Comments)
+            {
+                <p>@item.Contens</p><br>
+            }
+        </div>
     </div>
-
-
-</div>
 </div>
