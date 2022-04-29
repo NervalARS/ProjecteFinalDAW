@@ -1,13 +1,7 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using IberaDelivery.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 namespace IberaDelivery.Controllers
 {
     public class CommentController : Controller

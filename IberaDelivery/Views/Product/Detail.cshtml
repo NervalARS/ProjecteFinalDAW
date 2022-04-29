@@ -67,7 +67,7 @@
                         Total price = <b>@totalPrice</b>
                     </p>
                 </div>
-                <a asp-action="Checkout">Checkout</a>
+                <a asp-controller="Checkout" asp-action="Checkout">Checkout</a>
                 <a asp-action="ClearCart" asp-route-id="@this.Model.Id">Empty Cart</a>
             }
             else
