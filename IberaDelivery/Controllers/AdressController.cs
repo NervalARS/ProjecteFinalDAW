@@ -22,13 +22,22 @@ namespace IberaDelivery.Controllers
         // GET: Adress
         public IActionResult Index(int id)
         {
-            var address = dataContext.Adresses
-            .Where(a => a.UserId == id);
-            return View(address.ToList());
+            try
+            {
+                var address = dataContext.Adresses
+                .Where(a => a.UserId == id);
+                return View(address.ToList());
+            }
+            catch (Exception e)
+            {
+
+                return RedirectToAction("Error500", "Home");
+            }
+
 
         }
 
-        
+
 
         // GET: Adress/Create
         public IActionResult Create()
@@ -41,18 +50,26 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Adress adress)
         {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    dataContext.Add(adress);
+                    dataContext.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    //ViewBag.missatge = autor.validarAutor().Missatge;
+                    return View();
+                }
+            }
+            catch (Exception e)
+            {
 
-            if (ModelState.IsValid)
-            {
-                dataContext.Add(adress);
-                dataContext.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Error500", "Home");
             }
-            else
-            {
-                //ViewBag.missatge = autor.validarAutor().Missatge;
-                return View();
-            }
+
         }
 
         // GET: Adress/Delete/5
@@ -60,19 +77,28 @@ namespace IberaDelivery.Controllers
         {
             //if (HttpContext.Session.GetString("userName") != null)
             //{
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var adress = dataContext.Adresses
+                    .FirstOrDefault(a => a.Id == id);
+                if (adress == null)
+                {
+                    return NotFound();
+                }
+
+                return View(adress);
+            }
+            catch (Exception e)
+            {
+
+                return RedirectToAction("Error500", "Home");
             }
 
-            var adress = dataContext.Adresses
-                .FirstOrDefault(a => a.Id == id);
-            if (adress == null)
-            {
-                return NotFound();
-            }
-
-            return View(adress);
         }
         /*
         else
@@ -87,32 +113,50 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            var adress = dataContext.Adresses.Find(id);
-            if (adress != null)
+            try
             {
-                dataContext.Adresses.Remove(adress);
-                dataContext.SaveChanges();
+                var adress = dataContext.Adresses.Find(id);
+                if (adress != null)
+                {
+                    dataContext.Adresses.Remove(adress);
+                    dataContext.SaveChanges();
+                }
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+
+                return RedirectToAction("Error500", "Home");
             }
 
-            return RedirectToAction(nameof(Index));
         }
         public IActionResult Edit(int? id)
         {
             //if (HttpContext.Session.GetString("userName") != null)
             //{
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                var adress = dataContext.Adresses
+                    .FirstOrDefault(a => a.Id == id);
+                //.Find(id);
+                if (adress == null)
+                {
+                    return NotFound();
+                }
+                ViewBag.Id = id;
+                return View(adress);
             }
-            var adress = dataContext.Adresses
-                .FirstOrDefault(a => a.Id == id);
-            //.Find(id);
-            if (adress == null)
+            catch (Exception e)
             {
-                return NotFound();
+
+                return RedirectToAction("Error500", "Home");
             }
-            ViewBag.Id = id;
-            return View(adress);
+
             //}
         }
 
@@ -121,23 +165,34 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(Adress adress)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var original = dataContext.Adresses.Where(s => s.Id == adress.Id).FirstOrDefault();
-                dataContext.Entry(original).CurrentValues.SetValues(adress);
-                dataContext.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var original = dataContext.Adresses.Where(s => s.Id == adress.Id).FirstOrDefault();
+                    dataContext.Entry(original).CurrentValues.SetValues(adress);
+                    dataContext.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    //ViewBag.missatge = category.validarCategory().msg;
+                    return View();
+                }
             }
-            else
+            catch (Exception e)
             {
-                //ViewBag.missatge = category.validarCategory().msg;
-                return View();
+
+                return RedirectToAction("Error500", "Home");
             }
+
         }
 
 
         public IActionResult Details(int? id)
         {
+            try
+            {
                 if (id == null)
                 {
                     return NotFound();
@@ -149,6 +204,13 @@ namespace IberaDelivery.Controllers
                     return NotFound();
                 }
                 return View(adress);
+            }
+            catch (Exception e)
+            {
+
+                return RedirectToAction("Error500", "Home");
+            }
+
         }
     }
 }
