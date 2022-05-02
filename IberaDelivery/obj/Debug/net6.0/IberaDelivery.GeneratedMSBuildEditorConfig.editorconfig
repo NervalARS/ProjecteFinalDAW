@@ -19,6 +19,18 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXMvSWRlbnRpdHkvUGFnZXMvX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Adress/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRyZXNzL0NyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Adress/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRyZXNzL0VkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Adress/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWRyZXNzL0luZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Category/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2F0ZWdvcnkvQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

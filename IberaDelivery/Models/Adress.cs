@@ -19,20 +19,19 @@ namespace IberaDelivery.Models
         [Required]
         public string City { get; set; } = null!;
         [Required]
-        public int PostalCode { get; set; }
+        public string PostalCode { get; set; }
         [Required]
-        public int TargetNumber { get; set; }
+        public string TargetNumber { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MM-yyyy}", ApplyFormatInEditMode = false)]
         [Required]
         public DateTime ExpiryDate { get; set; }
-        
+
         [Range(100,999,ErrorMessage="Rating must between 100 to 999")] 
         [Required]
         public int Cvv { get; set; }
         [Required]
         public int UserId { get; set; }
-        [Required]
-        public virtual User User { get; set; } = null!;
+        public virtual User? User { get; set; }
     }
 }

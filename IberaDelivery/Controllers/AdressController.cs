@@ -20,23 +20,15 @@ namespace IberaDelivery.Controllers
         }
 
         // GET: Adress
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            var adresses = dataContext.Adresses;
-            return View(adresses.ToList());
+            var address = dataContext.Adresses
+            .Where(a => a.UserId == id);
+            return View(address.ToList());
 
         }
 
-        [HttpPost]
-        public IActionResult Index(String Cadena)
-        {
-
-            var categories = dataContext.Categories
-            .Where(a => a.Name.Contains(Cadena));
-            ViewBag.missatge = "Filtrat per: " + Cadena;
-            return View(categories.ToList());
-
-        }
+        
 
         // GET: Adress/Create
         public IActionResult Create()
