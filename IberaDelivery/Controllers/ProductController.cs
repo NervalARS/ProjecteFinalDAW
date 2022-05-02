@@ -124,11 +124,6 @@ namespace IberaDelivery.Controllers
             }
             PopulateCategoriesDropDownList();
             PopulateProvidersDropDownList();
-            if (checkUserIsProveidor())
-            {
-                ViewBag.ThisProviderId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
-                ViewBag.ThisProviderName = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).FirstName;
-            }
             return View();
         }
         // POST: Product/Create
@@ -146,7 +141,7 @@ namespace IberaDelivery.Controllers
                 Name = model.Name,
                 Description = model.Description,
                 CategoryId = model.CategoryId,
-                ProviderId = model.ProviderId,
+                ProviderId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id,
                 Stock = model.Stock,
                 Price = model.Price,
                 Iva = model.Iva,

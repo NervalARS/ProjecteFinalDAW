@@ -1,0 +1,15 @@
+@using System.Text.Json
+@using Microsoft.AspNetCore.Mvc;
+@using IberaDelivery.Models;
+@using Microsoft.EntityFrameworkCore;
+
+@{
+    ViewData["Title"] = "Error 500";
+}
+
+<div class="container">
+    <h1>500</h1>
+    <h4>OOPS. We are experiencing service issues.</h4>
+    <p>Please wait some time and try again.</p>
+    <button class="btn btn-danger" asp-controller="Home" asp-action="Index">Back to home</button>
+</div>

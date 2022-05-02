@@ -42,6 +42,11 @@ public class HomeController : Controller
         return View(products.ToList());
     }
 
+    public IActionResult Error500()
+    {
+        return View();
+    }
+
     public IActionResult Privacy()
     {
         return View();

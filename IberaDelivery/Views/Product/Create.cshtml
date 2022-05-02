@@ -34,19 +34,6 @@
                 </select>
             </div>
             <div class="form-group">
-                @if (ViewBag.ThisProviderId == null){
-                    <label asp-for="ProviderId" class="control-label"></label>
-                    <select asp-for="ProviderId" class="form-control" asp-items="ViewBag.ProviderId">
-                        <option value="" disabled selected hidden>-- Select Provider --</option>
-                    </select>
-                } else {
-                    <label asp-for="ProviderId" class="control-label"></label>
-                    <select asp-for="ProviderId" class="form-control">
-                        <option value="ViewBag.thisProviderId" disabled selected>@ViewBag.ThisProviderName</option>
-                    </select>
-                }
-            </div>
-            <div class="form-group">
                 <label asp-for="Stock" class="control-label"></label>
                 <input asp-for="Stock" class="form-control" />
                 <span asp-validation-for="Stock" class="text-danger"></span>

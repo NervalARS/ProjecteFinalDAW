@@ -16418,6 +16418,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Home/Error500.cshtml",
+      "TargetPath": "Views\\Home\\Error500.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Shared/_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
