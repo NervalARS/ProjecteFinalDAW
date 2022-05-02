@@ -42,7 +42,7 @@ public class HomeController : Controller
 
             return View(products.ToList());
         }catch(Exception e){
-            return RedirectToAction("Error500", "Home")
+            return RedirectToAction("Error500", "Home");
         }
     }
 
