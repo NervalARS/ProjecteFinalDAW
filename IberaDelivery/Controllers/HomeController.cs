@@ -33,13 +33,17 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        var products = dataContext.Products
+        try{
+            var products = dataContext.Products
             .OrderBy(a => a.Id)
             .Include(c => c.Category)
             .Include(p => p.Provider)
             .Include(i => i.Images);
 
-        return View(products.ToList());
+            return View(products.ToList());
+        }catch(Exception e){
+            return RedirectToAction("Error500", "Home")
+        }
     }
 
     public IActionResult Error500()
