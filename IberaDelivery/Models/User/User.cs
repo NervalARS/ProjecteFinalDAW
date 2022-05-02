@@ -10,6 +10,7 @@ namespace IberaDelivery.Models
     {
         public User()
         {
+            Adresses = new HashSet<Adress>();
             Comments = new HashSet<Comment>();
             Orders = new HashSet<Order>();
             Products = new HashSet<Product>();
@@ -24,6 +25,7 @@ namespace IberaDelivery.Models
         public bool Activate { get; set; }
         public string? Token { get; set; }
 
+        public virtual ICollection<Adress> Adresses { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Product> Products { get; set; }
@@ -37,5 +39,4 @@ namespace IberaDelivery.Models
             }
         }
     }
-    
 }
