@@ -425,7 +425,9 @@ namespace IberaDelivery.Controllers
 
         /*
             Shopping Cart Methods
+            Si me da tiempo los quito, si no, no lo hare
         */
+
         public async Task<IActionResult> AddToCart(int? id)
         {
             List<Product> list;
