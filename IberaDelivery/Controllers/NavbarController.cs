@@ -32,16 +32,44 @@ namespace IberaDelivery.Controllers
             ViewBag.Search = form["SearchField"];
             string searchField = form["SearchField"];
             int category = int.Parse(form["Category"]);
-            if(searchField != null){
-                if(category != 0){
+            if (searchField != null)
+            {
+                if (category != 0)
+                {
                     products = dataContext.Products.Where(a => a.Name.Contains(searchField) && a.CategoryId.Equals(category)).Include(i => i.Images).Include(c => c.Category).Include(p => p.Provider).ToList();
-                }else{
+                }
+                else
+                {
                     products = dataContext.Products.Where(a => a.Name.Contains(searchField)).Include(i => i.Images).Include(c => c.Category).Include(p => p.Provider).ToList();
                 }
                 return View(products);
             }
-
             return RedirectToAction("Index", "Home");
+        }
+        public IActionResult Search(String src, int cat)
+        {
+            var products = dataContext.Products.ToList();
+            ViewBag.Search = src;
+            string searchField = src;
+            int category = cat;
+            if (category != 0)
+            {
+                products = dataContext.Products.Where(a => a.Name.Contains(searchField) && a.CategoryId.Equals(category)).Include(i => i.Images).Include(c => c.Category).Include(p => p.Provider).ToList();
+            }
+            else
+            {
+                products = dataContext.Products.Where(a => a.Name.Contains(searchField)).Include(i => i.Images).Include(c => c.Category).Include(p => p.Provider).ToList();
+            }
+            if (products.Count == 0)
+            {
+                var product = dataContext.Products
+                .Include(p => p.Images)
+                .Include(p => p.Category)
+                .Include(p => p.Provider)
+                .Include(p => p.Comments);
+                return View(product);
+            }
+            return View(products);
         }
     }
 }
