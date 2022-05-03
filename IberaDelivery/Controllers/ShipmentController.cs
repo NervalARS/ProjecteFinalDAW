@@ -10,23 +10,30 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 namespace IberaDelivery.Controllers
 {
-    public class AdressController : Controller
+    public class ShipmentController : Controller
     {
         private readonly iberiadbContext dataContext;
 
-        public AdressController(iberiadbContext context)
+        public ShipmentController(iberiadbContext context)
         {
             dataContext = context;
         }
 
-        // GET: Adress
-        public IActionResult Index(int id)
+
+        public IActionResult Index()
         {
             try
             {
-                var address = dataContext.Adresses
+                if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                int id = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
+
+                var shipment = dataContext.Shipments
                 .Where(a => a.UserId == id);
-                return View(address.ToList());
+                return View(shipment.ToList());
             }
             catch (Exception e)
             {
@@ -37,24 +44,36 @@ namespace IberaDelivery.Controllers
 
         }
 
-
-
-        // GET: Adress/Create
         public IActionResult Create()
         {
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+            {
+                return RedirectToAction("Index", "Home");
+            }
             return View();
         }
 
-        // POST: Adress/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Adress adress)
+        public IActionResult Create(ShipmentForm shipmentInfo)
         {
             try
             {
+                if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                User user = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user"));
+
                 if (ModelState.IsValid)
                 {
-                    dataContext.Add(adress);
+                    Shipment shipment = new Shipment();
+                    shipment.Address = shipmentInfo.Address;
+                    shipment.Country = shipmentInfo.Country;
+                    shipment.City = shipmentInfo.City;
+                    shipment.PostalCode = shipmentInfo.PostalCode;
+                    shipment.UserId = user.Id;
+                    dataContext.Shipments.Add(shipment);
                     dataContext.SaveChanges();
                     return RedirectToAction(nameof(Index));
                 }
@@ -72,26 +91,29 @@ namespace IberaDelivery.Controllers
 
         }
 
-        // GET: Adress/Delete/5
         public IActionResult Delete(int? id)
         {
             //if (HttpContext.Session.GetString("userName") != null)
             //{
             try
             {
+                if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
                 if (id == null)
                 {
                     return NotFound();
                 }
 
-                var adress = dataContext.Adresses
+                var shipmentInfo = dataContext.Shipments
                     .FirstOrDefault(a => a.Id == id);
-                if (adress == null)
+                if (shipmentInfo == null)
                 {
                     return NotFound();
                 }
 
-                return View(adress);
+                return View(shipmentInfo);
             }
             catch (Exception e)
             {
@@ -107,18 +129,20 @@ namespace IberaDelivery.Controllers
         }
         */
 
-
-        // POST: Adress/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             try
             {
-                var adress = dataContext.Adresses.Find(id);
-                if (adress != null)
+                if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
                 {
-                    dataContext.Adresses.Remove(adress);
+                    return RedirectToAction("Index", "Home");
+                }
+                var shipmentInfo = dataContext.Shipments.Find(id);
+                if (shipmentInfo != null)
+                {
+                    dataContext.Shipments.Remove(shipmentInfo);
                     dataContext.SaveChanges();
                 }
 
@@ -137,19 +161,30 @@ namespace IberaDelivery.Controllers
             //{
             try
             {
+                if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
                 if (id == null)
                 {
                     return NotFound();
                 }
-                var adress = dataContext.Adresses
+                var shipmentInfo = dataContext.Shipments
                     .FirstOrDefault(a => a.Id == id);
                 //.Find(id);
-                if (adress == null)
+                if (shipmentInfo == null)
                 {
                     return NotFound();
                 }
+
+                ShipmentEditForm form = new ShipmentEditForm();
+                form.Address = shipmentInfo.Address;
+                form.City = shipmentInfo.City;
+                form.Country = shipmentInfo.Country;
+                form.PostalCode = shipmentInfo.PostalCode;
+                form.Id = shipmentInfo.Id;
                 ViewBag.Id = id;
-                return View(adress);
+                return View(form);
             }
             catch (Exception e)
             {
@@ -160,17 +195,24 @@ namespace IberaDelivery.Controllers
             //}
         }
 
-        // POST: Adress/Edit/6
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(Adress adress)
+        public IActionResult Edit(ShipmentEditForm shipmentInfo)
         {
             try
             {
+                if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
                 if (ModelState.IsValid)
                 {
-                    var original = dataContext.Adresses.Where(s => s.Id == adress.Id).FirstOrDefault();
-                    dataContext.Entry(original).CurrentValues.SetValues(adress);
+                    Shipment regShipmentInfo = dataContext.Shipments.Where(s => s.Id == shipmentInfo.Id).FirstOrDefault();
+                    regShipmentInfo.Address = shipmentInfo.Address;
+                    regShipmentInfo.City = shipmentInfo.City;
+                    regShipmentInfo.Country = shipmentInfo.Country;
+                    regShipmentInfo.PostalCode = shipmentInfo.PostalCode;
+                    dataContext.Shipments.Update(regShipmentInfo);
                     dataContext.SaveChanges();
                     return RedirectToAction(nameof(Index));
                 }
@@ -188,29 +230,5 @@ namespace IberaDelivery.Controllers
 
         }
 
-
-        public IActionResult Details(int? id)
-        {
-            try
-            {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-                var adress = dataContext.Adresses
-                    .FirstOrDefault(a => a.Id == id);
-                if (adress == null)
-                {
-                    return NotFound();
-                }
-                return View(adress);
-            }
-            catch (Exception e)
-            {
-
-                return RedirectToAction("Error500", "Home");
-            }
-
-        }
     }
 }

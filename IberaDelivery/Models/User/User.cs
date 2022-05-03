@@ -10,10 +10,10 @@ namespace IberaDelivery.Models
     {
         public User()
         {
-            Adresses = new HashSet<Adress>();
             Comments = new HashSet<Comment>();
             Orders = new HashSet<Order>();
             Products = new HashSet<Product>();
+            Shipments = new HashSet<Shipment>();
         }
 
         public int Id { get; set; }
@@ -25,10 +25,10 @@ namespace IberaDelivery.Models
         public bool Activate { get; set; }
         public string? Token { get; set; }
 
-        public virtual ICollection<Adress> Adresses { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<Shipment> Shipments { get; set; }
 
         [Display(Name = "Full Name")]
         public string FullName

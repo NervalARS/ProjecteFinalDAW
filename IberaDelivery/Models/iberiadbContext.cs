@@ -16,13 +16,13 @@ namespace IberaDelivery.Models
         {
         }
 
-        public virtual DbSet<Adress> Adresses { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Comment> Comments { get; set; } = null!;
         public virtual DbSet<Image> Images { get; set; } = null!;
         public virtual DbSet<LnOrder> LnOrders { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
+        public virtual DbSet<Shipment> Shipments { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -35,50 +35,6 @@ namespace IberaDelivery.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Adress>(entity =>
-            {
-                entity.ToTable("adress");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.City)
-                    .HasMaxLength(255)
-                    .IsUnicode(false)
-                    .HasColumnName("city");
-
-                entity.Property(e => e.Country)
-                    .HasMaxLength(255)
-                    .IsUnicode(false)
-                    .HasColumnName("country");
-
-                entity.Property(e => e.Cvv).HasColumnName("cvv");
-
-                entity.Property(e => e.ExpiryDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("expiry_date");
-
-                entity.Property(e => e.FirstName)
-                    .HasMaxLength(255)
-                    .IsUnicode(false)
-                    .HasColumnName("first_name");
-
-                entity.Property(e => e.LastName)
-                    .HasMaxLength(255)
-                    .IsUnicode(false)
-                    .HasColumnName("last_name");
-
-                entity.Property(e => e.PostalCode).HasColumnName("postal_code");
-
-                entity.Property(e => e.TargetNumber).HasColumnName("target_number");
-
-                entity.Property(e => e.UserId).HasColumnName("user_id");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.Adresses)
-                    .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("adress_FK");
-            });
-
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.ToTable("category");
@@ -229,6 +185,40 @@ namespace IberaDelivery.Models
                     .WithMany(p => p.Products)
                     .HasForeignKey(d => d.ProviderId)
                     .HasConstraintName("product_user_FK");
+            });
+
+            modelBuilder.Entity<Shipment>(entity =>
+            {
+                entity.ToTable("shipment");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Address)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("address");
+
+                entity.Property(e => e.City)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("city");
+
+                entity.Property(e => e.Country)
+                    .HasMaxLength(255)
+                    .IsUnicode(false)
+                    .HasColumnName("country");
+
+                entity.Property(e => e.PostalCode)
+                    .HasMaxLength(5)
+                    .IsUnicode(false)
+                    .HasColumnName("postal_code");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Shipments)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("adress_FK");
             });
 
             modelBuilder.Entity<User>(entity =>

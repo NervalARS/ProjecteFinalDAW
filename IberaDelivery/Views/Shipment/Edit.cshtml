@@ -1,0 +1,44 @@
+@model IberaDelivery.Models.ShipmentEditForm
+@inject IHttpContextAccessor HttpContextAccessor
+@using System.Text.Json
+@{
+    ViewData["Title"] = "Edit";
+
+}
+
+<h1>Edit</h1>
+
+<h4>Shipment Information</h4>
+<hr />
+<div class="row">
+    @using (Html.BeginForm("Edit", "Shipment"))
+    {
+        <div style="color:red;">@Html.ValidationSummary()</div>
+        <div class="col-lg-12">@ViewBag.Message</div>
+        <div class="col-md-6">
+            <div class="col-lg-10">@Html.TextBoxFor(a => a.Id, new { @class = "form-control", type = "Hidden" })</div>
+            <div class="row">
+                <div class="col-lg-2">@Html.LabelFor(a => a.Address)</div>
+                <div class="col-lg-10">@Html.TextBoxFor(a => a.Address, new { @class = "form-control" })</div>
+            </div><br />
+            <div class="row">
+                <div class="col-lg-2">@Html.LabelFor(a => a.Country)</div>
+                <div class="col-lg-10">@Html.TextBoxFor(a => a.Country, new { @class = "form-control" })</div>
+            </div><br />
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-lg-2">@Html.LabelFor(a => a.City)</div>
+                <div class="col-lg-10">@Html.TextBoxFor(a => a.City, new { @class = "form-control" })</div>
+            </div><br />
+            <div class="row">
+                <div class="col-lg-2">Postal Code </div>
+                <div class="col-lg-10">@Html.TextBoxFor(a => a.PostalCode, new { @class = "form-control" })</div>
+            </div><br />
+            <input type="submit" value="Edit" class="btn btn-primary" />
+        </div>
+    }
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
