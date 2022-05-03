@@ -158,6 +158,7 @@ namespace IberaDelivery.Controllers
 
                 Product product = new Product
                 {
+                    Name = model.Name,
                     Description = model.Description,
                     CategoryId = model.CategoryId,
                     ProviderId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id,
@@ -165,6 +166,7 @@ namespace IberaDelivery.Controllers
                     Price = model.Price,
                     Iva = model.Iva,
                 };
+                dataContext.Products.Add(product);
                 dataContext.SaveChanges();
 
                 if (model.Image != null)
