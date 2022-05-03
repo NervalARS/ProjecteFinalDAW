@@ -10,17 +10,62 @@
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            @{
-                int i = 0;
-            }
-            @foreach (var item in Model.Images)
-            {
-                <div class="carousel-item @(i == 0 ? "active" : "") ">
-                    <img src="data:image;base64,@System.Convert.ToBase64String(item.Image1)" class="img-thumbnail"
-                    style="width: 500px; height: 500px;" />
-                </div>
-                { i++; }
-            }
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @{
+                    int i = 0;
+                }
+                @foreach (var item in Model.Images)
+                {
+
+                    <div class="carousel-item @(i == 0 ? "active" : "")">
+                        <img src="data:image;base64,@System.Convert.ToBase64String(item.Image1)" class="img-thumbnail" />
+                    </div>
+                    { i++; }
+
+
+
+                }
+
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        <table>
+            <tbody>
+                @foreach (var item2 in Model.Images)
+                {
+
+                    <th>
+
+                        <img src="data:image;base64,@System.Convert.ToBase64String(item2.Image1)" class="img-thumbnail" style="max-height: 17vh;"/>
+                        
+
+                    </th>
+                }
+
+            </tbody>
+        </table>
+           <div class="display-label">Valorar</div>
+            <div class="display-field">
+                <input type="radio" name="score" value="1"/>1
+                <input type="radio" name="score" value="2"/>2
+                <input type="radio" name="score" value="3"/>3
+                <input type="radio" name="score" value="4"/>4
+                <input type="radio" name="score" value="5"/>5
+                <br />
+                <input type="submit" value="Votar"/>
+            </div>
+
+            Valoració:  @ViewBag.Valoration.Score;
         </div>
         <div class="col-sm">
             <h2 class="mb-4 display-4">

@@ -24,6 +24,7 @@ namespace IberaDelivery.Models
         public virtual DbSet<Product> Products { get; set; } = null!;
         public virtual DbSet<Shipment> Shipments { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
+        public virtual DbSet<Valoration> Valorations { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -138,7 +139,15 @@ namespace IberaDelivery.Models
                     .HasColumnType("decimal(38, 0)")
                     .HasColumnName("import");
 
+                entity.Property(e => e.ShipmentId).HasColumnName("shipment_id");
+
                 entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Shipment)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.ShipmentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("order_FK");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Orders)
@@ -255,6 +264,30 @@ namespace IberaDelivery.Models
                     .HasMaxLength(255)
                     .IsUnicode(false)
                     .HasColumnName("token");
+            });
+
+            modelBuilder.Entity<Valoration>(entity =>
+            {
+                entity.ToTable("valoration");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.ProductId).HasColumnName("product_id");
+
+                entity.Property(e => e.Score).HasColumnName("score");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Valorations)
+                    .HasForeignKey(d => d.ProductId)
+                    .HasConstraintName("valoration_product_FK");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Valorations)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("valoration_user_FK");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -216,6 +216,22 @@ namespace IberaDelivery.Controllers
                 return NotFound();
             }
             var product = buscarProducte(id);
+            int score = 0;
+            int totalValora = product.Valorations.Count;
+            foreach (var item in product.Valorations)
+            {
+                score += item.Score;
+            }
+            double average = Convert.ToDouble(score) / Convert.ToDouble(totalValora);
+
+            Valoration valoration = new Valoration
+            {
+                Score = score,
+                ProductId = product.Id,
+                UserId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id
+            };
+
+            ViewBag.Valoration = valoration;
 
             if (product != null)
             {
@@ -560,6 +576,7 @@ namespace IberaDelivery.Controllers
                 .Include(p => p.Category)
                 .Include(p => p.Provider)
                 .Include(p => p.Comments)
+                .Include(p => p.Valorations)
                 .FirstOrDefault(a => a.Id == id);
             foreach (var image in product.Images)
             {
