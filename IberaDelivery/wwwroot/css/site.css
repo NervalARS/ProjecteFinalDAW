@@ -30,3 +30,7 @@ body {
 #contSearch{
   padding-left: 12%;
 }
+
+.blur{
+  backdrop-filter: blur(5px);
+}

@@ -18,11 +18,10 @@
                 <div class="col-lg-10">@Html.TextBoxFor(a => a.Email, new { @class = "form-control"})<div style="color:red;">@ViewBag.Message</div></div>
             </div><br />
             <div class="row">
-                <div class="col-lg-12"><h8><b>Confirm your new email with your password</b></h8></div>
-                <div class="col-lg-2">@Html.LabelFor(a => a.Password)</div>
+                <div class="col-lg-2"><h8><b>Confirm with password</b></h8></div>
                 <div class="col-lg-10">@Html.TextBoxFor(a => a.Password, new { @class = "form-control", type = "Password" })</div>
             </div><br />
-            <input type="submit" value="Register" class="btn btn-primary" />
+            <input type="submit" value="Register" class="btn btn-info" />
         </div>
     }
 

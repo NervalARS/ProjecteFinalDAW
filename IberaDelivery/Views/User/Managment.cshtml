@@ -5,7 +5,7 @@
 }
 
 <div class="container w-100 justify-content-center">
-    <div class="row gutters">
+    <div class="row justify-content-center w-80">
         <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
             <div class="card h-100">
                 <div class="card-body">
@@ -35,7 +35,7 @@
                     <div class="row gutters">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="text-right">
-                                <button type="submit" value="Managment" name="submit" class="btn btn-primary">Update</button>
+                                <button type="submit" value="Managment" name="submit" class="btn btn-info">Update</button>
                             </div>
                         </div>
                     </div>
@@ -44,18 +44,18 @@
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <h6 class="mb-3"><b>Account Settings</b></h6>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                            <div class="card">
-                                @Html.DisplayFor(model => model.Email)
-                            </div>
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="form-group">
-                                <a asp-action="Index" asp-controller="Shipment" asp-route-id="@Model.Id">Address</a>
-                            </div>
-                            <div class="form-group">
+                                <div class="card pl-1 py-2">
+                                    @Html.DisplayFor(model => model.Email)
+                                </div>
                                 <a asp-action="NewEmail" asp-route-id="@Model.Id">Change Email Address</a>
                             </div>
                             <div class="form-group">
-                                <a asp-action="NewPassword" asp-route-id="@Model.Id">New Password</a>
+                                <a class="btn btn-info" asp-action="NewPassword" asp-route-id="@Model.Id">New Password</a>
+                            </div>
+                            <div class="form-group">
+                                <a class="btn btn-info" asp-action="Index" asp-controller="Shipment" asp-route-id="@Model.Id">Manage Shipment Information</a>
                             </div>
                         </div>
                     </div>

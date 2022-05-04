@@ -21,13 +21,13 @@
                 <div class="col-lg-10">@Html.TextBoxFor(a => a.Password, new { @class = "form-control", type="Password" })</div>
             </div><br />
             <div class="row">
-                <diV class="col-lg-10"><a asp-controller="User" asp-action="ResetPasswordEmail">Lost your password? Click here to reset it.</a></diV>
+                <diV class="col-lg-10">Lost your password?<a asp-controller="User" asp-action="ResetPasswordEmail"> Click here to reset it.</a></diV>
             </div><br />
             <div class="row">
                 <!--Show details are saved successfully message-->
                 <div class="col-lg-10"><a asp-controller="User" asp-action="ResendEmail">@ViewBag.Message</a></div>
             </div><br />
-            <input type="submit" value="Login" class="btn btn-primary" />
+            <input type="submit" value="Login" class="btn btn-info" />
         </div>
     }
 
