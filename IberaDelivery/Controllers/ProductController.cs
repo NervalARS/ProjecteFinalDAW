@@ -216,22 +216,19 @@ namespace IberaDelivery.Controllers
                 return NotFound();
             }
             var product = buscarProducte(id);
-            int score = 0;
-            int totalValora = product.Valorations.Count;
-            foreach (var item in product.Valorations)
+            if (product.Valorations.Count != 0)
             {
-                score += item.Score;
+                int score = 0;
+                int totalValora = product.Valorations.Count;
+                foreach (var item in product.Valorations)
+                {
+                    score += item.Score;
+                }
+                double average = Convert.ToDouble(score) / Convert.ToDouble(totalValora);
+
+
+                ViewBag.Average = average;
             }
-            double average = Convert.ToDouble(score) / Convert.ToDouble(totalValora);
-
-            Valoration valoration = new Valoration
-            {
-                Score = score,
-                ProductId = product.Id,
-                UserId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id
-            };
-
-            ViewBag.Valoration = valoration;
 
             if (product != null)
             {
@@ -242,6 +239,32 @@ namespace IberaDelivery.Controllers
                 return NotFound();
             }
         }
+        public ActionResult Votar(int id, int score)
+        {
+            Valoration valoration = new Valoration
+            {
+                Score = score,
+                ProductId = id,
+                UserId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id
+            };
+            dataContext.Add(valoration);
+            dataContext.SaveChanges();
+
+            var product = buscarProducte(id);
+
+            int numPunt = product.Valorations.Count;
+            int totScore = 0;
+            foreach (var item in product.Valorations)
+            {
+                totScore += item.Score;
+            }
+            double average = Convert.ToDouble(totScore) / Convert.ToDouble(numPunt);
+
+            ViewBag.Average = average;
+
+            return View("Detail", product);
+        }
+        
         // GET: Product/Delete/5
         public IActionResult Delete(int? id)
         {
