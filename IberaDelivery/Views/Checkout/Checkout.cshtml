@@ -1,0 +1,30 @@
+@model IberaDelivery.Models.CheckoutForm
+@inject IHttpContextAccessor HttpContextAccessor;
+@{
+    ViewData["Title"] = "Checkout";
+    decimal preutotal = 0;
+    var addresses = ViewBag.ShipmentId;
+    var productList = ViewBag.Products;
+    var User = ViewBag.User;
+}
+@foreach (var item in productList)
+{
+    preutotal = preutotal + item.Price;
+}
+<div class="container">
+    <div class="row">
+        <div class="col-12 card shadow-0 border rounded-3">
+            <form asp-action="Checkout" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label asp-for="ShipmentId" class="control-label"></label>
+                    <select asp-for="ShipmentId" class="form-control" asp-items="addresses">
+                        <option value="" disabled selected hidden>-- Select Shipment --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

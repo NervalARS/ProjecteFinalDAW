@@ -138,7 +138,15 @@ namespace IberaDelivery.Models
                     .HasColumnType("decimal(38, 0)")
                     .HasColumnName("import");
 
+                entity.Property(e => e.ShipmentId).HasColumnName("shipment_id");
+
                 entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.Shipment)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.ShipmentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("order_FK");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Orders)
@@ -256,6 +264,10 @@ namespace IberaDelivery.Models
                     .IsUnicode(false)
                     .HasColumnName("token");
             });
+
+            modelBuilder.HasSequence<int>("num_line_sequence")
+                .StartsAt(0)
+                .IsCyclic();
 
             OnModelCreatingPartial(modelBuilder);
         }

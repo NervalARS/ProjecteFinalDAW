@@ -1,17 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using IberaDelivery.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Hosting;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using System.Drawing;
-using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace IberaDelivery.Controllers
 {
@@ -30,37 +21,62 @@ namespace IberaDelivery.Controllers
             if (HttpContext.Session.GetString("Cart") != null)
             {
                 ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
+                ViewBag.Products = ShoppingCart;
             }
             return View("ShoppingCart", ShoppingCart);
         }
-        public async Task<IActionResult> Checkout()
+        private void PopulateShipmentsDropDownList(object? selectedShipment = null)
         {
-            List<Product> list;
-            list = new List<Product>();
-            if (HttpContext.Session.GetString("Cart") != null)
-            {
-                list = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
-            }
+            var UserId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
+            var shipments = dataContext.Shipments.Where(a => a.UserId == UserId);
+            ViewBag.ShipmentId = new SelectList(shipments.ToList(), "Id", "Address", selectedShipment);
+        }
+
+        private void PopulateProductsList(object? selectedShipment = null)
+        {
+            List<Product> ShoppingCart;
+            ShoppingCart = new List<Product>();
+            ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
+            ViewBag.Products = ShoppingCart;
+        }
+
+        public async Task<IActionResult> CheckoutDetails()
+        {
+            PopulateShipmentsDropDownList();
+            PopulateProductsList();
+            ViewBag.User = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user"));
+            return View("Checkout");
+        }
+        public async Task<IActionResult> Checkout(CheckoutForm model)
+        {
+            // Generamos variables
             var orders = dataContext.Orders;
             DateTime today = DateTime.Today;
             var order = new Order();
+            List<Product> ShoppingCart;
+            //ShoppingCart = new List<Product>();
+            ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
+            var User = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user"));
+            // Setteamos la información de Order
             order.Date = today;
             order.Import = 0;
-            order.UserId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
+            order.UserId = User.Id;
+            order.ShipmentId = model.ShipmentId;
+            // Añadimos la linea de Order
             dataContext.Add(order);
             dataContext.SaveChanges();
-            for (var i = 0; i < list.Count; i++)
+            foreach (var item in ShoppingCart)
             {
                 var lnOrder = new LnOrder();
                 lnOrder.NumOrder = order.Id;
-                lnOrder.RefProduct = list[i].Id;
-                lnOrder.Quantity = list[i].Stock;
-                lnOrder.TotalImport = list[i].Price + list[i].Iva;
+                lnOrder.RefProduct =item.Id;
+                lnOrder.Quantity = item.Stock;
+                lnOrder.TotalImport = item.Price + item.Iva;
                 var product = dataContext.Products
                 .Include(p => p.Images)
                 .Include(p => p.Category)
                 .Include(p => p.Provider)
-                .FirstOrDefault(a => a.Id == list[i].Id);
+                .FirstOrDefault(a => a.Id == item.Id);
                 if (product.Stock > lnOrder.Quantity)
                 {
                     dataContext.Add(lnOrder);
@@ -70,13 +86,8 @@ namespace IberaDelivery.Controllers
                     dataContext.SaveChanges();
                 }
             }
-            var products = dataContext.Products
-            .Include(c => c.Category)
-            .Include(p => p.Provider)
-            .AsNoTracking();
             HttpContext.Session.Remove("Cart");
-
-            return RedirectToAction("Index", "Product", await products.ToListAsync());
+            return RedirectToAction("Index", "Home");
         }
         public async Task<IActionResult> AddToCart(int? id, String? src)
         {
