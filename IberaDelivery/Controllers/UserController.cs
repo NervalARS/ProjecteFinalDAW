@@ -31,7 +31,7 @@ namespace IberaDelivery.Controllers
             }
         }
         // Return Home page.
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1)
             {

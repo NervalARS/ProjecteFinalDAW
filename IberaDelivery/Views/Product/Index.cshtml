@@ -15,7 +15,7 @@
 <h2>Products</h2>
 <a asp-action="Create" class="btn-info"><button>Create new product</button></a>
 <br><br>
-<form asp-action="Index">
+<form asp-action="Index" class="py-2">
 
     <input type="text" class="form-control" name="Cadena">  @ViewBag.cadena
     @if (@ViewBag.cadena != null)
@@ -91,9 +91,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Iva)
             </th>
-            <th>Delete</th>
-            <th>Edit</th>
-            <th>Details</th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
