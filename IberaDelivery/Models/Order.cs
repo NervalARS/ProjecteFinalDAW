@@ -14,7 +14,9 @@ namespace IberaDelivery.Models
         public DateTime Date { get; set; }
         public decimal Import { get; set; }
         public int UserId { get; set; }
+        public int ShipmentId { get; set; }
 
+        public virtual Shipment Shipment { get; set; } = null!;
         public virtual User User { get; set; } = null!;
         public virtual ICollection<LnOrder> LnOrders { get; set; }
     }

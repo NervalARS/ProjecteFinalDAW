@@ -6,21 +6,111 @@
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewBag.Title = Model.Name;
+
+
 }
+
+
 <div class="container">
     <div class="row">
         <div class="col-sm">
-            @{
-                int i = 0;
-            }
-            @foreach (var item in Model.Images)
-            {
-                <div class="carousel-item @(i == 0 ? "active" : "") ">
-                    <img src="data:image;base64,@System.Convert.ToBase64String(item.Image1)" class="img-thumbnail"
-                    style="width: 500px; height: 500px;" />
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    @{
+                        int i = 0;
+                    }
+                    @foreach (var item in Model.Images)
+                    {
+
+                        <div class="carousel-item @(i == 0 ? "active" : "")">
+                            <img src="data:image;base64,@System.Convert.ToBase64String(item.Image1)"
+                            class="img-thumbnail" />
+                        </div>
+                        { i++; }
+
+
+
+                    }
+
                 </div>
-                { i++; }
-            }
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <table>
+                <tbody>
+                    @foreach (var item2 in Model.Images)
+                    {
+
+                        <th>
+
+                            <img src="data:image;base64,@System.Convert.ToBase64String(item2.Image1)" class="img-thumbnail"
+                            style="max-height: 17vh;" />
+
+
+                        </th>
+                    }
+
+                </tbody>
+            </table>
+
+
+
+            <div class="display-label">Valorar</div>
+            <div class="display-field">
+                <form asp-action="Votar">
+                    <input type="hidden" name="id" value="@Model.Id" />
+                    @if (ViewBag.Average > 0 && ViewBag.Average <= 1)
+                    {
+                        <input class="star" type="radio" name="score" value="1" checked />
+                    }
+                    else
+                    {
+                        <input class="star" type="radio" name="score" value="1" />
+                    }
+                    @if (ViewBag.Average >= 1 && ViewBag.Average <= 2)
+                    {
+                        <input class="star" type="radio" name="score" value="2" checked />
+                    }
+                    else
+                    {
+                        <input class="star" type="radio" name="score" value="2" />
+                    }
+                    @if (ViewBag.Average >= 2 && ViewBag.Average <= 3)
+                    {
+                        <input class="star" type="radio" name="score" value="3" checked />
+                    }
+                    else
+                    {
+                        <input class="star" type="radio" name="score" value="3" />
+                    }
+                    @if (ViewBag.Average >= 3 && ViewBag.Average <= 4)
+                    {
+                        <input class="star" type="radio" name="score" value="4" checked />
+                    }
+                    else
+                    {
+                        <input class="star" type="radio" name="score" value="4" />
+                    }
+                    @if (ViewBag.Average >= 4 && ViewBag.Average <= 5)
+                    {
+                        <input class="star" type="radio" name="score" value="5" checked />
+                    }
+                    else
+                    {
+                        <input class="star" type="radio" name="score" value="5" />
+                    }
+                    <br />
+                    <input type="submit" value="Votar" />
+                </form>
+            </div>
         </div>
         <div class="col-sm">
             <h2 class="mb-4 display-4">
@@ -79,7 +169,7 @@
         </div>
         @using (Html.BeginForm("Create", "Comment"))
         {
-        <div class="form-group">
+            <div class="form-group">
                 @Html.Label("Comment here bitch!")
                 @Html.Hidden("id", Model.Id)
                 @Html.TextBox("com",null, new{@class = "form-control"})
