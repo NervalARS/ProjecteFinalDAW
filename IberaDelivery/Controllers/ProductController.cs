@@ -47,13 +47,8 @@ namespace IberaDelivery.Controllers
                 var products = dataContext.Products
              .Include(c => c.Category)
              .Include(p => p.Provider).ToList();
-
-
-
                 if (Cadena != null || cat != 0)
                 {
-
-
                     if (Cadena == null)
                     {
                         products = dataContext.Products
@@ -95,10 +90,7 @@ namespace IberaDelivery.Controllers
                     case 4:
                         products = products.OrderByDescending(a => a.Price).ToList();
                         break;
-
                 }
-
-
                 ViewBag.missatge = criteri;
                 ViewBag.Cadena = Cadena;
 
@@ -146,7 +138,6 @@ namespace IberaDelivery.Controllers
                 {
                     return RedirectToAction("Index", "Home");
                 }
-
                 Product product = new Product
                 {
                     Description = model.Description,
@@ -166,7 +157,6 @@ namespace IberaDelivery.Controllers
                         {
                             using (var ms = new MemoryStream())
                             {
-
                                 file.CopyTo(ms);
                                 var fileBytes = ms.ToArray();
                                 Image image = new Image
@@ -176,8 +166,6 @@ namespace IberaDelivery.Controllers
                                 };
                                 dataContext.Add(image);
                                 dataContext.SaveChanges();
-                                //string s = Convert.ToBase64String(fileBytes);
-                                // act on the Base64 data
                             }
                         }
                     }
@@ -185,7 +173,6 @@ namespace IberaDelivery.Controllers
                 }
                 else
                 {
-                    //ViewBag.missatge = product.validarProduct().Missatge;
                     return View();
                 }
             }
@@ -194,26 +181,15 @@ namespace IberaDelivery.Controllers
 
                 return RedirectToAction("Error500", "Home");
             }
-
         }
 
         // GET: Product/Detail/5
         public IActionResult Detail(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
             var product = buscarProducte(id);
+            ViewBag.Users = dataContext.Users;
+            return View(product);
 
-            if (product != null)
-            {
-                return View(product);
-            }
-            else
-            {
-                return NotFound();
-            }
         }
         // GET: Product/Delete/5
         public IActionResult Delete(int? id)
@@ -270,7 +246,6 @@ namespace IberaDelivery.Controllers
             }
 
         }
-
         public IActionResult DeleteImage(int? id)
         {
             if (id == null)
@@ -433,52 +408,6 @@ namespace IberaDelivery.Controllers
             }
 
         }
-
-        public async Task<IActionResult> Checkout()
-        {
-            List<Product> list;
-            list = new List<Product>();
-            if (HttpContext.Session.GetString("Cart") != null)
-            {
-                list = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
-            }
-            var orders = dataContext.Orders;
-            DateTime today = DateTime.Today;
-            var order = new Order();
-            order.Date = today;
-            order.Import = 0;
-            order.UserId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
-            dataContext.Add(order);
-            dataContext.SaveChanges();
-            for (var i = 0; i < list.Count; i++)
-            {
-                var lnOrder = new LnOrder();
-                lnOrder.NumOrder = order.Id;
-                lnOrder.RefProduct = list[i].Id;
-                lnOrder.Quantity = list[i].Stock;
-                lnOrder.TotalImport = list[i].Price + list[i].Iva;
-                var product = dataContext.Products
-                .Include(p => p.Images)
-                .Include(p => p.Category)
-                .Include(p => p.Provider)
-                .FirstOrDefault(a => a.Id == list[i].Id);
-                if (product.Stock > lnOrder.Quantity)
-                {
-                    dataContext.Add(lnOrder);
-                    dataContext.SaveChanges();
-                    product.Stock = product.Stock - lnOrder.Quantity;
-                    dataContext.Update(product);
-                    dataContext.SaveChanges();
-                }
-            }
-            var products = dataContext.Products
-            .Include(c => c.Category)
-            .Include(p => p.Provider)
-            .AsNoTracking();
-            HttpContext.Session.Remove("Cart");
-            return View("Index", await products.ToListAsync());
-        }
-
         /*
             Shopping Cart Methods
             Si me da tiempo los quito, si no, no lo hare
@@ -503,11 +432,14 @@ namespace IberaDelivery.Controllers
                 if (list.FirstOrDefault(a => a.Id == id) != null)
                 {
                     var pr = list.FirstOrDefault(a => a.Id == id);
-                    pr.Stock = pr.Stock + 1;
-                    pr.Price = (pr.Price + product.Price);
-                    pr.Iva = (pr.Iva + product.Iva);
-                    list.Remove(list.FirstOrDefault(a => a.Id == id));
-                    list.Add(pr);
+                    if (product.Stock > pr.Stock)
+                    {
+                        pr.Stock = pr.Stock + 1;
+                        pr.Price = (pr.Price + product.Price);
+                        pr.Iva = (pr.Iva + product.Iva);
+                        list.Remove(list.FirstOrDefault(a => a.Id == id));
+                        list.Add(pr);
+                    }
                 }
                 else
                 {
@@ -519,26 +451,6 @@ namespace IberaDelivery.Controllers
             product.Stock = oldStock;
             return RedirectToAction("Detail", new { id });
         }
-
-        public async Task<IActionResult> ClearCart(int? id)
-        {
-
-            HttpContext.Session.Remove("Cart");
-            if (id != null)
-            {
-                var product = buscarProducte(id);
-                foreach (var image in product.Images)
-                {
-                    image.Product = null;
-                }
-                return View("Detail", product);
-            }
-            else
-            {
-                return View("Index");
-            }
-        }
-
         /*
             Functions that dont return views
         */

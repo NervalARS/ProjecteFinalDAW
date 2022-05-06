@@ -13,7 +13,6 @@ namespace IberaDelivery.Controllers
         {
             dataContext = context;
         }
-
         public async Task<IActionResult> Index()
         {
             List<Product> ShoppingCart;
@@ -49,45 +48,62 @@ namespace IberaDelivery.Controllers
         }
         public async Task<IActionResult> Checkout(CheckoutForm model)
         {
-            // Generamos variables
-            var orders = dataContext.Orders;
-            DateTime today = DateTime.Today;
-            var order = new Order();
-            List<Product> ShoppingCart;
-            //ShoppingCart = new List<Product>();
-            ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
-            var User = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user"));
-            // Setteamos la información de Order
-            order.Date = today;
-            order.Import = 0;
-            order.UserId = User.Id;
-            order.ShipmentId = model.ShipmentId;
-            // Añadimos la linea de Order
-            dataContext.Add(order);
-            dataContext.SaveChanges();
-            foreach (var item in ShoppingCart)
+            try
             {
-                var lnOrder = new LnOrder();
-                lnOrder.NumOrder = order.Id;
-                lnOrder.RefProduct =item.Id;
-                lnOrder.Quantity = item.Stock;
-                lnOrder.TotalImport = item.Price + item.Iva;
-                var product = dataContext.Products
-                .Include(p => p.Images)
-                .Include(p => p.Category)
-                .Include(p => p.Provider)
-                .FirstOrDefault(a => a.Id == item.Id);
-                if (product.Stock > lnOrder.Quantity)
+                // Generar variables para utilizar mas tarde
+                DateTime today = DateTime.Today;
+                List<Product> ShoppingCart;
+                ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
+                var orders = dataContext.Orders;
+                var User = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user"));
+                var order = new Order();
+                // Rellenamos los datos de Order
+                order.Date = today;
+                order.UserId = User.Id;
+                order.ShipmentId = model.ShipmentId;
+                // De momento le asigno un Import de 0, ya que necesito la Id que se le asignara al crearlo y el campo no admite valores nulos.
+                order.Import = 0;
+                dataContext.Add(order);
+                dataContext.SaveChanges();
+                // Por cada TIPO de producto del carrito.
+                foreach (var item in ShoppingCart)
                 {
-                    dataContext.Add(lnOrder);
-                    dataContext.SaveChanges();
-                    product.Stock = product.Stock - lnOrder.Quantity;
-                    dataContext.Update(product);
-                    dataContext.SaveChanges();
+                    // Generamos una lnOrder y la rellenamos.
+                    var lnOrder = new LnOrder();
+                    lnOrder.NumOrder = order.Id;
+                    lnOrder.RefProduct = item.Id;
+                    // La Quantity de lnOrder sera el stock del carrito.
+                    lnOrder.Quantity = item.Stock;
+                    // El precio total es el Price + Iva.
+                    lnOrder.TotalImport = item.Price + item.Iva;
+                    var product = dataContext.Products
+                    .FirstOrDefault(a => a.Id == item.Id);
+                    // Si el Stock de la BDD es superior a la cantidad que queremos comprar.
+                    if (product.Stock > lnOrder.Quantity)
+                    {
+                        // Añadimos la lnOrder a la base de datos y actualizamos el stock de producto restandole la cantidad.
+                        dataContext.Add(lnOrder);
+                        dataContext.SaveChanges();
+                        product.Stock = product.Stock - lnOrder.Quantity;
+                        dataContext.Update(product);
+                        dataContext.SaveChanges();
+                        // Actualizamos el importe del pedido
+                        order.Import = order.Import + lnOrder.TotalImport;
+                    }
+                    else
+                    {
+                        // ¯\_(ツ)_/¯
+                    }
                 }
+                dataContext.Update(order);
+                dataContext.SaveChanges();
+                HttpContext.Session.Remove("Cart");
+                return RedirectToAction("Index", "Home");
             }
-            HttpContext.Session.Remove("Cart");
-            return RedirectToAction("Index", "Home");
+            catch (Exception e)
+            {
+                return RedirectToAction("Error500", "Home");
+            }
         }
         public async Task<IActionResult> AddToCart(int? id, String? src)
         {
@@ -108,11 +124,14 @@ namespace IberaDelivery.Controllers
                 if (list.FirstOrDefault(a => a.Id == id) != null)
                 {
                     var pr = list.FirstOrDefault(a => a.Id == id);
-                    pr.Stock = pr.Stock + 1;
-                    pr.Price = (pr.Price + product.Price);
-                    pr.Iva = (pr.Iva + product.Iva);
-                    list.Remove(list.FirstOrDefault(a => a.Id == id));
-                    list.Add(pr);
+                    if (product.Stock > pr.Stock)
+                    {
+                        pr.Stock = pr.Stock + 1;
+                        pr.Price = (pr.Price + product.Price);
+                        pr.Iva = (pr.Iva + product.Iva);
+                        list.Remove(list.FirstOrDefault(a => a.Id == id));
+                        list.Add(pr);
+                    }
                 }
                 else
                 {
@@ -145,21 +164,16 @@ namespace IberaDelivery.Controllers
             var oldStock = product.Stock;
             if (product != null)
             {
-                if (list.FirstOrDefault(a => a.Id == id) != null)
+                var pr = list.FirstOrDefault(a => a.Id == id);
+                if (product.Stock > pr.Stock)
                 {
-                    var pr = list.FirstOrDefault(a => a.Id == id);
                     pr.Stock = pr.Stock + 1;
                     pr.Price = (pr.Price + product.Price);
                     pr.Iva = (pr.Iva + product.Iva);
                     list.Remove(list.FirstOrDefault(a => a.Id == id));
                     list.Add(pr);
+                    HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(list));
                 }
-                else
-                {
-                    product.Stock = 1;
-                    list.Add(product);
-                }
-                HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(list));
             }
             if (product != null)
             {
@@ -168,8 +182,6 @@ namespace IberaDelivery.Controllers
             return RedirectToAction("Index");
 
         }
-
-
         public async Task<IActionResult> RemoveOne(int? id)
         {
             List<Product> list;
@@ -210,11 +222,7 @@ namespace IberaDelivery.Controllers
                 product.Stock = oldStock;
             }
             return RedirectToAction("Index");
-
         }
-
-
-
         public async Task<IActionResult> ClearCart()
         {
             HttpContext.Session.Remove("Cart");
@@ -248,5 +256,4 @@ namespace IberaDelivery.Controllers
             return product;
         }
     }
-
 }
