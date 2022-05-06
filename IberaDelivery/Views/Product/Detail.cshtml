@@ -65,24 +65,24 @@
             <div class="display-field">
                 <form asp-action="Votar">
                     <input type="hidden" name="id" value="@Model.Id"/>
-                    @if(ViewBag.Average > 0 && ViewBag.Average < 1){
+                    @if(ViewBag.Average > 0 && ViewBag.Average <= 1){
                         <input class="star" type="radio" name="score" value="1" checked/>
                     }else{
                         <input class="star" type="radio" name="score" value="1"/>
                     }
-                    @if(ViewBag.Average > 1 && ViewBag.Average < 2){
+                    @if(ViewBag.Average >= 1 && ViewBag.Average <= 2){
                         <input class="star" type="radio" name="score" value="2" checked/>
                     }else{
                         <input class="star" type="radio" name="score" value="2"/>
-                    }@if(ViewBag.Average > 2 && ViewBag.Average < 3){
+                    }@if(ViewBag.Average >= 2 && ViewBag.Average <= 3){
                         <input class="star" type="radio" name="score" value="3" checked/>
                     }else{
                         <input class="star" type="radio" name="score" value="3"/>
-                    }@if(ViewBag.Average > 3 && ViewBag.Average < 4){
+                    }@if(ViewBag.Average >= 3 && ViewBag.Average <= 4){
                         <input class="star" type="radio" name="score" value="4" checked/>
                     }else{
                         <input class="star" type="radio" name="score" value="4"/>
-                    }@if(ViewBag.Average > 4 && ViewBag.Average < 5){
+                    }@if(ViewBag.Average >= 4 && ViewBag.Average <= 5){
                         <input class="star" type="radio" name="score" value="5" checked/>
                     }else{
                         <input class="star" type="radio" name="score" value="5"/>

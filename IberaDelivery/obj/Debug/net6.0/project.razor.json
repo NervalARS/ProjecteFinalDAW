@@ -16393,11 +16393,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/App_Code/MyHelpers.cshtml",
-      "TargetPath": "App_Code\\MyHelpers.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Shared/_SearchForm.cshtml",
       "TargetPath": "Views\\Shared\\_SearchForm.cshtml",
       "FileKind": "mvc"

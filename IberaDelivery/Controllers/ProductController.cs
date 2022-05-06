@@ -241,14 +241,30 @@ namespace IberaDelivery.Controllers
         }
         public ActionResult Votar(int id, int score)
         {
-            Valoration valoration = new Valoration
+            int user = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
+
+            var comproValoration = dataContext.Valorations
+                .Where(a => a.UserId == user).FirstOrDefault();
+
+            if (comproValoration != null)
             {
-                Score = score,
-                ProductId = id,
-                UserId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id
-            };
-            dataContext.Add(valoration);
-            dataContext.SaveChanges();
+                comproValoration.Score = score;
+                dataContext.Update(comproValoration);
+                dataContext.SaveChanges();
+            }
+            else
+            {
+                Valoration valoration = new Valoration
+                {
+                    Score = score,
+                    ProductId = id,
+                    UserId = user
+                };
+                dataContext.Add(valoration);
+                dataContext.SaveChanges();
+            }
+
+
 
             var product = buscarProducte(id);
 
@@ -264,7 +280,7 @@ namespace IberaDelivery.Controllers
 
             return View("Detail", product);
         }
-        
+
         // GET: Product/Delete/5
         public IActionResult Delete(int? id)
         {
