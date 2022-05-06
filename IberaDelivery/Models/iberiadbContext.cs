@@ -266,7 +266,6 @@ namespace IberaDelivery.Models
                     .HasColumnName("token");
             });
 
-<<<<<<< HEAD
             modelBuilder.Entity<Valoration>(entity =>
             {
                 entity.ToTable("valoration");
@@ -290,11 +289,6 @@ namespace IberaDelivery.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("valoration_user_FK");
             });
-=======
-            modelBuilder.HasSequence<int>("num_line_sequence")
-                .StartsAt(0)
-                .IsCyclic();
->>>>>>> origin/daniel4
 
             OnModelCreatingPartial(modelBuilder);
         }

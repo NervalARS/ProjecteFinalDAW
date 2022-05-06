@@ -1,7 +1,13 @@
+using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using IberaDelivery.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 namespace IberaDelivery.Controllers
 {
     public class CategoryController : Controller
@@ -26,10 +32,12 @@ namespace IberaDelivery.Controllers
         [HttpPost]
         public IActionResult Index(String Cadena)
         {
+
             var categories = dataContext.Categories
             .Where(a => a.Name.Contains(Cadena));
-            ViewBag.missatge = "Filtered by: " + Cadena;
+            ViewBag.missatge = "Filtrat per: " + Cadena;
             return View(categories.ToList());
+
         }
 
         private void PopulateProductesDropDownList(object? selectedProduct = null)
@@ -50,6 +58,7 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Name")] Category category)
         {
+
             if (ModelState.IsValid)
             {
                 dataContext.Add(category);
@@ -58,6 +67,7 @@ namespace IberaDelivery.Controllers
             }
             else
             {
+                //ViewBag.missatge = autor.validarAutor().Missatge;
                 return View();
             }
         }
@@ -65,10 +75,30 @@ namespace IberaDelivery.Controllers
         // GET: Category/Delete/5
         public IActionResult Delete(int? id)
         {
+            //if (HttpContext.Session.GetString("userName") != null)
+            //{
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             var category = dataContext.Categories
                 .FirstOrDefault(a => a.Id == id);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
             return View(category);
         }
+        /*
+        else
+        {
+            return Redirect("/");
+        }
+        */
+
+
         // POST: Category/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -85,10 +115,22 @@ namespace IberaDelivery.Controllers
         }
         public IActionResult Edit(int? id)
         {
+            //if (HttpContext.Session.GetString("userName") != null)
+            //{
+            if (id == null)
+            {
+                return NotFound();
+            }
             var category = dataContext.Categories
                 .FirstOrDefault(a => a.Id == id);
+            //.Find(id);
+            if (category == null)
+            {
+                return NotFound();
+            }
             ViewBag.Id = id;
             return View(category);
+            //}
         }
 
         // POST: Category/Edit/6
@@ -105,6 +147,7 @@ namespace IberaDelivery.Controllers
             }
             else
             {
+                //ViewBag.missatge = category.validarCategory().msg;
                 return View();
             }
         }
@@ -112,9 +155,17 @@ namespace IberaDelivery.Controllers
 
         public IActionResult Details(int? id)
         {
-            var categoria = dataContext.Categories
-                .FirstOrDefault(a => a.Id == id);
-            return View(categoria);
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                var categoria = dataContext.Categories
+                    .FirstOrDefault(a => a.Id == id);
+                if (categoria == null)
+                {
+                    return NotFound();
+                }
+                return View(categoria);
         }
     }
 }

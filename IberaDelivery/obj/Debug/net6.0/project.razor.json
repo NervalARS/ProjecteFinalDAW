@@ -16478,11 +16478,6 @@
       "FileKind": "mvc"
     },
     {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Checkout/Checkout.cshtml",
-      "TargetPath": "Views\\Checkout\\Checkout.cshtml",
-      "FileKind": "mvc"
-    },
-    {
       "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/ResetPassword.cshtml",
       "TargetPath": "Views\\User\\ResetPassword.cshtml",
       "FileKind": "mvc"
