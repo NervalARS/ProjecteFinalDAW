@@ -226,6 +226,48 @@ namespace IberaDelivery.Controllers
                 return NotFound();
             }
         }
+
+        //Acció de Votar cada producte, si l'usuari ja ha votat s'actualitza el seu vot.
+        public ActionResult Votar(int id, int score)
+        {
+            int user = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
+
+            var comproValoration = dataContext.Valorations
+                .Where(a => a.UserId == user).FirstOrDefault();
+
+            if (comproValoration != null)
+            {
+                comproValoration.Score = score;
+                dataContext.Update(comproValoration);
+                dataContext.SaveChanges();
+            }
+            else
+            {
+                Valoration valoration = new Valoration
+                {
+                    Score = score,
+                    ProductId = id,
+                    UserId = user
+                };
+                dataContext.Add(valoration);
+                dataContext.SaveChanges();
+            }
+
+            var product = buscarProducte(id);
+
+            int numPunt = product.Valorations.Count;
+            int totScore = 0;
+            foreach (var item in product.Valorations)
+            {
+                totScore += item.Score;
+            }
+            double average = Convert.ToDouble(totScore) / Convert.ToDouble(numPunt);
+
+            ViewBag.Average = average;
+
+            return View("Detail", product);
+        }
+        
         // GET: Product/Delete/5
         public IActionResult Delete(int? id)
         {
