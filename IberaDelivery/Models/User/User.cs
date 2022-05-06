@@ -14,6 +14,7 @@ namespace IberaDelivery.Models
             Orders = new HashSet<Order>();
             Products = new HashSet<Product>();
             Shipments = new HashSet<Shipment>();
+            Valorations = new HashSet<Valoration>();
         }
 
         public int Id { get; set; }
@@ -29,6 +30,7 @@ namespace IberaDelivery.Models
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Shipment> Shipments { get; set; }
+        public virtual ICollection<Valoration> Valorations { get; set; }
 
         [Display(Name = "Full Name")]
         public string FullName

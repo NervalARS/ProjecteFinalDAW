@@ -5,6 +5,11 @@ namespace IberaDelivery.Models
 {
     public partial class Shipment
     {
+        public Shipment()
+        {
+            Orders = new HashSet<Order>();
+        }
+
         public int Id { get; set; }
         public string Address { get; set; } = null!;
         public string Country { get; set; } = null!;
@@ -13,5 +18,6 @@ namespace IberaDelivery.Models
         public int UserId { get; set; }
 
         public virtual User User { get; set; } = null!;
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
