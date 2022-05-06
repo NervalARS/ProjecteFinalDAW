@@ -1,10 +1,6 @@
 {
   "Version": 1,
-<<<<<<< HEAD
   "Hash": "Sc9HqJeHvmQn7WUnbWu1qe4USb+2TXWSNKH//C74Hg0=",
-=======
-  "Hash": "GgBGXP4g9F0L2fwhZzCU81HRjD/+xdrdIi/LrxSY6bo=",
->>>>>>> origin/pol4
   "Source": "IberaDelivery",
   "BasePath": "_content/IberaDelivery",
   "Mode": "Default",
@@ -1075,28 +1071,7 @@
       "OriginalItemSpec": "/var/www/html/ProjecteFinalDAW/IberaDelivery/obj/Debug/net6.0/scopedcss/projectbundle/IberaDelivery.bundle.scp.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/Content/Images/comida.jpg",
-=======
-      "Identity": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/Content/delete.gif",
-      "SourceId": "IberaDelivery",
-      "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/",
-      "BasePath": "_content/IberaDelivery",
-      "RelativePath": "Content/delete.gif",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/Content/delete.gif"
-    },
-    {
-      "Identity": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/Content/Images/comida.jpg",
->>>>>>> origin/pol4
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
       "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
@@ -1164,45 +1139,7 @@
       "OriginalItemSpec": "wwwroot/Content/Images/logo.png"
     },
     {
-<<<<<<< HEAD
       "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/css/site.css",
-=======
-      "Identity": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/Content/jquery.rating.css",
-      "SourceId": "IberaDelivery",
-      "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/",
-      "BasePath": "_content/IberaDelivery",
-      "RelativePath": "Content/jquery.rating.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/Content/jquery.rating.css"
-    },
-    {
-      "Identity": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/Content/star.gif",
-      "SourceId": "IberaDelivery",
-      "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/",
-      "BasePath": "_content/IberaDelivery",
-      "RelativePath": "Content/star.gif",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/Content/star.gif"
-    },
-    {
-      "Identity": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/css/site.css",
->>>>>>> origin/pol4
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
       "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",
@@ -1236,28 +1173,7 @@
       "OriginalItemSpec": "wwwroot/favicon.ico"
     },
     {
-<<<<<<< HEAD
       "Identity": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/js/site.js",
-=======
-      "Identity": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/js/jquery.rating.pack.js",
-      "SourceId": "IberaDelivery",
-      "SourceType": "Discovered",
-      "ContentRoot": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/",
-      "BasePath": "_content/IberaDelivery",
-      "RelativePath": "js/jquery.rating.pack.js",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/js/jquery.rating.pack.js"
-    },
-    {
-      "Identity": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/wwwroot/js/site.js",
->>>>>>> origin/pol4
       "SourceId": "IberaDelivery",
       "SourceType": "Discovered",
       "ContentRoot": "/var/www/html/ProjecteFinalDAW/IberaDelivery/wwwroot/",

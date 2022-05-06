@@ -48,7 +48,6 @@ namespace IberaDelivery.Controllers
 
 
         }
-        // POST: Funció per a buscar i ordenar productes
         [HttpPost]
         public IActionResult Index(String Cadena, int cat, int criteri)
         {
@@ -123,13 +122,11 @@ namespace IberaDelivery.Controllers
             }
 
         }
-        //Crear Select list de les Categories
         private void PopulateCategoriesDropDownList(object? selectedCategory = null)
         {
             var categories = dataContext.Categories;
             ViewBag.CategoryId = new SelectList(categories.ToList(), "Id", "Name", selectedCategory);
         }
-        //Crear Select list dels Usuaris
         private void PopulateProvidersDropDownList(object? selectedProvider = null)
         {
             var providers = dataContext.Users
@@ -190,6 +187,8 @@ namespace IberaDelivery.Controllers
                                 };
                                 dataContext.Add(image);
                                 dataContext.SaveChanges();
+                                //string s = Convert.ToBase64String(fileBytes);
+                                // act on the Base64 data
                             }
                         }
                     }
@@ -197,6 +196,7 @@ namespace IberaDelivery.Controllers
                 }
                 else
                 {
+                    //ViewBag.missatge = product.validarProduct().Missatge;
                     return View();
                 }
             }
@@ -208,8 +208,7 @@ namespace IberaDelivery.Controllers
 
         }
 
-        // GET: Product/Detail/id
-        //Obte el detall del producte
+        // GET: Product/Detail/5
         public IActionResult Detail(int? id)
         {
             if (id == null)
@@ -217,19 +216,6 @@ namespace IberaDelivery.Controllers
                 return NotFound();
             }
             var product = buscarProducte(id);
-            if (product.Valorations.Count != 0)
-            {
-                int score = 0;
-                int totalValora = product.Valorations.Count;
-                foreach (var item in product.Valorations)
-                {
-                    score += item.Score;
-                }
-                double average = Convert.ToDouble(score) / Convert.ToDouble(totalValora);
-
-
-                ViewBag.Average = average;
-            }
 
             if (product != null)
             {
@@ -240,48 +226,7 @@ namespace IberaDelivery.Controllers
                 return NotFound();
             }
         }
-        //Acció de Votar cada producte, si l'usuari ja ha votat s'actualitza el seu vot.
-        public ActionResult Votar(int id, int score)
-        {
-            int user = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
-
-            var comproValoration = dataContext.Valorations
-                .Where(a => a.UserId == user).FirstOrDefault();
-
-            if (comproValoration != null)
-            {
-                comproValoration.Score = score;
-                dataContext.Update(comproValoration);
-                dataContext.SaveChanges();
-            }
-            else
-            {
-                Valoration valoration = new Valoration
-                {
-                    Score = score,
-                    ProductId = id,
-                    UserId = user
-                };
-                dataContext.Add(valoration);
-                dataContext.SaveChanges();
-            }
-
-            var product = buscarProducte(id);
-
-            int numPunt = product.Valorations.Count;
-            int totScore = 0;
-            foreach (var item in product.Valorations)
-            {
-                totScore += item.Score;
-            }
-            double average = Convert.ToDouble(totScore) / Convert.ToDouble(numPunt);
-
-            ViewBag.Average = average;
-
-            return View("Detail", product);
-        }
-
-        // GET: Product/Delete/id
+        // GET: Product/Delete/5
         public IActionResult Delete(int? id)
         {
             try
@@ -306,7 +251,7 @@ namespace IberaDelivery.Controllers
 
         }
 
-        // POST: Product/Delete/id
+        // POST: Product/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
@@ -336,7 +281,7 @@ namespace IberaDelivery.Controllers
             }
 
         }
-        //Elimina la imatge del producte
+
         public IActionResult DeleteImage(int? id)
         {
             if (id == null)
@@ -352,7 +297,7 @@ namespace IberaDelivery.Controllers
             return View(image);
         }
 
-        // POST: Producte/DeleteImage/id
+        // POST: Producte/DeleteImage/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteImage(int id, string url)
@@ -377,7 +322,7 @@ namespace IberaDelivery.Controllers
             }
 
         }
-        //Editar producte
+
         public IActionResult Edit(int? id)
         {
             try
@@ -438,7 +383,7 @@ namespace IberaDelivery.Controllers
 
         }
 
-        // POST: Producte/Edit/model
+        // POST: Producte/Edit/6
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(FormProductEdit model)
@@ -478,6 +423,8 @@ namespace IberaDelivery.Controllers
                                     };
                                     dataContext.Add(image);
                                     dataContext.SaveChanges();
+                                    //string s = Convert.ToBase64String(fileBytes);
+                                    // act on the Base64 data
                                 }
                             }
                         }
@@ -613,7 +560,6 @@ namespace IberaDelivery.Controllers
                 .Include(p => p.Category)
                 .Include(p => p.Provider)
                 .Include(p => p.Comments)
-                .Include(p => p.Valorations)
                 .FirstOrDefault(a => a.Id == id);
             foreach (var image in product.Images)
             {

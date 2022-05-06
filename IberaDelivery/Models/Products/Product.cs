@@ -10,7 +10,6 @@ namespace IberaDelivery.Models
             Comments = new HashSet<Comment>();
             Images = new HashSet<Image>();
             LnOrders = new HashSet<LnOrder>();
-            Valorations = new HashSet<Valoration>();
         }
 
         public int Id { get; set; }
@@ -27,6 +26,5 @@ namespace IberaDelivery.Models
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Image> Images { get; set; }
         public virtual ICollection<LnOrder> LnOrders { get; set; }
-        public virtual ICollection<Valoration> Valorations { get; set; }
     }
 }
