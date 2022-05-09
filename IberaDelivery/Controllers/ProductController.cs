@@ -247,7 +247,7 @@ namespace IberaDelivery.Controllers
             int user = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
 
             var comproValoration = dataContext.Valorations
-                .Where(a => a.UserId == user).FirstOrDefault();
+                .Where(a => a.UserId == user && a.ProductId == id ).FirstOrDefault();
 
             if (comproValoration != null)
             {
