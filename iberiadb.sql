@@ -33,6 +33,21 @@ CREATE TABLE iberiadb.dbo.[user] (
 );
 
 
+-- iberiadb.dbo.credit_cards definition
+
+-- Drop table
+
+-- DROP TABLE iberiadb.dbo.credit_cards;
+
+CREATE TABLE iberiadb.dbo.credit_cards (
+	id int IDENTITY(1,1) NOT NULL,
+	target_number varchar(100) COLLATE Modern_Spanish_CI_AS NOT NULL,
+	user_id int NOT NULL,
+	CONSTRAINT credit_cards_PK PRIMARY KEY (id),
+	CONSTRAINT credit_cards_FK FOREIGN KEY (user_id) REFERENCES iberiadb.dbo.[user](id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
 -- iberiadb.dbo.product definition
 
 -- Drop table
@@ -69,6 +84,23 @@ CREATE TABLE iberiadb.dbo.shipment (
 	user_id int NOT NULL,
 	CONSTRAINT adress_PK PRIMARY KEY (id),
 	CONSTRAINT adress_FK FOREIGN KEY (user_id) REFERENCES iberiadb.dbo.[user](id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+
+-- iberiadb.dbo.valoration definition
+
+-- Drop table
+
+-- DROP TABLE iberiadb.dbo.valoration;
+
+CREATE TABLE iberiadb.dbo.valoration (
+	id int IDENTITY(1,1) NOT NULL,
+	score int NOT NULL,
+	product_id int NOT NULL,
+	user_id int NOT NULL,
+	CONSTRAINT valoration_PK PRIMARY KEY (id),
+	CONSTRAINT valoration_product_FK FOREIGN KEY (product_id) REFERENCES iberiadb.dbo.product(id) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT valoration_user_FK FOREIGN KEY (user_id) REFERENCES iberiadb.dbo.[user](id)
 );
 
 
@@ -138,3 +170,4 @@ CREATE TABLE iberiadb.dbo.ln_order (
 	CONSTRAINT ln_order_Order_FK FOREIGN KEY (num_order) REFERENCES iberiadb.dbo.[order](id) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT ln_order_Product_FK FOREIGN KEY (ref_product) REFERENCES iberiadb.dbo.product(id)
 );
+
