@@ -3,7 +3,7 @@
 @using System.Text.Json
 @{
     ViewData["Title"] = "Create";
-     User userSession = new User();
+    User userSession = new User();
     if(HttpContextAccessor.HttpContext.Session.GetString("user") != null){
          userSession = JsonSerializer.Deserialize<User>(HttpContextAccessor.HttpContext.Session.GetString("user"));
     }
