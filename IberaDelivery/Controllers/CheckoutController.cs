@@ -1,17 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using IberaDelivery.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Text.Json;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.Hosting;
-using System;
-using System.IO;
-using System.Threading.Tasks;
-using System.Drawing;
-using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace IberaDelivery.Controllers
 {
@@ -22,7 +13,6 @@ namespace IberaDelivery.Controllers
         {
             dataContext = context;
         }
-
         public async Task<IActionResult> Index()
         {
             List<Product> ShoppingCart;
@@ -30,8 +20,31 @@ namespace IberaDelivery.Controllers
             if (HttpContext.Session.GetString("Cart") != null)
             {
                 ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
+                ViewBag.Products = ShoppingCart;
             }
             return View("ShoppingCart", ShoppingCart);
+        }
+        private void PopulateShipmentsDropDownList(object? selectedShipment = null)
+        {
+            var UserId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
+            var shipments = dataContext.Shipments.Where(a => a.UserId == UserId);
+            ViewBag.ShipmentId = new SelectList(shipments.ToList(), "Id", "Address", selectedShipment);
+        }
+
+        private void PopulateProductsList(object? selectedShipment = null)
+        {
+            List<Product> ShoppingCart;
+            ShoppingCart = new List<Product>();
+            ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
+            ViewBag.Products = ShoppingCart;
+        }
+
+        public async Task<IActionResult> CheckoutDetails()
+        {
+            PopulateShipmentsDropDownList();
+            PopulateProductsList();
+            ViewBag.User = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user"));
+            return View("Checkout");
         }
         public async Task<IActionResult> Checkout(CheckoutForm model)
         {
@@ -111,11 +124,14 @@ namespace IberaDelivery.Controllers
                 if (list.FirstOrDefault(a => a.Id == id) != null)
                 {
                     var pr = list.FirstOrDefault(a => a.Id == id);
-                    pr.Stock = pr.Stock + 1;
-                    pr.Price = (pr.Price + product.Price);
-                    pr.Iva = (pr.Iva + product.Iva);
-                    list.Remove(list.FirstOrDefault(a => a.Id == id));
-                    list.Add(pr);
+                    if (product.Stock > pr.Stock)
+                    {
+                        pr.Stock = pr.Stock + 1;
+                        pr.Price = (pr.Price + product.Price);
+                        pr.Iva = (pr.Iva + product.Iva);
+                        list.Remove(list.FirstOrDefault(a => a.Id == id));
+                        list.Add(pr);
+                    }
                 }
                 else
                 {
@@ -148,21 +164,16 @@ namespace IberaDelivery.Controllers
             var oldStock = product.Stock;
             if (product != null)
             {
-                if (list.FirstOrDefault(a => a.Id == id) != null)
+                var pr = list.FirstOrDefault(a => a.Id == id);
+                if (product.Stock > pr.Stock)
                 {
-                    var pr = list.FirstOrDefault(a => a.Id == id);
                     pr.Stock = pr.Stock + 1;
                     pr.Price = (pr.Price + product.Price);
                     pr.Iva = (pr.Iva + product.Iva);
                     list.Remove(list.FirstOrDefault(a => a.Id == id));
                     list.Add(pr);
+                    HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(list));
                 }
-                else
-                {
-                    product.Stock = 1;
-                    list.Add(product);
-                }
-                HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(list));
             }
             if (product != null)
             {
@@ -171,8 +182,6 @@ namespace IberaDelivery.Controllers
             return RedirectToAction("Index");
 
         }
-
-
         public async Task<IActionResult> RemoveOne(int? id)
         {
             List<Product> list;
@@ -213,11 +222,7 @@ namespace IberaDelivery.Controllers
                 product.Stock = oldStock;
             }
             return RedirectToAction("Index");
-
         }
-
-
-
         public async Task<IActionResult> ClearCart()
         {
             HttpContext.Session.Remove("Cart");
@@ -251,5 +256,4 @@ namespace IberaDelivery.Controllers
             return product;
         }
     }
-
 }
