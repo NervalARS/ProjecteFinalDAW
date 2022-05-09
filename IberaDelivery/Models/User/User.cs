@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 
 namespace IberaDelivery.Models
 {
@@ -11,6 +8,7 @@ namespace IberaDelivery.Models
         public User()
         {
             Comments = new HashSet<Comment>();
+            CreditCards = new HashSet<CreditCard>();
             Orders = new HashSet<Order>();
             Products = new HashSet<Product>();
             Shipments = new HashSet<Shipment>();
@@ -27,18 +25,10 @@ namespace IberaDelivery.Models
         public string? Token { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<CreditCard> CreditCards { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Product> Products { get; set; }
         public virtual ICollection<Shipment> Shipments { get; set; }
         public virtual ICollection<Valoration> Valorations { get; set; }
-
-        [Display(Name = "Full Name")]
-        public string FullName
-        {
-            get
-            {
-                return FirstName + " " + LastName;
-            }
-        }
     }
 }
