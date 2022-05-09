@@ -8,6 +8,7 @@ namespace IberaDelivery.Models
         public int Id { get; set; }
         public string TargetNumber { get; set; } = null!;
         public int UserId { get; set; }
+        public string Cardholder { get; set; } = null!;
 
         public virtual User User { get; set; } = null!;
     }

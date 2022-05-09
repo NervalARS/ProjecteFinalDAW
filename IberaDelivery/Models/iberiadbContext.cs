@@ -81,6 +81,11 @@ namespace IberaDelivery.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.Cardholder)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("cardholder");
+
                 entity.Property(e => e.TargetNumber)
                     .HasMaxLength(100)
                     .IsUnicode(false)
