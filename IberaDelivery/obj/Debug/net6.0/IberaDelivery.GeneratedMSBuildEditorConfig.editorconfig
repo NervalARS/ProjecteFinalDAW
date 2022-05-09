@@ -39,6 +39,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2F0ZWdvcnkvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Checkout/Checkout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2hlY2tvdXQvQ2hlY2tvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Checkout/ShoppingCart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQ2hlY2tvdXQvU2hvcHBpbmdDYXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
