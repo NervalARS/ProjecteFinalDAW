@@ -210,28 +210,49 @@
             </p>
             <div class="col-sm">
                 <h4 class="mb-1 me-1">@(Model.Price + @Model.Iva)€</h4>
-                @if (Model.Stock > 0)
+                @if (User != null)
                 {
-                    <a asp-action="AddToCart" asp-route-id="@this.Model.Id" class="btn btn-success btn-lg">Add to cart </a>
+                    @if (Model.Stock > 0)
+                    {
+                        <a asp-action="AddToCart" asp-route-id="@this.Model.Id" class="btn btn-success btn-lg">Add to cart </a>
+                    }
+                    else
+                    {
+                        <button class="btn btn-failure btn-lg" type="button">Product unavailable</button>
+                    }
                 }
                 else
                 {
-                    <button class="btn btn-failure btn-lg" type="button">Product unavailable</button>
+                    <a asp-action="Login" asp-controller="User" class="btn btn-success btn-lg">Add to cart </a>
                 }
             </div>
         </div>
-        @using (Html.BeginForm("Create", "Comment"))
+        @if (User != null)
         {
-            <div class="form-group">
-                @Html.Label("Comment here bitch!")
-                @Html.Hidden("id", Model.Id)
-                @Html.TextBox("com",null, new{@class = "form-control"})
-            </div>
+            @using (Html.BeginForm("Create", "Comment"))
+            {
+                <div class="form-group">
+                    @Html.Label("Comment here bitch!")
+                    @Html.Hidden("id", Model.Id)
+                    @Html.TextBox("com",null, new{@class = "form-control"})
+                </div>
+            }
         }
-        <div>
+        else
+        {
+            <p class="text-muted">Please, log-in to submit your review</p>
+        }
+
+
+        <div class="card-body">
             @foreach (var item in Model.Comments)
             {
-                <p>@item.Contens</p><br>
+                <div class="row justify-content-center mb-3">
+                    <div class="card shadow-0 border rounded-3">
+                        <p class="text-dark">NOMBRE DE USUARIO</p>
+                        <p>@item.Contens</p>
+                    </div>
+                </div>
             }
         </div>
     </div>
