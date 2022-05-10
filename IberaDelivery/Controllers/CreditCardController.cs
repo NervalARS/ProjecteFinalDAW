@@ -53,7 +53,7 @@ namespace IberaDelivery.Controllers
             }
         }
 
-        // GET: Category/Delete/5
+        // GET: CreditCard/Delete/id
         public IActionResult Delete(int? id)
         {
             //if (HttpContext.Session.GetString("userName") != null)
@@ -63,14 +63,14 @@ namespace IberaDelivery.Controllers
                 return NotFound();
             }
 
-            var category = dataContext.Categories
+            var creditCard = dataContext.CreditCards
                 .FirstOrDefault(a => a.Id == id);
-            if (category == null)
+            if (creditCard == null)
             {
                 return NotFound();
             }
 
-            return View(category);
+            return View(creditCard);
         }
         /*
         else
@@ -80,15 +80,15 @@ namespace IberaDelivery.Controllers
         */
 
 
-        // POST: Category/Delete/5
+        // POST: CreditCard/Delete/id
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            var category = dataContext.Categories.Find(id);
-            if (category != null)
+            var creditCard = dataContext.CreditCards.Find(id);
+            if (creditCard != null)
             {
-                dataContext.Categories.Remove(category);
+                dataContext.CreditCards.Remove(creditCard);
                 dataContext.SaveChanges();
             }
 
@@ -102,27 +102,27 @@ namespace IberaDelivery.Controllers
             {
                 return NotFound();
             }
-            var category = dataContext.Categories
+            var creditCard = dataContext.CreditCards
                 .FirstOrDefault(a => a.Id == id);
             //.Find(id);
-            if (category == null)
+            if (creditCard == null)
             {
                 return NotFound();
             }
             ViewBag.Id = id;
-            return View(category);
+            return View(creditCard);
             //}
         }
 
-        // POST: Category/Edit/6
+        // POST: CreditCard/Edit/id
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([Bind("Id", "Name")] Category category)
+        public IActionResult Edit(CreditCard creditCard)
         {
             if (ModelState.IsValid)
             {
-                var original = dataContext.Categories.Where(s => s.Id == category.Id).FirstOrDefault();
-                dataContext.Entry(original).CurrentValues.SetValues(category);
+                var original = dataContext.CreditCards.Where(s => s.Id == creditCard.Id).FirstOrDefault();
+                dataContext.Entry(original).CurrentValues.SetValues(creditCard);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
@@ -140,13 +140,13 @@ namespace IberaDelivery.Controllers
                 {
                     return NotFound();
                 }
-                var categoria = dataContext.Categories
+                var creditCard = dataContext.CreditCards
                     .FirstOrDefault(a => a.Id == id);
-                if (categoria == null)
+                if (creditCard == null)
                 {
                     return NotFound();
                 }
-                return View(categoria);
+                return View(creditCard);
         }
     }
 }

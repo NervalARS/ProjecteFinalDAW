@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Shopping Cart";
     decimal preutotal = 0;
+    decimal ivaTotal = 0;
+    decimal preuMesIva = 0;
     var productList = Model;
     productList = productList.OrderBy(item => item.Id);
 }
@@ -14,7 +16,9 @@
                 { 
                     @foreach (var item in productList)
                     {
-                        preutotal = preutotal + (item.Price + item.Iva);
+                        ivaTotal = item.Price * item.Iva / 100;
+                        preuMesIva = item.Price + ivaTotal;
+                        preutotal = preutotal + preuMesIva;
                         <div class="col-12 card shadow-0 border rounded-3">
                                 <div class="card-body">
                                     <div class="row">
@@ -41,7 +45,7 @@
                                             </div>
                                             <div class="col-3">
                                                 <div class="text-center">
-                                                    <h4 class="mb-1 me-1">@item.Stock x @item.Price€</h4>
+                                                    <h4 class="mb-1 me-1">@item.Stock x @preuMesIva</h4>
                                                 </div>
                                                 <div class="d-flex flex-column mt-4">
                                                     <div class="btn-group justify-content-center">

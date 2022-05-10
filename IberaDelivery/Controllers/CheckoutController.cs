@@ -68,6 +68,7 @@ namespace IberaDelivery.Controllers
                 // Por cada TIPO de producto del carrito.
                 foreach (var item in ShoppingCart)
                 {
+                    decimal ivaTotal = item.Iva * 100 / item.Price;
                     // Generamos una lnOrder y la rellenamos.
                     var lnOrder = new LnOrder();
                     lnOrder.NumOrder = order.Id;
@@ -75,7 +76,7 @@ namespace IberaDelivery.Controllers
                     // La Quantity de lnOrder sera el stock del carrito.
                     lnOrder.Quantity = item.Stock;
                     // El precio total es el Price + Iva.
-                    lnOrder.TotalImport = item.Price + item.Iva;
+                    lnOrder.TotalImport = item.Price + ivaTotal;
                     var product = dataContext.Products
                     .FirstOrDefault(a => a.Id == item.Id);
                     // Si el Stock de la BDD es superior a la cantidad que queremos comprar.
