@@ -163,8 +163,8 @@ namespace IberaDelivery.Controllers
                     CategoryId = model.CategoryId,
                     ProviderId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id,
                     Stock = model.Stock,
-                    Price = model.Price,
-                    Iva = model.Iva,
+                    Price = decimal.Parse(model.Price),
+                    Iva = decimal.Parse(model.Iva),
                 };
                 dataContext.Products.Add(product);
                 dataContext.SaveChanges();
@@ -412,10 +412,10 @@ namespace IberaDelivery.Controllers
                     Name = product.Name,
                     Description = product.Description,
                     CategoryId = product.CategoryId,
-                    ProviderId = product.ProviderId,
+                    //ProviderId = product.ProviderId,
                     Stock = product.Stock,
-                    Price = product.Price,
-                    Iva = product.Iva,
+                    Price = product.Price + "",
+                    Iva = product.Iva + "",
                     Image = new List<Image>(),
                 };
                 foreach (var file in product.Images)
@@ -450,20 +450,20 @@ namespace IberaDelivery.Controllers
         {
             try
             {
+
                 if (ModelState.IsValid)
                 {
-                    Product product = new Product
-                    {
-                        Id = model.Id,
-                        Name = model.Name,
-                        Description = model.Description,
-                        CategoryId = model.CategoryId,
-                        ProviderId = model.ProviderId,
-                        Stock = model.Stock,
-                        Price = model.Price,
-                        Iva = model.Iva,
-                    };
-                    dataContext.Update(product);
+                    
+                    Product product = dataContext.Products.Find(model.Id);
+
+                    product.CategoryId = model.CategoryId;
+                    product.Name = model.Name;
+                    product.Description = model.Description;
+                    product.Stock = model.Stock;
+                    product.Price = decimal.Parse(model.Price);
+                    product.Iva = decimal.Parse(model.Iva);
+
+                    dataContext.Products.Update(product);
                     dataContext.SaveChanges();
                     if (model.ImageIn != null)
                     {
