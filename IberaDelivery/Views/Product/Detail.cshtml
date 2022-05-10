@@ -6,6 +6,7 @@
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewBag.Title = Model.Name;
+    IEnumerable<User> Users = ViewBag.Users;
     User User = new User();
     User = null;
     if (HttpContextAccessor.HttpContext.Session.GetString("user") != null)
@@ -249,7 +250,7 @@
             {
                 <div class="row justify-content-center mb-3">
                     <div class="card shadow-0 border rounded-3">
-                        <p class="text-dark">NOMBRE DE USUARIO</p>
+                        <p>@Users.First(u => u.Id == item.UserId).FullName</p>
                         <p>@item.Contens</p>
                     </div>
                 </div>
