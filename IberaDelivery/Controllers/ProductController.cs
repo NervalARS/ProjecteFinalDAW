@@ -217,6 +217,8 @@ namespace IberaDelivery.Controllers
                 return NotFound();
             }
             var product = buscarProducte(id);
+            ViewBag.Users = dataContext.Users;
+
             if (product.Valorations.Count != 0)
             {
                 int score = 0;
