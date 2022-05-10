@@ -57,7 +57,7 @@
                 </tbody>
             </table>
 
-            <div class="display-label">Rating</div>
+            <div class="display-label font-weight-bold">Rating</div>
             <div class="display-field">
                 <form asp-action="Votar">
                     <input type="hidden" name="id" value="@Model.Id" />
@@ -213,9 +213,15 @@
                 <h4 class="mb-1 me-1">@(Model.Price + @Model.Iva)€</h4>
                 @if (User != null)
                 {
-                    @if (Model.Stock > 0)
+
+                    @if (Model.Stock > 10)
                     {
                         <a asp-action="AddToCart" asp-route-id="@this.Model.Id" class="btn btn-success btn-lg">Add to cart </a>
+                    }
+                    else if ((Model.Stock > 0) && (Model.Stock < 10))
+                    {
+                        <a asp-action="AddToCart" asp-route-id="@this.Model.Id" class="btn btn-success btn-lg">Add to cart </a>
+                        <p class="text-danger">¡There are only @Model.Stock left, hurry!</p>
                     }
                     else
                     {
@@ -233,7 +239,7 @@
             @using (Html.BeginForm("Create", "Comment"))
             {
                 <div class="form-group">
-                    @Html.Label("Comment here bitch!")
+                    @Html.Label("Comment here, bitch!")
                     @Html.Hidden("id", Model.Id)
                     @Html.TextBox("com",null, new{@class = "form-control"})
                 </div>
@@ -250,7 +256,7 @@
             {
                 <div class="row justify-content-center mb-3">
                     <div class="card shadow-0 border rounded-3">
-                        <p>@Users.First(u => u.Id == item.UserId).FullName</p>
+                        <p class="font-weight-bold">@Users.First(u => u.Id == item.UserId).FullName</p>
                         <p>@item.Contens</p>
                     </div>
                 </div>
