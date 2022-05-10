@@ -217,7 +217,7 @@ namespace IberaDelivery.Controllers
                 return NotFound();
             }
             var product = buscarProducte(id);
-            ViewBag.Users = dataContext.Users;
+            ViewBag.Users = buscarUsuaris();
 
             if (product.Valorations.Count != 0)
             {
@@ -272,7 +272,7 @@ namespace IberaDelivery.Controllers
             }
 
             var product = buscarProducte(id);
-
+            ViewBag.Users = buscarUsuaris();
             int numPunt = product.Valorations.Count;
             int totScore = 0;
             foreach (var item in product.Valorations)
@@ -589,6 +589,20 @@ namespace IberaDelivery.Controllers
             product.Category.Products = null;
             product.Provider.Products = null;
             return product;
+        }
+        public IEnumerable<User> buscarUsuaris()
+        {
+            IEnumerable<User> users = dataContext.Users;
+            foreach (var user in users)
+            {
+                user.Comments = null;
+                user.Orders = null;
+                user.CreditCards = null;
+                user.Products = null;
+                user.Shipments = null;
+                user.Valorations = null;
+            }
+            return users;
         }
         public bool checkUserExists()
         {
