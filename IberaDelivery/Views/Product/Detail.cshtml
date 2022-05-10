@@ -6,8 +6,13 @@
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewBag.Title = Model.Name;
-
-
+    IEnumerable<User> Users = ViewBag.Users;
+    User User = new User();
+    User = null;
+    if (HttpContextAccessor.HttpContext.Session.GetString("user") != null)
+    {
+        User = JsonSerializer.Deserialize<User>(HttpContextAccessor.HttpContext.Session.GetString("user"));
+    }
 }
 
 
@@ -27,11 +32,7 @@
                             class="img-thumbnail" />
                         </div>
                         { i++; }
-
-
-
                     }
-
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
                     data-bs-slide="prev">
@@ -48,67 +49,153 @@
                 <tbody>
                     @foreach (var item2 in Model.Images)
                     {
-
                         <th>
-
                             <img src="data:image;base64,@System.Convert.ToBase64String(item2.Image1)" class="img-thumbnail"
                             style="max-height: 17vh;" />
-
-
                         </th>
                     }
-
                 </tbody>
             </table>
 
-
-
-            <div class="display-label">Valorar</div>
+            <div class="display-label">Rating</div>
             <div class="display-field">
                 <form asp-action="Votar">
                     <input type="hidden" name="id" value="@Model.Id" />
-                    @if (ViewBag.Average > 0 && ViewBag.Average <= 1)
+                    @switch (Math.Round(ViewBag.Average))
                     {
-                        <input class="star" type="radio" name="score" value="1" checked />
-                    }
-                    else
-                    {
-                        <input class="star" type="radio" name="score" value="1" />
-                    }
-                    @if (ViewBag.Average >= 1 && ViewBag.Average <= 2)
-                    {
-                        <input class="star" type="radio" name="score" value="2" checked />
-                    }
-                    else
-                    {
-                        <input class="star" type="radio" name="score" value="2" />
-                    }
-                    @if (ViewBag.Average >= 2 && ViewBag.Average <= 3)
-                    {
-                        <input class="star" type="radio" name="score" value="3" checked />
-                    }
-                    else
-                    {
-                        <input class="star" type="radio" name="score" value="3" />
-                    }
-                    @if (ViewBag.Average >= 3 && ViewBag.Average <= 4)
-                    {
-                        <input class="star" type="radio" name="score" value="4" checked />
-                    }
-                    else
-                    {
-                        <input class="star" type="radio" name="score" value="4" />
-                    }
-                    @if (ViewBag.Average >= 4 && ViewBag.Average <= 5)
-                    {
-                        <input class="star" type="radio" name="score" value="5" checked />
-                    }
-                    else
-                    {
-                        <input class="star" type="radio" name="score" value="5" />
+                        case 0.00:
+                            @if (User == null)
+                            {
+                                <input class="star" type="radio" name="score" value="1" disabled />
+                                <input class="star" type="radio" name="score" value="2" disabled />
+                                <input class="star" type="radio" name="score" value="3" disabled />
+                                <input class="star" type="radio" name="score" value="4" disabled />
+                                <input class="star" type="radio" name="score" value="5" disabled />
+                            }
+                            else
+                            {
+                                <input class="star" type="radio" name="score" value="1" />
+                                <input class="star" type="radio" name="score" value="2" />
+                                <input class="star" type="radio" name="score" value="3" />
+                                <input class="star" type="radio" name="score" value="4" />
+                                <input class="star" type="radio" name="score" value="5" />
+                            }
+                            break;
+                        case 1.00:
+                            @if (User == null)
+                            {
+                                <input class="star" type="radio" name="score" value="1" checked />
+                                <input class="star" type="radio" name="score" value="2" disabled />
+                                <input class="star" type="radio" name="score" value="3" disabled />
+                                <input class="star" type="radio" name="score" value="4" disabled />
+                                <input class="star" type="radio" name="score" value="5" disabled />
+                            }
+                            else
+                            {
+                                <input class="star" type="radio" name="score" value="1" checked />
+                                <input class="star" type="radio" name="score" value="2" />
+                                <input class="star" type="radio" name="score" value="3" />
+                                <input class="star" type="radio" name="score" value="4" />
+                                <input class="star" type="radio" name="score" value="5" />
+                            }
+
+                            break;
+                        case 2.00:
+                            @if (User == null)
+                            {
+                                <input class="star" type="radio" name="score" value="1" disabled />
+                                <input class="star" type="radio" name="score" value="2" checked />
+                                <input class="star" type="radio" name="score" value="3" disabled />
+                                <input class="star" type="radio" name="score" value="4" disabled />
+                                <input class="star" type="radio" name="score" value="5" disabled />
+                            }
+                            else
+                            {
+                                <input class="star" type="radio" name="score" value="1" />
+                                <input class="star" type="radio" name="score" value="2" checked />
+                                <input class="star" type="radio" name="score" value="3" />
+                                <input class="star" type="radio" name="score" value="4" />
+                                <input class="star" type="radio" name="score" value="5" />
+                            }
+                            break;
+                        case 3.00:
+                            @if (User == null)
+                            {
+                                <input class="star" type="radio" name="score" value="1" disabled />
+                                <input class="star" type="radio" name="score" value="2" disabled />
+                                <input class="star" type="radio" name="score" value="3" checked />
+                                <input class="star" type="radio" name="score" value="4" disabled />
+                                <input class="star" type="radio" name="score" value="5" disabled />
+                            }
+                            else
+                            {
+                                <input class="star" type="radio" name="score" value="1" />
+                                <input class="star" type="radio" name="score" value="2" />
+                                <input class="star" type="radio" name="score" value="3" checked />
+                                <input class="star" type="radio" name="score" value="4" />
+                                <input class="star" type="radio" name="score" value="5" />
+                            }
+                            break;
+                        case 4.00:
+                            @if (User == null)
+                            {
+                                <input class="star" type="radio" name="score" value="1" disabled />
+                                <input class="star" type="radio" name="score" value="2" disabled />
+                                <input class="star" type="radio" name="score" value="3" disabled />
+                                <input class="star" type="radio" name="score" value="4" checked />
+                                <input class="star" type="radio" name="score" value="5" disabled />
+                            }
+                            else
+                            {
+                                <input class="star" type="radio" name="score" value="1" />
+                                <input class="star" type="radio" name="score" value="2" />
+                                <input class="star" type="radio" name="score" value="3" />
+                                <input class="star" type="radio" name="score" value="4" checked />
+                                <input class="star" type="radio" name="score" value="5" />
+                            }
+                            break;
+                        case 5.00:
+                            @if (User == null)
+                            {
+                                <input class="star" type="radio" name="score" value="1" disabled />
+                                <input class="star" type="radio" name="score" value="2" disabled />
+                                <input class="star" type="radio" name="score" value="3" disabled />
+                                <input class="star" type="radio" name="score" value="4" disabled />
+                                <input class="star" type="radio" name="score" value="5" checked />
+                            }
+                            else
+                            {
+                                <input class="star" type="radio" name="score" value="1" />
+                                <input class="star" type="radio" name="score" value="2" />
+                                <input class="star" type="radio" name="score" value="3" />
+                                <input class="star" type="radio" name="score" value="4" />
+                                <input class="star" type="radio" name="score" value="5" checked />
+                            }
+                            break;
+                        default:
+                            @if (User == null)
+                            {
+                                <input class="star" type="radio" name="score" value="1" disabled />
+                                <input class="star" type="radio" name="score" value="2" disabled />
+                                <input class="star" type="radio" name="score" value="3" disabled />
+                                <input class="star" type="radio" name="score" value="4" disabled />
+                                <input class="star" type="radio" name="score" value="5" disabled />
+                            }
+                            else
+                            {
+                                <input class="star" type="radio" name="score" value="1" />
+                                <input class="star" type="radio" name="score" value="2" />
+                                <input class="star" type="radio" name="score" value="3" />
+                                <input class="star" type="radio" name="score" value="4" />
+                                <input class="star" type="radio" name="score" value="5" />
+                            }
+                            break;
                     }
                     <br />
-                    <input type="submit" value="Votar" />
+                    @if (User != null)
+                    {
+                        <input type="submit" value="Votar" />
+                    }
                 </form>
             </div>
         </div>
@@ -124,61 +211,49 @@
             </p>
             <div class="col-sm">
                 <h4 class="mb-1 me-1">@(Model.Price + @Model.Iva)€</h4>
-                @if (Model.Stock > 0)
+                @if (User != null)
                 {
-                    <a asp-action="AddToCart" asp-route-id="@this.Model.Id" class="btn btn-success btn-lg">Add to cart </a>
+                    @if (Model.Stock > 0)
+                    {
+                        <a asp-action="AddToCart" asp-route-id="@this.Model.Id" class="btn btn-success btn-lg">Add to cart </a>
+                    }
+                    else
+                    {
+                        <button class="btn btn-failure btn-lg" type="button">Product unavailable</button>
+                    }
                 }
                 else
                 {
-                    <button class="btn btn-failure btn-lg" type="button">Product unavailable</button>
+                    <a asp-action="Login" asp-controller="User" class="btn btn-success btn-lg">Add to cart </a>
                 }
             </div>
         </div>
-        <div class="col-sm">
-            @if (@HttpContextAccessor.HttpContext.Session.GetString("Cart") != null)
-            {
-                List<Product> list;
-                list = new List<Product>();
-                list =
-                JsonSerializer.Deserialize<List<Product>>(@HttpContextAccessor.HttpContext.Session.GetString("Cart"));
-                var totalPrice = new Decimal();
-                <div>
-                    <h3>Carrito</h3>
-                    <ul style="list-style-type: none;">
-                        @for (int j = 0; j < list.Count; j++)
-                        {
-                            <li><b>@list[j].Name</b></li>
-                            <li>Price: @(list[j].Price + @list[j].Iva)</li>
-                            <li>Quantity: @list[j].Stock</li>
-                            totalPrice = totalPrice + (list[j].Price + @list[j].Iva);
-                        }
-                    </ul>
-                    <p>
-                        Total price = <b>@totalPrice</b>
-                    </p>
-                </div>
-                <a asp-controller="Checkout" asp-action="Checkout">Checkout</a>
-                <a asp-action="ClearCart" asp-route-id="@this.Model.Id">Empty Cart</a>
-            }
-            else
-            {
-                <div>
-                    Your shopping cart is empty!
-                </div>
-            }
-        </div>
-        @using (Html.BeginForm("Create", "Comment"))
+        @if (User != null)
         {
-            <div class="form-group">
-                @Html.Label("Comment here bitch!")
-                @Html.Hidden("id", Model.Id)
-                @Html.TextBox("com",null, new{@class = "form-control"})
-            </div>
+            @using (Html.BeginForm("Create", "Comment"))
+            {
+                <div class="form-group">
+                    @Html.Label("Comment here bitch!")
+                    @Html.Hidden("id", Model.Id)
+                    @Html.TextBox("com",null, new{@class = "form-control"})
+                </div>
+            }
         }
-        <div>
+        else
+        {
+            <p class="text-muted">Please, log-in to submit your review</p>
+        }
+
+
+        <div class="card-body">
             @foreach (var item in Model.Comments)
             {
-                <p>@item.Contens</p><br>
+                <div class="row justify-content-center mb-3">
+                    <div class="card shadow-0 border rounded-3">
+                        <p>@Users.First(u => u.Id == item.UserId).FullName</p>
+                        <p>@item.Contens</p>
+                    </div>
+                </div>
             }
         </div>
     </div>

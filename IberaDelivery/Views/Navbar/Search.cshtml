@@ -1,7 +1,14 @@
 @model IEnumerable<IberaDelivery.Models.Product>
+@using System.Text.Json
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Search";
+    User User = new User();
+    User = null;
+    if (HttpContextAccessor.HttpContext.Session.GetString("user") != null)
+    {
+        User = JsonSerializer.Deserialize<User>(HttpContextAccessor.HttpContext.Session.GetString("user"));
+    }
 }
 
 <h2>Search "@ViewBag.Search"</h2>
@@ -21,8 +28,9 @@
                                             @{
                                                 Image img = item.Images.FirstOrDefault();
 
-                                                if(img != null){
-                                                    
+                                                if (img != null)
+                                                {
+
                                                 }
                                             }
                                             <img src="data:image;base64,@System.Convert.ToBase64String(img.Image1)"
@@ -45,10 +53,20 @@
                                             <h4 class="mb-1 me-1">@item.Price €</h4>
                                         </div>
                                         <div class="d-flex flex-column mt-4">
-                                            <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id"><button class="btn btn-info btn-sm" type="button">Details</button></a>
-                                            <a asp-controller="Checkout" asp-action="AddToCart" asp-route-id="@item.Id" asp-route-src="@ViewBag.Search">
-                                                <button class="btn btn-outline-primary btn-sm mt-2" type="button">Add to shopping cart</button>
-                                            </a>
+                                            <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id"><button
+                                            class="btn btn-info btn-sm" type="button">Details</button></a>
+                                            @if (User != null)
+                                            {
+                                                <a asp-controller="Checkout" asp-action="AddToCart" asp-route-id="@item.Id" asp-route-src="@ViewBag.Search">
+                                                    <button class="btn btn-outline-primary btn-sm mt-2" type="button">Add to cart</button>
+                                                </a>
+                                            }  
+                                            else
+                                            {
+                                                <a asp-controller="User" asp-action="Login">
+                                                    <button class="btn btn-outline-primary btn-sm mt-2" type="button">Add to cart</button>
+                                                </a>
+                                            }
                                         </div>
                                     </div>
                                 </div>
