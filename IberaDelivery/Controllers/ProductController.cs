@@ -229,6 +229,8 @@ namespace IberaDelivery.Controllers
 
 
                 ViewBag.Average = average;
+            }else{
+                ViewBag.Average = 0.00;
             }
 
             if (product != null)
