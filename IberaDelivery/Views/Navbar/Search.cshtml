@@ -3,17 +3,14 @@
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Search";
-<<<<<<< HEAD
     decimal ivaTotal = 0;
     decimal preuMesIva = 0;
-=======
     User User = new User();
     User = null;
     if (HttpContextAccessor.HttpContext.Session.GetString("user") != null)
     {
         User = JsonSerializer.Deserialize<User>(HttpContextAccessor.HttpContext.Session.GetString("user"));
     }
->>>>>>> b2676cc1207b9939851c6a2a422a89a036c38455
 }
 
 <h2>Search "@ViewBag.Search"</h2>
