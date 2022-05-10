@@ -1,18 +1,16 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IberaDelivery.Models
 {
-    public partial class CheckoutForm
+    public partial class CreditCardForm
     {
-        public CheckoutForm()
-        {
 
-        }
-        public int ShipmentId { get; set; }
+        [Required]
         public string TargetNumber { get; set; } = null!;
+        [Required]
         public string Cardholder { get; set; } = null!;
-
     }
 }

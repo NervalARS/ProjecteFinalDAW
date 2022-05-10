@@ -1,0 +1,47 @@
+@model IEnumerable<IberaDelivery.Models.CreditCard>
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    ViewData["Title"] = "Addresses";
+
+}
+
+<h2>Shipment Information</h2>
+
+<a asp-action="Create" class="btn btn-info"><button>New Shipment Information + </button></a>
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TargetNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cardholder)
+            </th>
+            <th colspan="2">
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TargetNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cardholder)
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

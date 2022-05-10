@@ -75,7 +75,7 @@ namespace IberaDelivery.Controllers
                     // La Quantity de lnOrder sera el stock del carrito.
                     lnOrder.Quantity = item.Stock;
                     // El precio total es el Price + Iva.
-                    lnOrder.TotalImport = item.Price + item.Iva;
+                    lnOrder.TotalImport = item.Price + (item.Price * item.Iva / 100);
                     var product = dataContext.Products
                     .FirstOrDefault(a => a.Id == item.Id);
                     // Si el Stock de la BDD es superior a la cantidad que queremos comprar.
