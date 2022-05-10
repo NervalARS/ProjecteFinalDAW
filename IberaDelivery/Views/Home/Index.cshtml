@@ -1,12 +1,7 @@
 ﻿@model IEnumerable<IberaDelivery.Models.Product>
-@using System.Text.Json
-@using Microsoft.AspNetCore.Mvc;
-@using IberaDelivery.Models;
-@using Microsoft.EntityFrameworkCore;
 @{
     ViewData["Title"] = "Home Page";
 }
-
 
 <div class="text-center">
     <h1 class="display-4">Welcome to IberiaDelivery</h1>
@@ -17,7 +12,8 @@
                 <div id="item" class="carousel-item active justify-content-center">
                     <img src="@Url.Content("~/Content/Images/comida.jpg")"" class=" rounded border-secondary d-block
                         w-100 h-100" alt="Comida" style="">
-                    <div class="carousel-caption d-none d-md-block justify-content-center">
+                    <div
+                        class="carousel-caption d-none d-md-block justify-content-center blur border border-primary rounded">
                         <h3>Kitchen</h3>
                         <p>The essential items for your kitchen</p>
                     </div>
@@ -25,7 +21,8 @@
                 <div id="item" class="carousel-item justify-content-center">
                     <img src="@Url.Content("~/Content/Images/deporte.jpg")"" class=" rounded border-secondary d-block
                         w-100 h-100" alt="Deporte">
-                    <div class="carousel-caption d-none d-md-block justify-content-center">
+                    <div
+                        class="carousel-caption d-none d-md-block justify-content-center blur border border-primary rounded">
                         <h3>Sports</h3>
                         <p>Take your body to new horizons</p>
                     </div>
@@ -33,18 +30,19 @@
                 <div id="item" class="carousel-item justify-content-center">
                     <img src="@Url.Content("~/Content/Images/hogar.jpeg")"" class=" rounded border-secondary d-block
                         w-100 h-100" alt="Hogar">
-                    <div class="carousel-caption d-none d-md-block justify-content-center">
+                    <div
+                        class="carousel-caption d-none d-md-block justify-content-center blur border border-primary rounded">
                         <h3>Furnitures</h3>
                         <p>Give a new air to your house</p>
                     </div>
                 </div>
             </div>
-            <button class="carousel-control-prev blur" type="button" data-bs-target="#carouselExampleControls"
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next blur" type="button" data-bs-target="#carouselExampleControls"
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
                 data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
@@ -53,27 +51,15 @@
     </div>
     <br /><br />
     <div class="row flex-wrap">
-
         @foreach (var item in Model)
         {
-
         <div class="col-lg-3 col-md-4 col-sm-12 card p-3">
             @{
-            int i = 0;
+                Image img = item.Images.FirstOrDefault();
             }
-
-            @foreach (var item2 in item.Images)
-            {
-            @if (i == 0)
-            {
-            <img src="data:image;base64,@System.Convert.ToBase64String(item2.Image1)" class="rounded img-thumbnail"
-                style="max-height: 17vh;" />
-            i++;
-            }
-            }
+            <a href="/Product/Detail/@item.Id"><img src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class="rounded img-thumbnail" style="max-height: 17vh;"/></a>
             <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
         </div>
-
         }
     </div>
 </div>
