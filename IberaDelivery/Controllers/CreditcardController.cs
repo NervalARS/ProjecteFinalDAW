@@ -37,12 +37,19 @@ namespace IberaDelivery.Controllers
         // POST: CreditCard/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(CreditCard creditCard)
+        public IActionResult Create(CreditCardForm creditCardForm)
         {
 
             if (ModelState.IsValid)
             {
-                dataContext.Add(creditCard);
+                CreditCard creditCard = new CreditCard();
+
+                creditCard.UserId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
+                creditCard.Cardholder = creditCardForm.Cardholder;
+                //creditCard.TargetNumber = creditCardForm.Number; Descomentar esto mas tarde xdddd
+                creditCard.TargetNumber = creditCardForm.TargetNumber;
+
+                dataContext.CreditCards.Add(creditCard);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
@@ -104,25 +111,32 @@ namespace IberaDelivery.Controllers
             }
             var creditCard = dataContext.CreditCards
                 .FirstOrDefault(a => a.Id == id);
+            CreditCardEditForm CreditCardEditForm = new CreditCardEditForm();
+            CreditCardEditForm.Id = creditCard.Id;
+            CreditCardEditForm.Cardholder = creditCard.Cardholder;
+            CreditCardEditForm.TargetNumber = creditCard.TargetNumber;
             //.Find(id);
             if (creditCard == null)
             {
                 return NotFound();
             }
             ViewBag.Id = id;
-            return View(creditCard);
+            return View(CreditCardEditForm);
             //}
         }
 
         // POST: CreditCard/Edit/id
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(CreditCard creditCard)
+        public IActionResult Edit(CreditCardEditForm creditCard)
         {
             if (ModelState.IsValid)
             {
                 var original = dataContext.CreditCards.Where(s => s.Id == creditCard.Id).FirstOrDefault();
-                dataContext.Entry(original).CurrentValues.SetValues(creditCard);
+                original.Cardholder = creditCard.Cardholder;
+                original.TargetNumber = creditCard.TargetNumber;
+                //creditCard.TargetNumber = creditCardForm.Number; Descomentar esto mas tarde xdddd
+                dataContext.Update(original);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
