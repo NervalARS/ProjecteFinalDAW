@@ -29,12 +29,6 @@
                 </select>
             </div>
             <div class="form-group">
-                <label asp-for="ProviderId" class="control-label"></label>
-                <select asp-for="ProviderId" class="form-control" asp-items="ViewBag.ProviderId">
-                    <option value="">-- Select Provider --</option>
-                </select>
-            </div>
-            <div class="form-group">
                 <label asp-for="Stock" class="control-label"></label>
                 <input asp-for="Stock" class="form-control" />
                 <span asp-validation-for="Stock" class="text-danger"></span>
@@ -52,7 +46,7 @@
             <div class="form-group">
                 <label asp-for="ImageIn" class="control-label"></label>
                 <div class="custom-file">
-                    <input asp-for="ImageIn" class="custom-file-input" id="customFile" multiple>
+                    <input asp-for="ImageIn" id="customFile" multiple>
 
                 </div>
                 <span asp-validation-for="ImageIn" class="text-danger"></span>

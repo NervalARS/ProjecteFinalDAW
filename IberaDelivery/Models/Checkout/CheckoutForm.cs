@@ -11,5 +11,8 @@ namespace IberaDelivery.Models
 
         }
         public int ShipmentId { get; set; }
+        public string TargetNumber { get; set; } = null!;
+        public string Cardholder { get; set; } = null!;
+
     }
 }
