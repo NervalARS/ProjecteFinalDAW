@@ -9,7 +9,7 @@ namespace IberaDelivery.Models
 
         public int Id {get; set; }
         [Required]
-        public string TargetNumber { get; set; } = null!;
+        public string CardNumber { get; set; } = null!;
         [Required]
         public string Cardholder { get; set; } = null!;
     }

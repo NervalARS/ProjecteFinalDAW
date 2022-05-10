@@ -81,15 +81,15 @@ namespace IberaDelivery.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.CardNumber)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("card_number");
+
                 entity.Property(e => e.Cardholder)
                     .HasMaxLength(100)
                     .IsUnicode(false)
                     .HasColumnName("cardholder");
-
-                entity.Property(e => e.TargetNumber)
-                    .HasMaxLength(100)
-                    .IsUnicode(false)
-                    .HasColumnName("target_number");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
 
@@ -194,7 +194,7 @@ namespace IberaDelivery.Models
                     .HasColumnName("description");
 
                 entity.Property(e => e.Iva)
-                    .HasColumnType("decimal(38, 0)")
+                    .HasColumnType("decimal(38, 2)")
                     .HasColumnName("iva");
 
                 entity.Property(e => e.Name)
@@ -203,7 +203,7 @@ namespace IberaDelivery.Models
                     .HasColumnName("name");
 
                 entity.Property(e => e.Price)
-                    .HasColumnType("decimal(38, 0)")
+                    .HasColumnType("decimal(38, 2)")
                     .HasColumnName("price");
 
                 entity.Property(e => e.ProviderId).HasColumnName("provider_id");

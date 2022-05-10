@@ -46,8 +46,8 @@ namespace IberaDelivery.Controllers
 
                 creditCard.UserId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
                 creditCard.Cardholder = creditCardForm.Cardholder;
-                //creditCard.TargetNumber = creditCardForm.Number; Descomentar esto mas tarde xdddd
-                creditCard.TargetNumber = creditCardForm.TargetNumber;
+                //creditCard.CardNumber = creditCardForm.Number; Descomentar esto mas tarde xdddd
+                creditCard.CardNumber = creditCardForm.CardNumber;
 
                 dataContext.CreditCards.Add(creditCard);
                 dataContext.SaveChanges();
@@ -114,7 +114,7 @@ namespace IberaDelivery.Controllers
             CreditCardEditForm CreditCardEditForm = new CreditCardEditForm();
             CreditCardEditForm.Id = creditCard.Id;
             CreditCardEditForm.Cardholder = creditCard.Cardholder;
-            CreditCardEditForm.TargetNumber = creditCard.TargetNumber;
+            CreditCardEditForm.CardNumber = creditCard.CardNumber;
             //.Find(id);
             if (creditCard == null)
             {
@@ -134,8 +134,8 @@ namespace IberaDelivery.Controllers
             {
                 var original = dataContext.CreditCards.Where(s => s.Id == creditCard.Id).FirstOrDefault();
                 original.Cardholder = creditCard.Cardholder;
-                original.TargetNumber = creditCard.TargetNumber;
-                //creditCard.TargetNumber = creditCardForm.Number; Descomentar esto mas tarde xdddd
+                original.CardNumber = creditCard.CardNumber;
+                //creditCard.CardNumber = creditCardForm.Number; Descomentar esto mas tarde xdddd
                 dataContext.Update(original);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
