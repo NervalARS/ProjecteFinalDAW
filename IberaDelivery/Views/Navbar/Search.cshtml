@@ -3,6 +3,8 @@
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     ViewData["Title"] = "Search";
+    decimal ivaTotal = 0;
+    decimal preuMesIva = 0;
     User User = new User();
     User = null;
     if (HttpContextAccessor.HttpContext.Session.GetString("user") != null)
@@ -18,6 +20,8 @@
         {
             @foreach (var item in Model)
             {
+                ivaTotal = item.Price * item.Iva / 100;
+                preuMesIva = item.Price + ivaTotal;
                 <div class="row justify-content-center mb-3">
                     <div class="col-md-12 col-xl-10">
                         <div class="card shadow-0 border rounded-3">
@@ -50,7 +54,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
                                         <div class="d-flex flex-row align-items-center mb-1">
-                                            <h4 class="mb-1 me-1">@item.Price €</h4>
+                                            <h4 class="mb-1 me-1">@preuMesIva €</h4>
                                         </div>
                                         <div class="d-flex flex-column mt-4">
                                             <a asp-controller="Product" asp-action="Detail" asp-route-id="@item.Id"><button

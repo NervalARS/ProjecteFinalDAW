@@ -16353,6 +16353,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Checkout/Checkout.cshtml",
+      "TargetPath": "Views\\Checkout\\Checkout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/LnOrder/Index.cshtml",
       "TargetPath": "Views\\LnOrder\\Index.cshtml",
       "FileKind": "mvc"

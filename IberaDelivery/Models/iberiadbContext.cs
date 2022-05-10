@@ -18,6 +18,7 @@ namespace IberaDelivery.Models
 
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Comment> Comments { get; set; } = null!;
+        public virtual DbSet<CreditCard> CreditCards { get; set; } = null!;
         public virtual DbSet<Image> Images { get; set; } = null!;
         public virtual DbSet<LnOrder> LnOrders { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
@@ -72,6 +73,30 @@ namespace IberaDelivery.Models
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("comments_User_FK");
+            });
+
+            modelBuilder.Entity<CreditCard>(entity =>
+            {
+                entity.ToTable("credit_cards");
+
+                entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.Cardholder)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("cardholder");
+
+                entity.Property(e => e.TargetNumber)
+                    .HasMaxLength(100)
+                    .IsUnicode(false)
+                    .HasColumnName("target_number");
+
+                entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.CreditCards)
+                    .HasForeignKey(d => d.UserId)
+                    .HasConstraintName("credit_cards_FK");
             });
 
             modelBuilder.Entity<Image>(entity =>
