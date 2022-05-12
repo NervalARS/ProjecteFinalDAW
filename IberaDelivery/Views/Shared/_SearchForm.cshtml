@@ -16,13 +16,13 @@
         });
     }
     <div class="row">
-        <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12">
             @Html.DropDownList("Category", listItems, new { @class = "form-control" })
         </div>
-        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12">
+        <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12">
             @Html.TextBox("SearchField", null, new { @class = "form-control w-100", @placeholder = "Search product..."})
         </div>
-        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-12">
+        <div class="col-xl-1 col-lg-1 col-md-12 col-sm-12">
             <input type="submit" value="Search" class="btn btn-light" />
         </div>
     </div>
