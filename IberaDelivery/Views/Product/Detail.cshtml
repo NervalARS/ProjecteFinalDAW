@@ -211,6 +211,25 @@
                     <h2 class="mb-4 me-1">@(Model.Price + (Model.Price * Model.Iva / 100))€</h2>
                     @if (User != null)
                     {
+                        <input type="submit" value="Votar" />
+                    }
+                </form>
+            </div>
+        </div>
+        <div class="col-sm">
+            <h2 class="mb-4 display-4">
+                @Html.DisplayFor(Product => Product.Name)
+            </h2>
+            <div class="mt-1 mb-0 text-muted small">
+                @Html.DisplayFor(Product => Product.Category.Name)
+            </div>
+            <p>
+                @Html.DisplayFor(Product => Product.Description)
+            </p>
+            <div class="col-sm">
+                <h2 class="mb-4 me-1">@Math.Round((Model.Price + (Model.Price * Model.Iva / 100)),2)€</h2>
+                @if (User != null)
+                {
 
                         @if (Model.Stock > 10)
                         {
