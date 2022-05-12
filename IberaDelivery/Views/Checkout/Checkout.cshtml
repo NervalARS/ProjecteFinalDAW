@@ -4,6 +4,7 @@
     ViewData["Title"] = "Checkout";
     decimal preutotal = 0;
     var addresses = ViewBag.ShipmentId;
+    var cards = ViewBag.Cards;
     var productList = ViewBag.Products;
     var User = ViewBag.User;
 }
@@ -16,9 +17,13 @@
         <div class="col-12 card shadow-0 border rounded-3">
             <form asp-action="Checkout" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label asp-for="ShipmentId" class="control-label"></label>
+                    <label asp-for="ShipmentId" class="control-label">Address</label>
                     <select asp-for="ShipmentId" class="form-control" asp-items="addresses">
                         <option value="" disabled selected hidden>-- Select Shipment --</option>
+                    </select>
+                    <label asp-for="CardId" class="control-label">Credit Card</label>
+                    <select asp-for="CardId" class="form-control" asp-items="cards">
+                        <option value="" disabled selected hidden>-- Select Credit Card --</option>
                     </select>
                 </div>
                 <div class="form-group">

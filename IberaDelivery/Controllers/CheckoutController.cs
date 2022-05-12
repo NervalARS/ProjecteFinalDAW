@@ -30,18 +30,32 @@ namespace IberaDelivery.Controllers
             var shipments = dataContext.Shipments.Where(a => a.UserId == UserId);
             ViewBag.ShipmentId = new SelectList(shipments.ToList(), "Id", "Address", selectedShipment);
         }
+        private void PopulateCardsDropDownList(object? selectedCard = null)
+        {
+            var UserId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
+            var cards = dataContext.CreditCards.Where(a => a.UserId == UserId);
+            ViewBag.Cards = new SelectList(cards.ToList(), "Id", "Cardholder", selectedCard);
+        }
 
         private void PopulateProductsList(object? selectedShipment = null)
         {
             List<Product> ShoppingCart;
             ShoppingCart = new List<Product>();
-            ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
-            ViewBag.Products = ShoppingCart;
+            if (HttpContext.Session.GetString("Cart") != null)
+            {
+                ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
+                ViewBag.Products = ShoppingCart;
+            }
+            else
+            {
+                ViewBag.Alert_EmptyCart = "Your shopping cart is empty!";
+            }
         }
 
         public async Task<IActionResult> CheckoutDetails()
         {
             PopulateShipmentsDropDownList();
+            PopulateCardsDropDownList();
             PopulateProductsList();
             ViewBag.User = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user"));
             return View("Checkout");
@@ -169,7 +183,7 @@ namespace IberaDelivery.Controllers
                 {
                     pr.Stock = pr.Stock + 1;
                     pr.Price = (pr.Price + product.Price);
-                    pr.Iva = (pr.Iva + product.Iva);
+                    pr.Iva = pr.Iva;
                     list.Remove(list.FirstOrDefault(a => a.Id == id));
                     list.Add(pr);
                     HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(list));
@@ -203,7 +217,7 @@ namespace IberaDelivery.Controllers
                     var pr = list.FirstOrDefault(a => a.Id == id);
                     pr.Stock = pr.Stock - 1;
                     pr.Price = (pr.Price - product.Price);
-                    pr.Iva = (pr.Iva - product.Iva);
+                    pr.Iva = pr.Iva;
                     list.Remove(list.FirstOrDefault(a => a.Id == id));
                     if (pr.Stock > 0)
                     {
