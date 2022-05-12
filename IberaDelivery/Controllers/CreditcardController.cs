@@ -135,7 +135,6 @@ namespace IberaDelivery.Controllers
                 var original = dataContext.CreditCards.Where(s => s.Id == creditCard.Id).FirstOrDefault();
                 original.Cardholder = creditCard.Cardholder;
                 original.CardNumber = creditCard.CardNumber;
-                //creditCard.CardNumber = creditCardForm.Number; Descomentar esto mas tarde xdddd
                 dataContext.Update(original);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
