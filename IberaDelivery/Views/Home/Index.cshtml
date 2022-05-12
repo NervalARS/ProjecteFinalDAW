@@ -17,19 +17,17 @@
                     @for (int i = 0; i < 5; i++)
                     {
                         var item = list[i];
-                        <div class="carousel-inner">
-                            <div id="item" class="carousel-item active justify-content-center">
-                                @{
-                                    Image img = item.Images.FirstOrDefault();
-                                }
-                                <a href="/Product/Detail/item2.id"><img
-                            src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class=" rounded
+                        <div id="item" class="carousel-item active justify-content-center">
+                            @{
+                                Image img = item.Images.FirstOrDefault();
+                            }
+                            <a href="/Product/Detail/item2.id"><img
+                        src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class=" rounded
                                     border-secondary d-block w-100 h-100" alt="Comida" style=""></a>
-                                <div
-                        class="carousel-caption d-none d-md-block justify-content-center blur border border-primary rounded">
-                                    <h3>@item.Name</h3>
-                                    <p>@item.Description</p>
-                                </div>
+                            <div
+                    class="carousel-caption d-none d-md-block justify-content-center blur border border-primary rounded">
+                                <h3>@item.Name</h3>
+                                <p>@item.Description</p>
                             </div>
                         </div>
                     }
@@ -38,19 +36,17 @@
                 {
                     @foreach (var item in Model)
                     {
-                        <div class="carousel-inner">
-                            <div id="item" class="carousel-item active justify-content-center">
-                                @{
-                                    Image img = item.Images.FirstOrDefault();
-                                }
-                                <a href="/Product/Detail/item2.id"><img
-                            src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class=" rounded
+                        <div id="item" class="carousel-item active justify-content-center">
+                            @{
+                                Image img = item.Images.FirstOrDefault();
+                            }
+                            <a href="/Product/Detail/item2.id"><img
+                        src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class=" rounded
                                     border-secondary d-block w-100 h-100" alt="Comida" style=""></a>
-                                <div
-                        class="carousel-caption d-none d-md-block justify-content-center blur border border-primary rounded">
-                                    <h3>@item.Name</h3>
-                                    <p>@item.Description</p>
-                                </div>
+                            <div
+                    class="carousel-caption d-none d-md-block justify-content-center blur border border-primary rounded">
+                                <h3>@item.Name</h3>
+                                <p>@item.Description</p>
                             </div>
                         </div>
                     }
