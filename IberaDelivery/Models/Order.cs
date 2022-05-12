@@ -15,7 +15,9 @@ namespace IberaDelivery.Models
         public decimal Import { get; set; }
         public int UserId { get; set; }
         public int ShipmentId { get; set; }
+        public int CreditCardId { get; set; }
 
+        public virtual CreditCard CreditCard { get; set; } = null!;
         public virtual Shipment Shipment { get; set; } = null!;
         public virtual User User { get; set; } = null!;
         public virtual ICollection<LnOrder> LnOrders { get; set; }
