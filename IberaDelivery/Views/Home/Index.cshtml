@@ -21,7 +21,7 @@
                             @{
                                 Image img = item.Images.FirstOrDefault();
                             }
-                            <a href="/Product/Detail/item2.id"><img
+                            <a href="/Product/Detail/@item.Id"><img
                         src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class=" rounded
                                     border-secondary d-block w-100 h-100" alt="Comida" style=""></a>
                             <div
@@ -34,16 +34,14 @@
                 }
                 else
                 {
-                    @{
-                        int i = 0;
-                    }
+                    int i = 0;
                     @foreach (var item in Model)
                     {
                         <div id="item" class="carousel-item justify-content-center @(i == 0 ? "active" : "")">
                             @{
                                 Image img = item.Images.FirstOrDefault();
                             }
-                            <a href="/Product/Detail/item2.id"><img
+                            <a href="/Product/Detail/@item.Id"><img
                         src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class=" rounded
                                     border-secondary d-block w-100 h-100" alt="Comida" style=""></a>
                             <div
