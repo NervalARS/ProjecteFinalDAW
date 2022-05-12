@@ -210,7 +210,7 @@
                 @Html.DisplayFor(Product => Product.Description)
             </p>
             <div class="col-sm">
-                <h2 class="mb-4 me-1">@(Model.Price + (Model.Price * Model.Iva / 100))€</h2>
+                <h2 class="mb-4 me-1">@Math.Round((Model.Price + (Model.Price * Model.Iva / 100)),2)€</h2>
                 @if (User != null)
                 {
 

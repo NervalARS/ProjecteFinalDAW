@@ -165,11 +165,11 @@ namespace IberaDelivery.Controllers
             if (product != null)
             {
                 var pr = list.FirstOrDefault(a => a.Id == id);
-                if (product.Stock > pr.Stock)
+                if (product.Stock >= (pr.Stock + 1))
                 {
                     pr.Stock = pr.Stock + 1;
                     pr.Price = (pr.Price + product.Price);
-                    pr.Iva = (pr.Iva + product.Iva);
+                    pr.Iva = pr.Iva;
                     list.Remove(list.FirstOrDefault(a => a.Id == id));
                     list.Add(pr);
                     HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(list));
@@ -203,7 +203,7 @@ namespace IberaDelivery.Controllers
                     var pr = list.FirstOrDefault(a => a.Id == id);
                     pr.Stock = pr.Stock - 1;
                     pr.Price = (pr.Price - product.Price);
-                    pr.Iva = (pr.Iva - product.Iva);
+                    pr.Iva = pr.Iva;
                     list.Remove(list.FirstOrDefault(a => a.Id == id));
                     if (pr.Stock > 0)
                     {
