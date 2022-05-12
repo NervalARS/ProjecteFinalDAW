@@ -17,7 +17,7 @@
                     @for (int i = 0; i < 5; i++)
                     {
                         var item = list[i];
-                        <div id="item" class="carousel-item active justify-content-center">
+                        <div id="item" class="carousel-item justify-content-center @(i == 0 ? "active" : "")">
                             @{
                                 Image img = item.Images.FirstOrDefault();
                             }
@@ -34,9 +34,12 @@
                 }
                 else
                 {
+                    @{
+                        int i = 0;
+                    }
                     @foreach (var item in Model)
                     {
-                        <div id="item" class="carousel-item active justify-content-center">
+                        <div id="item" class="carousel-item justify-content-center @(i == 0 ? "active" : "")">
                             @{
                                 Image img = item.Images.FirstOrDefault();
                             }
@@ -49,6 +52,7 @@
                                 <p>@item.Description</p>
                             </div>
                         </div>
+                        { i++; }
                     }
                 }
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
