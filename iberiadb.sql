@@ -149,9 +149,11 @@ CREATE TABLE iberiadb.dbo.[order] (
 	import decimal(38,0) NOT NULL,
 	user_id int NOT NULL,
 	shipment_id int NOT NULL,
+	credit_card_id int NOT NULL,
 	CONSTRAINT order_PK PRIMARY KEY (id),
 	CONSTRAINT order_FK FOREIGN KEY (shipment_id) REFERENCES iberiadb.dbo.shipment(id),
-	CONSTRAINT order_FK_1 FOREIGN KEY (user_id) REFERENCES iberiadb.dbo.[user](id) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT order_FK_1 FOREIGN KEY (user_id) REFERENCES iberiadb.dbo.[user](id) ON DELETE CASCADE ON UPDATE CASCADE,
+	CONSTRAINT order_credit_card_FK FOREIGN KEY (credit_card_id) REFERENCES iberiadb.dbo.credit_cards(id)
 );
 
 
