@@ -165,7 +165,7 @@ namespace IberaDelivery.Controllers
             if (product != null)
             {
                 var pr = list.FirstOrDefault(a => a.Id == id);
-                if (product.Stock >= (pr.Stock + 1))
+                if (product.Stock > pr.Stock)
                 {
                     pr.Stock = pr.Stock + 1;
                     pr.Price = (pr.Price + product.Price);
