@@ -15,7 +15,6 @@
     }
 }
 
-
 <div class="container">
     <div class="row">
         <div class="col-sm">
@@ -26,7 +25,6 @@
                     }
                     @foreach (var item in Model.Images)
                     {
-
                         <div class="carousel-item @(i == 0 ? "active" : "")">
                             <img src="data:image;base64,@System.Convert.ToBase64String(item.Image1)"
                             class="img-thumbnail" />
@@ -213,7 +211,6 @@
                 <h2 class="mb-4 me-1">@Math.Round((Model.Price + (Model.Price * Model.Iva / 100)),2)€</h2>
                 @if (User != null)
                 {
-
                     @if (Model.Stock > 10)
                     {
                         <a asp-action="AddToCart" asp-route-id="@this.Model.Id" class="btn btn-success btn-lg">Add to cart </a>

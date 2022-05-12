@@ -231,7 +231,9 @@ namespace IberaDelivery.Controllers
 
 
                 ViewBag.Average = average;
-            }else{
+            }
+            else
+            {
                 ViewBag.Average = 0.00;
             }
 
@@ -251,7 +253,7 @@ namespace IberaDelivery.Controllers
             int user = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
 
             var comproValoration = dataContext.Valorations
-                .Where(a => a.UserId == user && a.ProductId == id ).FirstOrDefault();
+                .Where(a => a.UserId == user && a.ProductId == id).FirstOrDefault();
 
             if (comproValoration != null)
             {
@@ -285,7 +287,7 @@ namespace IberaDelivery.Controllers
 
             return View("Detail", product);
         }
-        
+
         // GET: Product/Delete/5
         public IActionResult Delete(int? id)
         {
@@ -453,7 +455,7 @@ namespace IberaDelivery.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    
+
                     Product product = dataContext.Products.Find(model.Id);
 
                     product.CategoryId = model.CategoryId;
@@ -529,11 +531,14 @@ namespace IberaDelivery.Controllers
                 if (list.FirstOrDefault(a => a.Id == id) != null)
                 {
                     var pr = list.FirstOrDefault(a => a.Id == id);
-                    pr.Stock = pr.Stock + 1;
-                    pr.Price = (pr.Price + product.Price);
-                    pr.Iva = (pr.Iva + product.Iva);
-                    list.Remove(list.FirstOrDefault(a => a.Id == id));
-                    list.Add(pr);
+                    if (product.Stock > pr.Stock)
+                    {
+                        pr.Stock = pr.Stock + 1;
+                        pr.Price = (pr.Price + product.Price);
+                        pr.Iva = (pr.Iva + product.Iva);
+                        list.Remove(list.FirstOrDefault(a => a.Id == id));
+                        list.Add(pr);
+                    }
                 }
                 else
                 {

@@ -61,15 +61,23 @@
                     }
                 }    else
     {
-        <h2>No results</h2>
+        <h1>Your shopping cart is empty :(</h1>
     }
             </div>
             <div class="col-2 card shadow-0 border rounded-3">
                 <div class="row text-center ">
                     <h2 class="mb-2">TOTAL PRICE</h2>
                     <h3 class="mb-3">@preutotal €</h3>
-                    <a asp-action="CheckoutDetails"><button class="btn btn-primary btn-sm m-5 justify-content-center"
-                    type="button">¡Buy!</button></a>
+                    @if (productList.Count() > 0){
+                        <a asp-action="CheckoutDetails">
+                            <button class="btn btn-primary btn-sm m-5 justify-content-center" type="button">¡Buy!</button>
+                        </a>
+                    } else {
+                        <p>¡Your shopping cart is empty, go buy something!</p>
+                        <a asp-controller="Home" asp-action="Index">
+                            <button class="btn btn-primary btn-sm m-5 justify-content-center" type="button">¡Go!</button>
+                        </a>
+                    }
                 </div>
             </div>
         </div>

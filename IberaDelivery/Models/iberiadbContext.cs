@@ -156,6 +156,8 @@ namespace IberaDelivery.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.CreditCardId).HasColumnName("credit_card_id");
+
                 entity.Property(e => e.Date)
                     .HasColumnType("datetime")
                     .HasColumnName("date");
@@ -167,6 +169,12 @@ namespace IberaDelivery.Models
                 entity.Property(e => e.ShipmentId).HasColumnName("shipment_id");
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.CreditCard)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.CreditCardId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("order_credit_card_FK");
 
                 entity.HasOne(d => d.Shipment)
                     .WithMany(p => p.Orders)
