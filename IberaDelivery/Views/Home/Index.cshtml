@@ -13,9 +13,9 @@
         {
             <div class="card p-3">
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                     <div class="carousel-inner">
                     @if (list.Count() >= 5)
                     {
-<<<<<<< HEAD
                         @for (int i = 0; i < 5; i++)
                         {
                             var item = list[i];
@@ -25,23 +25,14 @@
                                 }
                                 <a href="/Product/Detail/item2.id"><img
                             src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class=" rounded
-=======
-                        var item = list[i];
-                        <div id="item" class="carousel-item justify-content-center @(i == 0 ? "active" : "")">
-                            @{
-                                Image img = item.Images.FirstOrDefault();
-                            }
-                            <a href="/Product/Detail/@item.Id"><img
-                        src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class=" rounded
->>>>>>> 46d5ad0e46d6247b841103351c2a5e06b05bafbe
                                     border-secondary d-block w-100 h-100" alt="Comida" style=""></a>
                                 <div
                         class="carousel-caption d-none d-md-block justify-content-center blur border border-primary rounded">
                                     <h3>@item.Name</h3>
                                     <p>@item.Description</p>
                                 </div>
+                                
                             </div>
-<<<<<<< HEAD
                         }
                     }
                     else
@@ -57,22 +48,6 @@
                                 }
                                 <a href="/Product/Detail/item2.id">
                                 <img src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class=" rounded
-=======
-                        </div>
-                    }
-                }
-                else
-                {
-                    int i = 0;
-                    @foreach (var item in Model)
-                    {
-                        <div id="item" class="carousel-item justify-content-center @(i == 0 ? "active" : "")">
-                            @{
-                                Image img = item.Images.FirstOrDefault();
-                            }
-                            <a href="/Product/Detail/@item.Id"><img
-                        src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class=" rounded
->>>>>>> 46d5ad0e46d6247b841103351c2a5e06b05bafbe
                                     border-secondary d-block w-100 h-100" alt="Comida" style=""></a>
                                 <div class="carousel-caption d-none d-md-block justify-content-center blur border border-primary rounded">
                                     <h3>@item.Name</h3>
@@ -82,6 +57,7 @@
                             { i++; }
                         }
                     }
+                    </div>
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
                     data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
