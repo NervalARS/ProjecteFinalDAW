@@ -8,78 +8,80 @@
     @{
         var list = Model.ToList();
     }
-    @if (list.Count() > 0)
-    {
-        <div class="card p-3">
-            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-                @if (list.Count() >= 5)
-                {
-                    @for (int i = 0; i < 5; i++)
-                    {
-                        var item = list[i];
-                        <div id="item" class="carousel-item justify-content-center @(i == 0 ? "active" : "")">
-                            @{
-                                Image img = item.Images.FirstOrDefault();
-                            }
-                            <a href="/Product/Detail/item2.id"><img
-                        src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class=" rounded
-                                    border-secondary d-block w-100 h-100" alt="Comida" style=""></a>
-                            <div
-                    class="carousel-caption d-none d-md-block justify-content-center blur border border-primary rounded">
-                                <h3>@item.Name</h3>
-                                <p>@item.Description</p>
-                            </div>
-                        </div>
-                    }
-                }
-                else
-                {
-                    @{
-                        int i = 0;
-                    }
-                    @foreach (var item in Model)
-                    {
-                        <div id="item" class="carousel-item justify-content-center @(i == 0 ? "active" : "")">
-                            @{
-                                Image img = item.Images.FirstOrDefault();
-                            }
-                            <a href="/Product/Detail/item2.id"><img
-                        src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class=" rounded
-                                    border-secondary d-block w-100 h-100" alt="Comida" style=""></a>
-                            <div
-                    class="carousel-caption d-none d-md-block justify-content-center blur border border-primary rounded">
-                                <h3>@item.Name</h3>
-                                <p>@item.Description</p>
-                            </div>
-                        </div>
-                        { i++; }
-                    }
-                }
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
-                data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </div>
-    }
-    <br /><br />
-    <div class="row flex-wrap">
-        @foreach (var item in Model)
+    <div class="row">
+        @if (list.Count() > 0)
         {
-            <div class="col-lg-3 col-md-4 col-sm-12 card p-3">
-                @{
-                    Image img = item.Images.FirstOrDefault();
-                }
-                <a href="/Product/Detail/@item.Id"><img src="data:image;base64,@System.Convert.ToBase64String(img.Image1)"
-                    class="rounded img-thumbnail" style="max-height: 17vh;" /></a>
-                <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
+            <div class="card p-3">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    @if (list.Count() >= 5)
+                    {
+                        @for (int i = 0; i < 5; i++)
+                        {
+                            var item = list[i];
+                            <div id="item" class="carousel-item  @(i == 0 ? "active" : "")">
+                                @{
+                                    Image img = item.Images.FirstOrDefault();
+                                }
+                                <a href="/Product/Detail/item2.id"><img
+                            src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class=" rounded
+                                    border-secondary d-block w-100 h-100" alt="Comida" style=""></a>
+                                <div
+                        class="carousel-caption d-none d-md-block justify-content-center blur border border-primary rounded">
+                                    <h3>@item.Name</h3>
+                                    <p>@item.Description</p>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+
+                        int i = 0;
+
+                        @foreach (var item in Model)
+                        {
+                            <div id="item" class="carousel-item justify-content-center @(i == 0 ? "active" : "")">
+                                @{
+                                    Image img = item.Images.FirstOrDefault();
+                                }
+                                <a href="/Product/Detail/item2.id">
+                                <img src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class=" rounded
+                                    border-secondary d-block w-100 h-100" alt="Comida" style=""></a>
+                                <div class="carousel-caption d-none d-md-block justify-content-center blur border border-primary rounded">
+                                    <h3>@item.Name</h3>
+                                    <p>@item.Description</p>
+                                </div>
+                            </div>
+                            { i++; }
+                        }
+                    }
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                    data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
             </div>
         }
+        <br /><br />
+        <div class="row flex-wrap">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-12 card p-3">
+                    @{
+                        Image img = item.Images.FirstOrDefault();
+                    }
+                    <a href="/Product/Detail/@item.Id"><img
+                        src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class="rounded img-thumbnail"
+                        style="max-height: 17vh;" /></a>
+                    <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
+                </div>
+            }
+        </div>
     </div>
 </div>

@@ -146,7 +146,7 @@ CREATE TABLE iberiadb.dbo.[image] (
 CREATE TABLE iberiadb.dbo.[order] (
 	id int IDENTITY(1,1) NOT NULL,
 	[date] datetime NOT NULL,
-	import decimal(38,0) NOT NULL,
+	import decimal(38,2) NOT NULL,
 	user_id int NOT NULL,
 	shipment_id int NOT NULL,
 	credit_card_id int NOT NULL,
@@ -167,10 +167,9 @@ CREATE TABLE iberiadb.dbo.ln_order (
 	num_order int NOT NULL,
 	num_line int IDENTITY(1,1) NOT NULL,
 	quantity int NOT NULL,
-	total_import decimal(38,0) NOT NULL,
+	total_import decimal(38,2) NOT NULL,
 	ref_product int NOT NULL,
 	CONSTRAINT ln_order_PK PRIMARY KEY (num_order,num_line),
 	CONSTRAINT ln_order_Order_FK FOREIGN KEY (num_order) REFERENCES iberiadb.dbo.[order](id) ON DELETE CASCADE ON UPDATE CASCADE,
 	CONSTRAINT ln_order_Product_FK FOREIGN KEY (ref_product) REFERENCES iberiadb.dbo.product(id)
 );
-
