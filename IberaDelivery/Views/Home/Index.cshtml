@@ -75,13 +75,13 @@
         <div class="row flex-wrap">
             @foreach (var item in Model)
             {
-                <div class="col-lg-3 col-md-4 col-sm-12 p-1 mt-1">
-                    @{
-                        Image img = item.Images.FirstOrDefault();
-                    }
+                Image img = item.Images.FirstOrDefault();
+                <div class="col-lg-3 col-md-4 col-sm-12 p-1 mt-1 w-100 h-100">
+                    <div class="w-100 h-70">
                     <a href="/Product/Detail/@item.Id"><img
-                        src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class="rounded img-thumbnail p-2"
-                        style="max-height: 17vh;" /></a>
+                        src="data:image;base64,@System.Convert.ToBase64String(img.Image1)" class="rounded img-thumbnail p-2 w-100" style="height: 17vh;"
+                         /></a>
+                    </div>
                     <h5>@Html.DisplayFor(modelItem => item.Name)</h5>
                 </div>
             }
