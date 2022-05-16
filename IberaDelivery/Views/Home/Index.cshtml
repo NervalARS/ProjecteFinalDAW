@@ -11,7 +11,7 @@
     <div class="row">
         @if (list.Count() > 0)
         {
-            <div class="card p-3">
+            <div>
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                      <div class="carousel-inner">
                     @if (list.Count() >= 5)
@@ -75,7 +75,7 @@
         <div class="row flex-wrap">
             @foreach (var item in Model)
             {
-                <div class="col-lg-3 col-md-4 col-sm-12 card p-3">
+                <div class="col-lg-3 col-md-4 col-sm-12 p-1" style="margin-top: 1%;">
                     @{
                         Image img = item.Images.FirstOrDefault();
                     }
