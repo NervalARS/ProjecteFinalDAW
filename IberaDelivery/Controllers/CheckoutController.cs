@@ -66,7 +66,7 @@ namespace IberaDelivery.Controllers
             {
                 // Generar variables para utilizar mas tarde
                 DateTime today = DateTime.Today;
-                List<Product> ShoppingCart;
+                var ShoppingCart = new List<Product>();
                 ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
                 var orders = dataContext.Orders;
                 var User = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user"));
@@ -74,6 +74,7 @@ namespace IberaDelivery.Controllers
                 // Rellenamos los datos de Order
                 order.Date = today;
                 order.UserId = User.Id;
+                order.CreditCardId = model.CardId;
                 order.ShipmentId = model.ShipmentId;
                 // De momento le asigno un Import de 0, ya que necesito la Id que se le asignara al crearlo y el campo no admite valores nulos.
                 order.Import = 0;
@@ -116,6 +117,7 @@ namespace IberaDelivery.Controllers
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.ToString());
                 return RedirectToAction("Error500", "Home");
             }
         }
