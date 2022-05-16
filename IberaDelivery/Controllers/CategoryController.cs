@@ -22,22 +22,36 @@ namespace IberaDelivery.Controllers
         // GET: Category
         public async Task<IActionResult> Index()
         {
-            var categories = dataContext.Categories
-            .Include(p => p.Products)
-            .AsNoTracking();
-            return View(await categories.ToListAsync());
+            if (checkUserIsAdmin())
+            {
+                var categories = dataContext.Categories
+                .Include(p => p.Products)
+                .AsNoTracking();
+                return View(await categories.ToListAsync());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+
+            }
 
         }
 
         [HttpPost]
         public IActionResult Index(String Cadena)
         {
+            if (checkUserIsAdmin())
+            {
+                var categories = dataContext.Categories
+                .Where(a => a.Name.Contains(Cadena));
+                ViewBag.missatge = "Filtrat per: " + Cadena;
+                return View(categories.ToList());
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
 
-            var categories = dataContext.Categories
-            .Where(a => a.Name.Contains(Cadena));
-            ViewBag.missatge = "Filtrat per: " + Cadena;
-            return View(categories.ToList());
-
+            }
         }
 
         private void PopulateProductesDropDownList(object? selectedProduct = null)
@@ -49,8 +63,16 @@ namespace IberaDelivery.Controllers
         // GET: Category/Create
         public IActionResult Create()
         {
-            PopulateProductesDropDownList();
-            return View();
+            if (checkUserIsAdmin())
+            {
+                PopulateProductesDropDownList();
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
         }
 
         // POST: Category/Create
@@ -58,79 +80,97 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Name")] Category category)
         {
-
-            if (ModelState.IsValid)
+            if (checkUserIsAdmin())
             {
-                dataContext.Add(category);
-                dataContext.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    dataContext.Add(category);
+                    dataContext.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    //ViewBag.missatge = autor.validarAutor().Missatge;
+                    return View();
+                }
             }
             else
             {
-                //ViewBag.missatge = autor.validarAutor().Missatge;
-                return View();
+                return RedirectToAction("Index", "Home");
             }
+
         }
 
         // GET: Category/Delete/5
         public IActionResult Delete(int? id)
         {
-            //if (HttpContext.Session.GetString("userName") != null)
-            //{
-            if (id == null)
+            if (checkUserIsAdmin())
             {
-                return NotFound();
-            }
+                if (id == null)
+                {
+                    return NotFound();
+                }
 
-            var category = dataContext.Categories
-                .FirstOrDefault(a => a.Id == id);
-            if (category == null)
+                var category = dataContext.Categories
+                    .FirstOrDefault(a => a.Id == id);
+                if (category == null)
+                {
+                    return NotFound();
+                }
+                return View(category);
+            }
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "Home");
+
             }
-
-            return View(category);
         }
-        /*
-        else
-        {
-            return Redirect("/");
-        }
-        */
-
 
         // POST: Category/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            var category = dataContext.Categories.Find(id);
-            if (category != null)
+            if (checkUserIsAdmin())
             {
-                dataContext.Categories.Remove(category);
-                dataContext.SaveChanges();
-            }
+                var category = dataContext.Categories.Find(id);
+                if (category != null)
+                {
+                    dataContext.Categories.Remove(category);
+                    dataContext.SaveChanges();
+                }
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+
+            }
         }
         public IActionResult Edit(int? id)
         {
-            //if (HttpContext.Session.GetString("userName") != null)
-            //{
-            if (id == null)
+            if (checkUserIsAdmin())
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                var category = dataContext.Categories
+                    .FirstOrDefault(a => a.Id == id);
+                //.Find(id);
+                if (category == null)
+                {
+                    return NotFound();
+                }
+                ViewBag.Id = id;
+                return View(category);
             }
-            var category = dataContext.Categories
-                .FirstOrDefault(a => a.Id == id);
-            //.Find(id);
-            if (category == null)
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "Home");
+
             }
-            ViewBag.Id = id;
-            return View(category);
-            //}
         }
 
         // POST: Category/Edit/6
@@ -138,34 +178,50 @@ namespace IberaDelivery.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit([Bind("Id", "Name")] Category category)
         {
-            if (ModelState.IsValid)
+            if (checkUserIsAdmin())
             {
-                var original = dataContext.Categories.Where(s => s.Id == category.Id).FirstOrDefault();
-                dataContext.Entry(original).CurrentValues.SetValues(category);
-                dataContext.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    var original = dataContext.Categories.Where(s => s.Id == category.Id).FirstOrDefault();
+                    dataContext.Entry(original).CurrentValues.SetValues(category);
+                    dataContext.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    //ViewBag.missatge = category.validarCategory().msg;
+                    return View();
+                }
             }
             else
             {
-                //ViewBag.missatge = category.validarCategory().msg;
-                return View();
+                return RedirectToAction("Index", "Home");
+
             }
         }
 
 
         public IActionResult Details(int? id)
         {
-            if (id == null)
+            if (checkUserIsAdmin())
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                var categoria = dataContext.Categories
+                    .FirstOrDefault(a => a.Id == id);
+                if (categoria == null)
+                {
+                    return NotFound();
+                }
+                return View(categoria);
             }
-            var categoria = dataContext.Categories
-                .FirstOrDefault(a => a.Id == id);
-            if (categoria == null)
+            else
             {
-                return NotFound();
+                return RedirectToAction("Index", "Home");
+
             }
-            return View(categoria);
         }
         public bool checkUserExists()
         {
@@ -179,30 +235,39 @@ namespace IberaDelivery.Controllers
         }
         public bool checkUserIsClient()
         {
-            // If (rol == 3) return true
-            if (JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol == 3)
+            if (checkUserExists())
             {
-                return true;
+                // If (rol == 3) return true
+                if (JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol == 3)
+                {
+                    return true;
+                }
             }
             // Else return false;
             return false;
         }
         public bool checkUserIsProveidor()
         {
-            // If (rol == 2) return true
-            if (JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol == 2)
+            if (checkUserExists())
             {
-                return true;
+                // If (rol == 2) return true
+                if (JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol == 2)
+                {
+                    return true;
+                }
             }
             // Else return false;
             return false;
         }
         public bool checkUserIsAdmin()
         {
-            // If (rol == 1) return true
-            if (JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol == 1)
+            if (checkUserExists())
             {
-                return true;
+                // If (rol == 1) return true
+                if (JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol == 1)
+                {
+                    return true;
+                }
             }
             // Else return false;
             return false;
