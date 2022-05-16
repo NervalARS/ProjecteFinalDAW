@@ -593,6 +593,13 @@ namespace IberaDelivery.Controllers
             }
             product.Category.Products = null;
             product.Provider.Products = null;
+            product.Provider.Valorations = null;
+            foreach (var valoration in product.Valorations)
+            {
+                valoration.Product = null;
+                valoration.User = null;
+
+            }
             return product;
         }
         public IEnumerable<User> buscarUsuaris()

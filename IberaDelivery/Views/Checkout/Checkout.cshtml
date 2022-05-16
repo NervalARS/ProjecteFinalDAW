@@ -9,7 +9,7 @@
     var User = ViewBag.User;
     var ProductsWOstock = ViewBag.ProductsWOstock;
     var orderOk = true;
-    @if (ProductsWOstock != null)
+    @if (ProductsWOstock.Count > 0)
     {
         orderOk = false;
     }
