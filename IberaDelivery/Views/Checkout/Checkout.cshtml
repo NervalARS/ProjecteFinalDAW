@@ -17,14 +17,38 @@
         <div class="col-12 card shadow-0 border rounded-3">
             <form asp-action="Checkout" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label asp-for="ShipmentId" class="control-label">Address</label>
-                    <select asp-for="ShipmentId" class="form-control" asp-items="addresses">
-                        <option value="" disabled selected hidden>-- Select Shipment --</option>
-                    </select>
-                    <label asp-for="CardId" class="control-label">Credit Card</label>
-                    <select asp-for="CardId" class="form-control" asp-items="cards">
-                        <option value="" disabled selected hidden>-- Select Credit Card --</option>
-                    </select>
+
+                    @if (addresses.Items.Count == 0)
+                    {
+                        <p>Your account doesnt have a shipment adress... Yet</p>
+                        <a asp-action="Create" asp-controller="Shipment" class="btn btn-success btn-lg">¡Add Address! </a>
+
+                    }
+                    else
+                    {
+                        <label asp-for="ShipmentId" class="control-label">Address</label>
+                        <select asp-for="ShipmentId" class="form-control" asp-items="addresses">
+                            <option value="" disabled selected hidden>-- Select Shipment --</option>
+                        </select>
+                    }
+
+                    @if (cards.Items.Count == 0)
+                    {
+                        <p>Your account doesnt have a credit card stored... Yet</p>
+                        <a asp-action="Create" asp-controller="Creditcard" class="btn btn-success btn-lg">¡Add Credit card! </a>
+                    }
+                    else
+                    {
+                        <label asp-for="CardId" class="control-label">Credit Card</label>
+                        <select asp-for="CardId" class="form-control" asp-items="cards">
+                            <option value="" disabled selected hidden>-- Select Credit Card --</option>
+                        </select>
+                    }
+                    <br>
+                    <label>Expiration date</label>
+                    <input type="text" placeholder="MM/YY">
+                    <label>Security code</label>
+                    <input type="text" placeholder="CVC">
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
