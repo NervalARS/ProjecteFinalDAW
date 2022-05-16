@@ -7,6 +7,30 @@
     var cards = ViewBag.Cards;
     var productList = ViewBag.Products;
     var User = ViewBag.User;
+    var ProductsWOstock = ViewBag.ProductsWOstock;
+    var orderOk = true;
+    @if (ProductsWOstock != null)
+    {
+        orderOk = false;
+    }
+
+
+}
+@if (orderOk == false)
+{
+    <div class="container">
+    <div class="row">
+        <p>There was a problem with the stock of the next products:</p>
+        <ul>
+            @foreach (var item in ProductsWOstock)
+                {
+                    <li>@item.Name</li>
+                }
+            </ul>
+            <p class="text-danger">Go back to the shopping cart to approve your new order, sorry for the inconvenience</p>
+            <a asp-action="FixStock" asp-controller="Checkout" class="btn btn-success btn-lg">Shopping Cart</a>
+        </div>
+    </div>
 }
 @foreach (var item in productList)
 {
@@ -35,7 +59,8 @@
                     @if (cards.Items.Count == 0)
                     {
                         <p>Your account doesnt have a credit card stored... Yet</p>
-                        <a asp-action="Create" asp-controller="Creditcard" class="btn btn-success btn-lg">¡Add Credit card! </a>
+                        <a asp-action="Create" asp-controller="Creditcard" class="btn btn-success btn-lg">¡Add Credit card!
+                        </a>
                     }
                     else
                     {
@@ -51,7 +76,14 @@
                     <input type="text" placeholder="CVC">
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" />
+                    @if (orderOk == true)
+                    {
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    }
+                    else
+                    {
+                        <input type="disabled" value="Create" class="btn btn-primary" />
+                    }
                 </div>
             </form>
         </div>

@@ -22,7 +22,24 @@ namespace IberaDelivery.Controllers
                 ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
                 ViewBag.Products = ShoppingCart;
             }
+
             return View("ShoppingCart", ShoppingCart);
+        }
+        public IActionResult FixStock()
+        {
+            var ShoppingCart = new List<Product>();
+            ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
+            foreach (var item in ShoppingCart)
+            {
+                var product = dataContext.Products
+               .FirstOrDefault(a => a.Id == item.Id);
+                if (product.Stock < item.Stock)
+                {
+                    item.Stock = product.Stock;
+                }
+            }
+            HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(ShoppingCart));
+            return RedirectToAction("Index");
         }
         private void PopulateShipmentsDropDownList(object? selectedShipment = null)
         {
@@ -51,22 +68,45 @@ namespace IberaDelivery.Controllers
                 ViewBag.Alert_EmptyCart = "Your shopping cart is empty!";
             }
         }
-
+        private void CheckStock()
+        {
+            var ShoppingCart = new List<Product>();
+            var ProductsWOstock = new List<Product>();
+            ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
+            foreach (var item in ShoppingCart)
+            {
+                var lnOrder = new LnOrder();
+                lnOrder.Quantity = item.Stock;
+                var product = dataContext.Products
+               .FirstOrDefault(a => a.Id == item.Id);
+                // SI NO HAY STOCK
+                if (product.Stock < lnOrder.Quantity)
+                {
+                    ProductsWOstock.Add(product);
+                }
+            }
+            ViewBag.ProductsWOstock = ProductsWOstock;
+        }
         public async Task<IActionResult> CheckoutDetails()
         {
             PopulateShipmentsDropDownList();
             PopulateCardsDropDownList();
             PopulateProductsList();
+            CheckStock();
             ViewBag.User = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user"));
             return View("Checkout");
         }
+
         public async Task<IActionResult> Checkout(CheckoutForm model)
         {
             try
             {
                 // Generar variables para utilizar mas tarde
+                var orderOk = true;
                 DateTime today = DateTime.Today;
                 var ShoppingCart = new List<Product>();
+                var ProductsWOstock = new List<Product>();
+
                 ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
                 var orders = dataContext.Orders;
                 var User = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user"));
@@ -80,35 +120,40 @@ namespace IberaDelivery.Controllers
                 order.Import = 0;
                 dataContext.Add(order);
                 dataContext.SaveChanges();
-                // Por cada TIPO de producto del carrito.
-                foreach (var item in ShoppingCart)
+                CheckStock();
+                if (ViewBag.ProductsWOstock.Count == 0)
                 {
-                    // Generamos una lnOrder y la rellenamos.
-                    var lnOrder = new LnOrder();
-                    lnOrder.NumOrder = order.Id;
-                    lnOrder.RefProduct = item.Id;
-                    // La Quantity de lnOrder sera el stock del carrito.
-                    lnOrder.Quantity = item.Stock;
-                    // El precio total es el Price + Iva.
-                    lnOrder.TotalImport = item.Price + (item.Price * item.Iva / 100);
-                    var product = dataContext.Products
-                    .FirstOrDefault(a => a.Id == item.Id);
-                    // Si el Stock de la BDD es superior a la cantidad que queremos comprar.
-                    if (product.Stock > lnOrder.Quantity)
+                    foreach (var item in ShoppingCart)
                     {
-                        // Añadimos la lnOrder a la base de datos y actualizamos el stock de producto restandole la cantidad.
-                        dataContext.Add(lnOrder);
-                        dataContext.SaveChanges();
-                        product.Stock = product.Stock - lnOrder.Quantity;
-                        dataContext.Update(product);
-                        dataContext.SaveChanges();
-                        // Actualizamos el importe del pedido
-                        order.Import = order.Import + lnOrder.TotalImport;
+                        // Generamos una lnOrder y la rellenamos.
+                        var lnOrder = new LnOrder();
+                        lnOrder.NumOrder = order.Id;
+                        lnOrder.RefProduct = item.Id;
+                        // La Quantity de lnOrder sera el stock del carrito.
+                        lnOrder.Quantity = item.Stock;
+                        // El precio total es el Price + Iva.
+                        lnOrder.TotalImport = item.Price + (item.Price * item.Iva / 100);
+                        var product = dataContext.Products
+                        .FirstOrDefault(a => a.Id == item.Id);
+                        // Si el Stock de la BDD es superior a la cantidad que queremos comprar.
+                        if (product.Stock > lnOrder.Quantity)
+                        {
+                            // Añadimos la lnOrder a la base de datos y actualizamos el stock de producto restandole la cantidad.
+                            dataContext.Add(lnOrder);
+                            dataContext.SaveChanges();
+                            product.Stock = product.Stock - lnOrder.Quantity;
+                            dataContext.Update(product);
+                            dataContext.SaveChanges();
+                            // Actualizamos el importe del pedido
+                            order.Import = order.Import + lnOrder.TotalImport;
+                        }
                     }
-                    else
-                    {
-                        // ¯\_(ツ)_/¯
-                    }
+                }
+                else
+                {
+                    ViewBag.ProductsWOstock = ProductsWOstock;
+                    return RedirectToAction("CheckoutDetails");
+                    // ¯\_(ツ)_/¯
                 }
                 dataContext.Update(order);
                 dataContext.SaveChanges();
