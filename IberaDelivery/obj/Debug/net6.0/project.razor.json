@@ -1,5 +1,5 @@
 {
-  "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj",
+  "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/IberaDelivery.csproj",
   "Configuration": {
     "ConfigurationName": "MVC-3.0",
     "LanguageVersion": "6.0",
@@ -16298,7 +16298,6 @@
   "RootNamespace": "IberaDelivery",
   "Documents": [
     {
-<<<<<<< HEAD
       "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Home/Privacy.cshtml",
       "TargetPath": "Views\\Home\\Privacy.cshtml",
       "FileKind": "mvc"
@@ -16400,114 +16399,10 @@
     },
     {
       "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/User/Managment.cshtml",
-=======
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Delete.cshtml",
-      "TargetPath": "Views\\User\\Delete.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Product/Delete.cshtml",
-      "TargetPath": "Views\\Product\\Delete.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Category/Index.cshtml",
-      "TargetPath": "Views\\Category\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Create.cshtml",
-      "TargetPath": "Views\\User\\Create.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Category/Create.cshtml",
-      "TargetPath": "Views\\Category\\Create.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/LnOrder/Details.cshtml",
-      "TargetPath": "Views\\LnOrder\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Home/Index.cshtml",
-      "TargetPath": "Views\\Home\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Shipment/Index.cshtml",
-      "TargetPath": "Views\\Shipment\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Order/Index.cshtml",
-      "TargetPath": "Views\\Order\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Navbar/Search.cshtml",
-      "TargetPath": "Views\\Navbar\\Search.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Register.cshtml",
-      "TargetPath": "Views\\User\\Register.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/LnOrder/Index.cshtml",
-      "TargetPath": "Views\\LnOrder\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Areas/Identity/Pages/_ViewStart.cshtml",
-      "TargetPath": "Areas\\Identity\\Pages\\_ViewStart.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/CreditCard/Edit.cshtml",
-      "TargetPath": "Views\\CreditCard\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/ResetPasswordEmail.cshtml",
-      "TargetPath": "Views\\User\\ResetPasswordEmail.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Product/DeleteImage.cshtml",
-      "TargetPath": "Views\\Product\\DeleteImage.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Category/Details.cshtml",
-      "TargetPath": "Views\\Category\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/NewPassword.cshtml",
-      "TargetPath": "Views\\User\\NewPassword.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Shared/Error.cshtml",
-      "TargetPath": "Views\\Shared\\Error.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Shared/_SearchForm.cshtml",
-      "TargetPath": "Views\\Shared\\_SearchForm.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Managment.cshtml",
->>>>>>> 46d5ad0e46d6247b841103351c2a5e06b05bafbe
       "TargetPath": "Views\\User\\Managment.cshtml",
       "FileKind": "mvc"
     },
     {
-<<<<<<< HEAD
       "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Shared/_SearchForm.cshtml",
       "TargetPath": "Views\\Shared\\_SearchForm.cshtml",
       "FileKind": "mvc"
@@ -16584,89 +16479,10 @@
     },
     {
       "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Shared/_ValidationScriptsPartial.cshtml",
-=======
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Product/Edit.cshtml",
-      "TargetPath": "Views\\Product\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Details.cshtml",
-      "TargetPath": "Views\\User\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Category/Edit.cshtml",
-      "TargetPath": "Views\\Category\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/NewEmail.cshtml",
-      "TargetPath": "Views\\User\\NewEmail.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Shipment/Edit.cshtml",
-      "TargetPath": "Views\\Shipment\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Home/Error500.cshtml",
-      "TargetPath": "Views\\Home\\Error500.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Shared/_Layout.cshtml",
-      "TargetPath": "Views\\Shared\\_Layout.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/_ViewImports.cshtml",
-      "TargetPath": "Views\\_ViewImports.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/_ViewStart.cshtml",
-      "TargetPath": "Views\\_ViewStart.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/ResendEmail.cshtml",
-      "TargetPath": "Views\\User\\ResendEmail.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Checkout/ShoppingCart.cshtml",
-      "TargetPath": "Views\\Checkout\\ShoppingCart.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Home/Privacy.cshtml",
-      "TargetPath": "Views\\Home\\Privacy.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Product/Create.cshtml",
-      "TargetPath": "Views\\Product\\Create.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Product/Detail.cshtml",
-      "TargetPath": "Views\\Product\\Detail.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/CreditCard/Create.cshtml",
-      "TargetPath": "Views\\CreditCard\\Create.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Shared/_ValidationScriptsPartial.cshtml",
->>>>>>> 46d5ad0e46d6247b841103351c2a5e06b05bafbe
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
     },
     {
-<<<<<<< HEAD
       "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Product/Detail.cshtml",
       "TargetPath": "Views\\Product\\Detail.cshtml",
       "FileKind": "mvc"
@@ -16719,60 +16535,6 @@
     {
       "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/_ViewStart.cshtml",
       "TargetPath": "Views\\_ViewStart.cshtml",
-=======
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Checkout/Checkout.cshtml",
-      "TargetPath": "Views\\Checkout\\Checkout.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/ResetPassword.cshtml",
-      "TargetPath": "Views\\User\\ResetPassword.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Shipment/Create.cshtml",
-      "TargetPath": "Views\\Shipment\\Create.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Order/Details.cshtml",
-      "TargetPath": "Views\\Order\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Shared/_LoginPartial.cshtml",
-      "TargetPath": "Views\\Shared\\_LoginPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/CreditCard/Index.cshtml",
-      "TargetPath": "Views\\CreditCard\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Index.cshtml",
-      "TargetPath": "Views\\User\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Product/Index.cshtml",
-      "TargetPath": "Views\\Product\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Edit.cshtml",
-      "TargetPath": "Views\\User\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/User/Login.cshtml",
-      "TargetPath": "Views\\User\\Login.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "/var/www/html/ProjecteFinalDAW/IberaDelivery/Views/Category/Delete.cshtml",
-      "TargetPath": "Views\\Category\\Delete.cshtml",
->>>>>>> 46d5ad0e46d6247b841103351c2a5e06b05bafbe
       "FileKind": "mvc"
     }
   ],
