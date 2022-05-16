@@ -15,6 +15,10 @@ namespace IberaDelivery.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            if (!checkUserExists() || checkUserIsClient())
+            {
+                return RedirectToAction("Index", "Home");
+            }
             List<Product> ShoppingCart;
             ShoppingCart = new List<Product>();
             if (HttpContext.Session.GetString("Cart") != null)
@@ -25,22 +29,7 @@ namespace IberaDelivery.Controllers
 
             return View("ShoppingCart", ShoppingCart);
         }
-        public IActionResult FixStock()
-        {
-            var ShoppingCart = new List<Product>();
-            ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
-            foreach (var item in ShoppingCart)
-            {
-                var product = dataContext.Products
-               .FirstOrDefault(a => a.Id == item.Id);
-                if (product.Stock < item.Stock)
-                {
-                    item.Stock = product.Stock;
-                }
-            }
-            HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(ShoppingCart));
-            return RedirectToAction("Index");
-        }
+
         private void PopulateShipmentsDropDownList(object? selectedShipment = null)
         {
             var UserId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
@@ -86,6 +75,24 @@ namespace IberaDelivery.Controllers
                 }
             }
             ViewBag.ProductsWOstock = ProductsWOstock;
+        }
+
+        public IActionResult FixStock()
+        {
+            var ShoppingCart = new List<Product>();
+            ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
+            foreach (var item in ShoppingCart)
+            {
+                var product = dataContext.Products
+               .FirstOrDefault(a => a.Id == item.Id);
+                if (product.Stock < item.Stock)
+                {
+                    item.Stock = product.Stock;
+                    item.Price = (item.Price + (item.Price * item.Iva / 100)) * item.Stock;
+                }
+            }
+            HttpContext.Session.SetString("Cart", JsonSerializer.Serialize(ShoppingCart));
+            return RedirectToAction("Index");
         }
         public async Task<IActionResult> CheckoutDetails()
         {
@@ -135,25 +142,22 @@ namespace IberaDelivery.Controllers
                         lnOrder.TotalImport = item.Price + (item.Price * item.Iva / 100);
                         var product = dataContext.Products
                         .FirstOrDefault(a => a.Id == item.Id);
-                        // Si el Stock de la BDD es superior a la cantidad que queremos comprar.
-                        if (product.Stock > lnOrder.Quantity)
-                        {
-                            // Añadimos la lnOrder a la base de datos y actualizamos el stock de producto restandole la cantidad.
-                            dataContext.Add(lnOrder);
-                            dataContext.SaveChanges();
-                            product.Stock = product.Stock - lnOrder.Quantity;
-                            dataContext.Update(product);
-                            dataContext.SaveChanges();
-                            // Actualizamos el importe del pedido
-                            order.Import = order.Import + lnOrder.TotalImport;
-                        }
+                        // Las comprobaciones ya se hicieron en CheckStock, solo falta efectuar los cambios
+                        // Añadimos la LnOrder a la BDD
+                        dataContext.Add(lnOrder);
+                        //dataContext.SaveChanges();
+                        // Actualizamos el Stock del producto en la BDD
+                        product.Stock = product.Stock - lnOrder.Quantity;
+                        dataContext.Update(product);
+                        dataContext.SaveChanges();
+                        // Actualizamos el importe del pedido
+                        order.Import = order.Import + lnOrder.TotalImport;
                     }
                 }
                 else
                 {
                     ViewBag.ProductsWOstock = ProductsWOstock;
                     return RedirectToAction("CheckoutDetails");
-                    // ¯\_(ツ)_/¯
                 }
                 dataContext.Update(order);
                 dataContext.SaveChanges();
@@ -315,6 +319,47 @@ namespace IberaDelivery.Controllers
             product.Category.Products = null;
             product.Provider.Products = null;
             return product;
+        }
+
+                public bool checkUserExists()
+        {
+            // If (user == null) return false
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+            {
+                return false;
+            }
+            // else return true
+            return true;
+        }
+        public bool checkUserIsClient()
+        {
+            // If (rol == 3) return true
+            if (JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol == 3)
+            {
+                return true;
+            }
+            // Else return false;
+            return false;
+        }
+        public bool checkUserIsProveidor()
+        {
+            // If (rol == 2) return true
+            if (JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol == 2)
+            {
+                return true;
+            }
+            // Else return false;
+            return false;
+        }
+        public bool checkUserIsAdmin()
+        {
+            // If (rol == 1) return true
+            if (JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol == 1)
+            {
+                return true;
+            }
+            // Else return false;
+            return false;
         }
     }
 }

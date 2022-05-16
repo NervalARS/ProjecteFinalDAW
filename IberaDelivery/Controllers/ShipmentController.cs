@@ -229,6 +229,45 @@ namespace IberaDelivery.Controllers
             }
 
         }
-
+        public bool checkUserExists()
+        {
+            // If (user == null) return false
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+            {
+                return false;
+            }
+            // else return true
+            return true;
+        }
+        public bool checkUserIsClient()
+        {
+            // If (rol == 3) return true
+            if (JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol == 3)
+            {
+                return true;
+            }
+            // Else return false;
+            return false;
+        }
+        public bool checkUserIsProveidor()
+        {
+            // If (rol == 2) return true
+            if (JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol == 2)
+            {
+                return true;
+            }
+            // Else return false;
+            return false;
+        }
+        public bool checkUserIsAdmin()
+        {
+            // If (rol == 1) return true
+            if (JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol == 1)
+            {
+                return true;
+            }
+            // Else return false;
+            return false;
+        }
     }
 }
