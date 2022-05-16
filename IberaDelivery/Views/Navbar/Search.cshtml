@@ -61,18 +61,18 @@
                                             class="btn btn-info btn-sm" type="button">Details</button></a>
                                             @if (User != null)
                                             {
-                                                @if (item.Stock > 10){
+                                                @if (item.Stock > 11){
                                                 <a asp-controller="Checkout" asp-action="AddToCart" asp-route-id="@item.Id" asp-route-src="@ViewBag.Search">
                                                     <button class="btn btn-outline-primary btn-sm mt-2" type="button">Add to cart</button>
                                                 </a>
-                                                } else if ((item.Stock > 0)  && (item.Stock < 10)){
+                                                } else if ((item.Stock > 0)  && (item.Stock <= 10)){
                                                 <a asp-controller="Checkout" asp-action="AddToCart" asp-route-id="@item.Id" asp-route-src="@ViewBag.Search">
                                                     <button class="btn btn-outline-primary btn-sm mt-2" type="button">Add to cart</button>
                                                 </a>
                                                     <p class="text-danger">¡There are only @item.Stock left, hurry!</p>
                                                 } else
                                                 {
-                                                    <button class="btn btn-failure btn-lg" type="button">Product unavailable</button>
+                                                     <p class="text-danger">Product unavailable</p>
                                                 }
                                             }  
                                             else

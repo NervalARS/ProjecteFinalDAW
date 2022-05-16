@@ -211,11 +211,11 @@
                 <h2 class="mb-4 me-1">@Math.Round((Model.Price + (Model.Price * Model.Iva / 100)),2)€</h2>
                 @if (User != null)
                 {
-                    @if (Model.Stock > 10)
+                    @if (Model.Stock > 11)
                     {
                         <a asp-action="AddToCart" asp-route-id="@this.Model.Id" class="btn btn-success btn-lg">Add to cart </a>
                     }
-                    else if ((Model.Stock > 0) && (Model.Stock < 10))
+                    else if ((Model.Stock > 0) && (Model.Stock <= 10))
                     {
                         <a asp-action="AddToCart" asp-route-id="@this.Model.Id" class="btn btn-success btn-lg">Add to cart </a>
                         <p class="text-danger">¡There are only @Model.Stock left, hurry!</p>
