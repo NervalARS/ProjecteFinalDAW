@@ -205,7 +205,7 @@
                 @Html.DisplayFor(Product => Product.Category.Name)
             </div>
             <p>
-                @Html.DisplayFor(Product => Product.Description)
+                @Html.Raw(Model.Description.Replace("\n", "<br/>"))
             </p>
             <div class="col-sm">
                 <h2 class="mb-4 me-1">@Math.Round((Model.Price + (Model.Price * Model.Iva / 100)),2)€</h2>
@@ -236,9 +236,10 @@
             @using (Html.BeginForm("Create", "Comment"))
             {
                 <div class="form-group">
-                    @Html.Label("Comment here, bitch!")
+                    @Html.Label("Comment here, please!")
                     @Html.Hidden("id", Model.Id)
-                    @Html.TextBox("com",null, new{@class = "form-control"})
+                    @Html.TextArea("com",null, new{@class = "form-control"})
+                    <input type="submit" value="Submit" />
                 </div>
             }
         }
@@ -254,7 +255,7 @@
                 <div class="row justify-content-center mb-3">
                     <div class="card shadow-0 border rounded-3">
                         <p class="font-weight-bold">@Users.First(u => u.Id == item.UserId).FullName</p>
-                        <p>@item.Contens</p>
+                        <p>@Html.Raw(item.Contens.Replace("\n", "<br/>"))</p>
                     </div>
                 </div>
             }
