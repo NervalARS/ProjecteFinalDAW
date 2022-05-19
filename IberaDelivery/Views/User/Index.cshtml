@@ -27,7 +27,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Rol)
             </th>
-            <th>Delete</th>
+            <th>Disable</th>
             <th>Edit</th>
             <th>Details</th>
         </tr>
@@ -63,9 +63,16 @@
                         break;
 
                 }
+                @if(item.Activate == true){
                 <td>
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id">Disable</a>
                 </td>
+                }else{
+                <td>
+                    <a asp-action="Enable" asp-route-id="@item.Id">Enable</a>
+                </td>
+                }
+                
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                 </td>

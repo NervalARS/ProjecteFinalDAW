@@ -150,7 +150,6 @@ namespace IberaDelivery.Models
                 entity.HasOne(d => d.RefProductNavigation)
                     .WithMany(p => p.LnOrders)
                     .HasForeignKey(d => d.RefProduct)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("ln_order_Product_FK");
             });
 

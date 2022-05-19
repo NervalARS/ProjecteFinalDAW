@@ -355,6 +355,12 @@ namespace IberaDelivery.Controllers
                         {
                             if (product.ProviderId == JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id)
                             {
+                                 var lnOrders = dataContext.LnOrders.Where(a => a.RefProduct == product.Id).ToList();
+                                    foreach (var lnOrder in lnOrders)
+                                    {
+                                        lnOrder.RefProduct = null;
+                                        dataContext.Update(lnOrder);
+                                    }
                                 dataContext.Products.Remove(product);
                             }
                             else
@@ -367,6 +373,12 @@ namespace IberaDelivery.Controllers
                         */
                         if (checkUserIsAdmin())
                         {
+                             var lnOrders = dataContext.LnOrders.Where(a => a.RefProduct == product.Id).ToList();
+                                    foreach (var lnOrder in lnOrders)
+                                    {
+                                        lnOrder.RefProduct = null;
+                                        dataContext.Update(lnOrder);
+                                    }
                             dataContext.Products.Remove(product);
                         }
 

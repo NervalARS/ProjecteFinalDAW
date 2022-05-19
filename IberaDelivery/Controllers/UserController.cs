@@ -222,9 +222,33 @@ namespace IberaDelivery.Controllers
             try
             {
                 var user = dataContext.Users.Find(id);
-                dataContext.Users.Remove(user);
+                user.Activate = false;
+                dataContext.Users.Update(user);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
+
+            }
+            catch (Exception e)
+            {
+                ViewBag.Message = "Error: " + e;
+                return RedirectToAction("Error500", "Home");
+            }
+        }
+
+        public IActionResult Enable(int id)
+        {
+    
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            try
+            {
+                var user = dataContext.Users.Find(id);
+                user.Activate = true;
+                dataContext.Users.Update(user);
+                dataContext.SaveChanges();
+                return RedirectToAction("Index", "User");
 
             }
             catch (Exception e)
