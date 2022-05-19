@@ -324,11 +324,12 @@ namespace IberaDelivery.Controllers
                     {
                         if (isValidUser.Activate)
                         {
+                            createSession(isValidUser);
                             return RedirectToAction("Index", "Home");
                         }
                         else
                         {
-                            ModelState.AddModelError("Failure", "Account no activated");
+                            ModelState.AddModelError("Failure", "Account not activated");
                             ViewBag.Message = "You lost confirmation email? Resend.";
                             return View();
                         }
@@ -369,7 +370,6 @@ namespace IberaDelivery.Controllers
             {
                 if (BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
                 {
-                    createSession(user);
                     return user;
                 }
                 else
