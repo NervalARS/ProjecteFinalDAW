@@ -18,8 +18,6 @@ namespace IberaDelivery.Controllers
         {
             dataContext = context;
         }
-
-
         public IActionResult Index()
         {
             try
@@ -37,13 +35,9 @@ namespace IberaDelivery.Controllers
             }
             catch (Exception e)
             {
-
                 return RedirectToAction("Error500", "Home");
             }
-
-
         }
-
         public IActionResult Create()
         {
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
@@ -79,7 +73,6 @@ namespace IberaDelivery.Controllers
                 }
                 else
                 {
-                    //ViewBag.missatge = autor.validarAutor().Missatge;
                     return View();
                 }
             }
@@ -93,8 +86,6 @@ namespace IberaDelivery.Controllers
 
         public IActionResult Delete(int? id)
         {
-            //if (HttpContext.Session.GetString("userName") != null)
-            //{
             try
             {
                 if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
@@ -122,43 +113,36 @@ namespace IberaDelivery.Controllers
             }
 
         }
-        /*
-        else
-        {
-            return Redirect("/");
-        }
-        */
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
             try
             {
-                if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
-                {
-                    return RedirectToAction("Index", "Home");
-                }
+                var userId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
                 var shipmentInfo = dataContext.Shipments.Find(id);
                 if (shipmentInfo != null)
                 {
-                    dataContext.Shipments.Remove(shipmentInfo);
-                    dataContext.SaveChanges();
+                    if (shipmentInfo.UserId == userId)
+                    {
+                        dataContext.Shipments.Remove(shipmentInfo);
+                        dataContext.SaveChanges();
+                    }
+                    else
+                    {
+                        return RedirectToAction("Error500", "Home");
+                    }
                 }
-
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception e)
             {
-
                 return RedirectToAction("Error500", "Home");
             }
 
         }
         public IActionResult Edit(int? id)
         {
-            //if (HttpContext.Session.GetString("userName") != null)
-            //{
             try
             {
                 if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
@@ -191,8 +175,6 @@ namespace IberaDelivery.Controllers
 
                 return RedirectToAction("Error500", "Home");
             }
-
-            //}
         }
 
         [HttpPost]

@@ -22,10 +22,23 @@ namespace IberaDelivery.Controllers
         // GET: CreditCard
         public async Task<IActionResult> Index()
         {
-            var credCard = dataContext.CreditCards
-            .AsNoTracking();
-            return View(await credCard.ToListAsync());
+            try
+            {
+                if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
+                {
+                    return RedirectToAction("Index", "Home");
+                }
 
+                int id = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
+
+                var credCards = dataContext.CreditCards
+                .Where(a => a.UserId == id);
+                return View(credCards.ToList());
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Error500", "Home");
+            }
         }
 
         // GET: CreditCard/Create
@@ -33,7 +46,6 @@ namespace IberaDelivery.Controllers
         {
             return View();
         }
-
         // POST: CreditCard/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -46,7 +58,6 @@ namespace IberaDelivery.Controllers
 
                 creditCard.UserId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
                 creditCard.Cardholder = creditCardForm.Cardholder;
-                //creditCard.CardNumber = creditCardForm.Number; Descomentar esto mas tarde xdddd
                 creditCard.CardNumber = creditCardForm.CardNumber;
 
                 dataContext.CreditCards.Add(creditCard);
@@ -55,7 +66,6 @@ namespace IberaDelivery.Controllers
             }
             else
             {
-                //ViewBag.missatge = autor.validarAutor().Missatge;
                 return View();
             }
         }
@@ -63,28 +73,19 @@ namespace IberaDelivery.Controllers
         // GET: CreditCard/Delete/id
         public IActionResult Delete(int? id)
         {
-            //if (HttpContext.Session.GetString("userName") != null)
-            //{
             if (id == null)
             {
                 return NotFound();
             }
-
             var creditCard = dataContext.CreditCards
                 .FirstOrDefault(a => a.Id == id);
-            if (creditCard == null)
+            var userId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
+            if (creditCard == null || creditCard.UserId != userId)
             {
-                return NotFound();
+                return RedirectToAction("Error500", "Home");
             }
-
             return View(creditCard);
         }
-        /*
-        else
-        {
-            return Redirect("/");
-        }
-        */
 
 
         // POST: CreditCard/Delete/id
@@ -103,8 +104,6 @@ namespace IberaDelivery.Controllers
         }
         public IActionResult Edit(int? id)
         {
-            //if (HttpContext.Session.GetString("userName") != null)
-            //{
             if (id == null)
             {
                 return NotFound();
@@ -115,14 +114,19 @@ namespace IberaDelivery.Controllers
             CreditCardEditForm.Id = creditCard.Id;
             CreditCardEditForm.Cardholder = creditCard.Cardholder;
             CreditCardEditForm.CardNumber = creditCard.CardNumber;
-            //.Find(id);
             if (creditCard == null)
             {
                 return NotFound();
             }
             ViewBag.Id = id;
-            return View(CreditCardEditForm);
-            //}
+            if (checkUserIsAdmin() || creditCard.UserId == JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id)
+            {
+                return View(CreditCardEditForm);
+            }
+            else
+            {
+                return RedirectToAction("Error500", "Home");
+            }
         }
 
         // POST: CreditCard/Edit/id
@@ -135,13 +139,19 @@ namespace IberaDelivery.Controllers
                 var original = dataContext.CreditCards.Where(s => s.Id == creditCard.Id).FirstOrDefault();
                 original.Cardholder = creditCard.Cardholder;
                 original.CardNumber = creditCard.CardNumber;
-                dataContext.Update(original);
-                dataContext.SaveChanges();
-                return RedirectToAction(nameof(Index));
+                if (checkUserIsAdmin() || original.UserId == JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id)
+                {
+                    dataContext.Update(original);
+                    dataContext.SaveChanges();
+                    return RedirectToAction(nameof(Index));
+                }
+                else
+                {
+                    return RedirectToAction("Error500", "Home");
+                }
             }
             else
             {
-                //ViewBag.missatge = category.validarCategory().msg;
                 return View();
             }
         }
@@ -149,19 +159,24 @@ namespace IberaDelivery.Controllers
 
         public IActionResult Details(int? id)
         {
-                if (id == null)
-                {
-                    return NotFound();
-                }
+            if (id == null)
+            {
+                return NotFound();
+            }
+            if (checkUserIsClient() || checkUserIsProveidor())
+            {
                 var creditCard = dataContext.CreditCards
-                    .FirstOrDefault(a => a.Id == id);
-                if (creditCard == null)
+                                .FirstOrDefault(a => a.Id == id);
+                if (creditCard == null || creditCard.UserId != JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id)
                 {
                     return NotFound();
                 }
                 return View(creditCard);
+            }
+            return NotFound();
+
         }
-                        public bool checkUserExists()
+        public bool checkUserExists()
         {
             // If (user == null) return false
             if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")))
