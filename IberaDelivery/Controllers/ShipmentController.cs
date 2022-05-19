@@ -83,7 +83,7 @@ namespace IberaDelivery.Controllers
             }
 
         }
-
+        // GET: Shipment/Delete/5
         public IActionResult Delete(int? id)
         {
             try
@@ -113,6 +113,8 @@ namespace IberaDelivery.Controllers
             }
 
         }
+        // POST: Shipment/Delete/5
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
@@ -125,6 +127,12 @@ namespace IberaDelivery.Controllers
                 {
                     if (shipmentInfo.UserId == userId)
                     {
+                        var Orders = dataContext.Orders.Where(a => a.ShipmentId == shipmentInfo.Id).ToList();
+                        foreach (var order in Orders)
+                        {
+                            order.ShipmentId = null;
+                            dataContext.Update(order);
+                        }
                         dataContext.Shipments.Remove(shipmentInfo);
                         dataContext.SaveChanges();
                     }

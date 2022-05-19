@@ -70,37 +70,57 @@ namespace IberaDelivery.Controllers
             }
         }
 
-        // GET: CreditCard/Delete/id
+        // GET: CreditCard/Delete/5
         public IActionResult Delete(int? id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+                var creditCard = dataContext.CreditCards
+                    .FirstOrDefault(a => a.Id == id);
+                var userId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
+                if (creditCard == null || creditCard.UserId != userId)
+                {
+                    return RedirectToAction("Error500", "Home");
+                }
+                return View(creditCard);
             }
-            var creditCard = dataContext.CreditCards
-                .FirstOrDefault(a => a.Id == id);
-            var userId = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
-            if (creditCard == null || creditCard.UserId != userId)
+            catch (Exception e)
             {
                 return RedirectToAction("Error500", "Home");
             }
-            return View(creditCard);
         }
 
 
-        // POST: CreditCard/Delete/id
+        // POST: CreditCard/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Delete(int id)
         {
-            var creditCard = dataContext.CreditCards.Find(id);
-            if (creditCard != null)
+            try
             {
-                dataContext.CreditCards.Remove(creditCard);
-                dataContext.SaveChanges();
-            }
+                var creditCard = dataContext.CreditCards.Find(id);
+                if (creditCard != null)
+                {
+                    var Orders = dataContext.Orders.Where(a => a.CreditCardId == creditCard.Id).ToList();
+                    foreach (var order in Orders)
+                    {
+                        order.CreditCardId = null;
+                        dataContext.Update(order);
+                    }
+                    dataContext.CreditCards.Remove(creditCard);
+                    dataContext.SaveChanges();
+                }
 
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Error500", "Home");
+            }
         }
         public IActionResult Edit(int? id)
         {

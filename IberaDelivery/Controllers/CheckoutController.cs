@@ -15,7 +15,7 @@ namespace IberaDelivery.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            if (checkUserIsClient())
+            if (checkUserExists())
             {
                 List<Product> ShoppingCart;
                 ShoppingCart = new List<Product>();
@@ -81,7 +81,7 @@ namespace IberaDelivery.Controllers
 
         public IActionResult FixStock()
         {
-            if (checkUserIsClient())
+            if (checkUserExists())
             {
                 var ShoppingCart = new List<Product>();
                 ShoppingCart = JsonSerializer.Deserialize<List<Product>>(HttpContext.Session.GetString("Cart"));
@@ -105,7 +105,7 @@ namespace IberaDelivery.Controllers
         }
         public async Task<IActionResult> CheckoutDetails()
         {
-            if (checkUserIsClient())
+            if (checkUserExists())
             {
                 PopulateShipmentsDropDownList();
                 PopulateCardsDropDownList();
@@ -122,7 +122,7 @@ namespace IberaDelivery.Controllers
 
         public async Task<IActionResult> Checkout(CheckoutForm model)
         {
-            if (checkUserIsClient())
+            if (checkUserExists())
             {
                 try
                 {
@@ -195,7 +195,7 @@ namespace IberaDelivery.Controllers
         }
         public async Task<IActionResult> AddToCart(int? id, String? src)
         {
-            if (checkUserIsClient())
+            if (checkUserExists())
             {
                 List<Product> list;
                 if (HttpContext.Session.GetString("Cart") == null)
@@ -244,7 +244,7 @@ namespace IberaDelivery.Controllers
 
         public async Task<IActionResult> AddOne(int? id)
         {
-            if (checkUserIsClient())
+            if (checkUserExists())
             {
                 List<Product> list;
                 if (HttpContext.Session.GetString("Cart") == null)
@@ -285,7 +285,7 @@ namespace IberaDelivery.Controllers
         }
         public async Task<IActionResult> RemoveOne(int? id)
         {
-            if (checkUserIsClient())
+            if (checkUserExists())
             {
                 List<Product> list;
                 if (HttpContext.Session.GetString("Cart") == null)
@@ -333,7 +333,7 @@ namespace IberaDelivery.Controllers
         }
         public async Task<IActionResult> ClearCart()
         {
-            if (checkUserIsClient())
+            if (checkUserExists())
             {
                 HttpContext.Session.Remove("Cart");
                 return View("Index");
