@@ -237,7 +237,7 @@ namespace IberaDelivery.Controllers
 
         public IActionResult Enable(int id)
         {
-    
+            if (string.IsNullOrEmpty(HttpContext.Session.GetString("user")) || JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Rol != 1)
             {
                 return RedirectToAction("Index", "Home");
             }

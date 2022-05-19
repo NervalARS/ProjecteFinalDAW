@@ -260,7 +260,7 @@ namespace IberaDelivery.Controllers
         //Acció de Votar cada producte, si l'usuari ja ha votat s'actualitza el seu vot.
         public ActionResult Votar(int id, int score)
         {
-            if (checkUserIsClient())
+            if (checkUserIsClient() || checkUserIsAdmin())
             {
                 int user = JsonSerializer.Deserialize<User>(HttpContext.Session.GetString("user")).Id;
                 var comproValoration = dataContext.Valorations
