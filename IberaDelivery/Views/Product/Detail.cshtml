@@ -190,9 +190,9 @@
                             break;
                     }
                     <br />
-                    @if (User != null)
+                    @if ((User != null) && (User.Id != Model.ProviderId))
                     {
-                        <input type="submit" value="Votar" />
+                        <input class="btn btn-info" type="submit" value="Review" />
                     }
                 </form>
             </div>
@@ -231,7 +231,7 @@
                 }
             </div>
         </div>
-        @if (User != null)
+        @if(User != null)
         {
             @using (Html.BeginForm("Create", "Comment"))
             {
@@ -239,7 +239,7 @@
                     @Html.Label("Comment here, please!")
                     @Html.Hidden("id", Model.Id)
                     @Html.TextArea("com",null, new{@class = "form-control"})
-                    <input type="submit" value="Submit" />
+                    <input type="submit" class="btn btn-info" value="Submit" />
                 </div>
             }
         }
@@ -255,6 +255,9 @@
                 <div class="row justify-content-center mb-3">
                     <div class="card shadow-0 border rounded-3">
                         <p class="font-weight-bold">@Users.First(u => u.Id == item.UserId).FullName</p>
+                         @if (item.UserId == Model.ProviderId){
+                        <p class="font-weight-bold">"Review of the provider"</p>
+                         }
                         <p>@Html.Raw(item.Contens.Replace("\n", "<br/>"))</p>
                     </div>
                 </div>
