@@ -63,9 +63,16 @@
                         break;
 
                 }
+                @if(item.Activate == true){
                 <td>
                     <a asp-action="Delete" asp-route-id="@item.Id">Disable</a>
                 </td>
+                }else{
+                <td>
+                    <a asp-action="Enable" asp-route-id="@item.Id">Enable</a>
+                </td>
+                }
+                
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                 </td>
