@@ -222,7 +222,8 @@ namespace IberaDelivery.Controllers
             try
             {
                 var user = dataContext.Users.Find(id);
-                dataContext.Users.Remove(user);
+                user.Activate = false;
+                dataContext.Users.Update(user);
                 dataContext.SaveChanges();
                 return RedirectToAction(nameof(Index));
 

@@ -16358,6 +16358,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Shipment/Delete.cshtml",
+      "TargetPath": "Views\\Shipment\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/Shipment/Index.cshtml",
       "TargetPath": "Views\\Shipment\\Index.cshtml",
       "FileKind": "mvc"
@@ -16495,6 +16500,11 @@
     {
       "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/User/Create.cshtml",
       "TargetPath": "Views\\User\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/var/www/html/projecteDaw/ProjecteFinalDAW/IberaDelivery/Views/CreditCard/Delete.cshtml",
+      "TargetPath": "Views\\CreditCard\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {
