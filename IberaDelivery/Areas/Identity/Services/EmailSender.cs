@@ -17,7 +17,7 @@ public class EmailSender
         string htmlString = @"<html>
                       <body>
                       <p>An account has been created with the email "+ userEmail +@", associated please click the link to activate the account.</p>
-                      <p><a href='https://172.16.23.3:5001/User/ActivateAccount?token="+ token +@"'>Link</p>
+                      <p><a href='https://localhost:7274/User/ActivateAccount?token="+ token +@"'>Link</p>
                       </body>
                       </html>
                      "; 
@@ -56,7 +56,7 @@ public class EmailSender
         string htmlString = @"<html>
                       <body>
                       <p>Link to reset your Iberia Delivery password. If you did not request a reset ignore this message.</p>
-                      <p><a href='https://172.16.23.3:5001/User/ResetPassword?token="+ token +@"'>Link</p>
+                      <p><a href='https://localhost:7274/User/ResetPassword?token="+ token +@"'>Link</p>
                       </body>
                       </html>
                      "; 
